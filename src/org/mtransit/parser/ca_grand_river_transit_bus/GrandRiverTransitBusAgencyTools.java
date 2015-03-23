@@ -448,9 +448,8 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				stationName = AINSLIE_ST_TERMINAL;
 			}
 		} else if (route.id == 56l) {
-			if (directionId == 0) {
-				stationName = CAMBRIDGE_CENTRE;
-			}
+			directionId = 0; // merge 2 directions
+			stationName = CAMBRIDGE_CENTRE;
 		} else if (route.id == 57l) {
 			if (directionId == 1) {
 				stationName = AINSLIE_ST_TERMINAL;
