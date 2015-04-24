@@ -20,6 +20,7 @@ import org.mtransit.parser.mt.data.MTrip;
 // http://www.regionofwaterloo.ca/en/regionalGovernment/GRT_GTFSdata.asp
 // http://www.regionofwaterloo.ca/opendatadownloads/GRT_Merged_GTFS.zip
 // http://www.regionofwaterloo.ca/opendatadownloads/GRT_GTFS_Winter2015.zip
+// http://www.regionofwaterloo.ca/opendatadownloads/GRT_GTFS.zip
 public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
 	public static void main(String[] args) {
@@ -580,24 +581,24 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		return MSpec.cleanLabel(tripHeadsign);
 	}
 
-	private static final Pattern FIRST = Pattern.compile("(first)", Pattern.CASE_INSENSITIVE);
-	private static final String FIRST_REPLACEMENT = "1st";
-	private static final Pattern SECOND = Pattern.compile("(second)", Pattern.CASE_INSENSITIVE);
-	private static final String SECOND_REPLACEMENT = "2nd";
-	private static final Pattern THIRD = Pattern.compile("(third)", Pattern.CASE_INSENSITIVE);
-	private static final String THIRD_REPLACEMENT = "3rd";
-	private static final Pattern FOURTH = Pattern.compile("(fourth)", Pattern.CASE_INSENSITIVE);
-	private static final String FOURTH_REPLACEMENT = "4th";
-	private static final Pattern FIFTH = Pattern.compile("(fifth)", Pattern.CASE_INSENSITIVE);
-	private static final String FIFTH_REPLACEMENT = "5th";
-	private static final Pattern SIXTH = Pattern.compile("(sixth)", Pattern.CASE_INSENSITIVE);
-	private static final String SIXTH_REPLACEMENT = "6th";
-	private static final Pattern SEVENTH = Pattern.compile("(seventh)", Pattern.CASE_INSENSITIVE);
-	private static final String SEVENTH_REPLACEMENT = "7th";
-	private static final Pattern EIGHTH = Pattern.compile("(eighth)", Pattern.CASE_INSENSITIVE);
-	private static final String EIGHTH_REPLACEMENT = "8th";
-	private static final Pattern NINTH = Pattern.compile("(ninth)", Pattern.CASE_INSENSITIVE);
-	private static final String NINTH_REPLACEMENT = "9th";
+	private static final Pattern FIRST = Pattern.compile("(first )", Pattern.CASE_INSENSITIVE);
+	private static final String FIRST_REPLACEMENT = "1st ";
+	private static final Pattern SECOND = Pattern.compile("(second )", Pattern.CASE_INSENSITIVE);
+	private static final String SECOND_REPLACEMENT = "2nd ";
+	private static final Pattern THIRD = Pattern.compile("(third )", Pattern.CASE_INSENSITIVE);
+	private static final String THIRD_REPLACEMENT = "3rd ";
+	private static final Pattern FOURTH = Pattern.compile("(fourth )", Pattern.CASE_INSENSITIVE);
+	private static final String FOURTH_REPLACEMENT = "4th ";
+	private static final Pattern FIFTH = Pattern.compile("(fifth )", Pattern.CASE_INSENSITIVE);
+	private static final String FIFTH_REPLACEMENT = "5th ";
+	private static final Pattern SIXTH = Pattern.compile("(sixth )", Pattern.CASE_INSENSITIVE);
+	private static final String SIXTH_REPLACEMENT = "6th ";
+	private static final Pattern SEVENTH = Pattern.compile("(seventh )", Pattern.CASE_INSENSITIVE);
+	private static final String SEVENTH_REPLACEMENT = "7th ";
+	private static final Pattern EIGHTH = Pattern.compile("(eighth )", Pattern.CASE_INSENSITIVE);
+	private static final String EIGHTH_REPLACEMENT = "8th ";
+	private static final Pattern NINTH = Pattern.compile("(ninth )", Pattern.CASE_INSENSITIVE);
+	private static final String NINTH_REPLACEMENT = "9th ";
 
 	@Override
 	public String cleanStopName(String gStopName) {
