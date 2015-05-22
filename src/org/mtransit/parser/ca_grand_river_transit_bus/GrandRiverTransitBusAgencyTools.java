@@ -8,6 +8,7 @@ import org.mtransit.parser.Utils;
 import org.mtransit.parser.gtfs.data.GCalendar;
 import org.mtransit.parser.gtfs.data.GCalendarDate;
 import org.mtransit.parser.gtfs.data.GRoute;
+import org.mtransit.parser.gtfs.data.GSpec;
 import org.mtransit.parser.gtfs.data.GStop;
 import org.mtransit.parser.gtfs.data.GTrip;
 import org.mtransit.parser.mt.data.MAgency;
@@ -218,7 +219,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String STANLEY_PARK = "Stanley Park";
 	private static final String FAIRVIEW_PARK_MALL = "Fairview Park Mall";
 	private static final String UNIVERSITY = "University";
-	private static final String U_W_DAVIS_CENTER = "U.W. Davis Center";
+	private static final String U_W_DAVIS_CENTER = "U.W. Davis Ctr";
 	private static final String CONESTOGA_MALL = "Conestoga Mall";
 	private static final String LACKNER_VICTORIA = "Lackner / Victoria";
 	private static final String QUINTE_MORRISON = "Quinte / Morrison";
@@ -235,7 +236,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String MC_CORMICK_C_C = "McCormick C.C.";
 	private static final String LAKE_LOUISE_CONSERVATION = "Lake Louise / Conservation";
 	private static final String INDUSTRIAL_LANGS = "Industrial / Langs";
-	private static final String CAMBRIDGE_CENTRE = "Cambridge Centre";
+	private static final String CAMBRIDGE_CENTRE = "Cambridge Ctr";
 	private static final String HESPELER = "Hespeler";
 	private static final String AINSLIE = "Ainslie";
 	private static final String COLUMBIA_SUNDEW = "Columbia / Sundew";
@@ -245,314 +246,316 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String WATERLOO = "Waterloo";
 	private static final String THE_BOARDWALK = "The Boardwalk";
 	private static final String FOREST_GLEN = "Forest Glen";
-	private static final String FOREST_GLEN_PLAZA = "Forest Glen Plaza";
+	private static final String FOREST_GLEN_PLAZA = "Forest Glen Plz";
 	private static final String AINSLIE_TERMINAL = "Ainslie Terminal";
 	private static final String AINSLIE_ST_TERMINAL = "Ainslie St. Terminal";
 	private static final String SPORTSWORLD_CROSSING = "Sportsworld Crossing";
 	private static final String HURON = "Huron";
 
 	@Override
-	public void setTripHeadsign(MRoute route, MTrip mTrip, GTrip gTrip) {
+	public void setTripHeadsign(MRoute mRoute, MTrip mTrip, GTrip gTrip, GSpec gtfs) {
 		int directionId = gTrip.direction_id;
 		String stationName = null;
-		if (route.id == 1l) {
+		if (mRoute.id == 1l) {
 			if (directionId == 0) {
 				stationName = STANLEY_PARK;
 			} else {
 				stationName = CHARLES_ST_TERMINAL;
 			}
-		} else if (route.id == 2l) {
+		} else if (mRoute.id == 2l) {
 			if (directionId == 0) {
 				stationName = HIGHLAND_HILLS_MALL;
 			} else {
 				stationName = CHARLES_ST_TERMINAL;
 			}
-		} else if (route.id == 3l) {
+		} else if (mRoute.id == 3l) {
 			if (directionId == 0) {
 				stationName = FOREST_GLEN_PLAZA;
 			} else {
 				stationName = CHARLES_ST_TERMINAL;
 			}
-		} else if (route.id == 4l) {
+		} else if (mRoute.id == 4l) {
 			if (directionId == 0) {
 				stationName = THE_BOARDWALK;
 			} else {
 				stationName = CHARLES_ST_TERMINAL;
 			}
-		} else if (route.id == 5l) {
+		} else if (mRoute.id == 5l) {
 			if (directionId == 0) {
 				stationName = DANIEL_BLOOMINGDALE;
 			} else {
 				stationName = THE_BOARDWALK;
 			}
-		} else if (route.id == 6l) {
+		} else if (mRoute.id == 6l) {
 			if (directionId == 0) {
 				stationName = CONESTOGA_MALL;
 			} else {
 				stationName = CHARLES_ST_TERMINAL;
 			}
-		} else if (route.id == 7l) {
+		} else if (mRoute.id == 7l) {
 			if (directionId == 0) {
 				stationName = WATERLOO;
 			} else {
 				stationName = FAIRVIEW_PARK_MALL;
 			}
-		} else if (route.id == 8l) {
+		} else if (mRoute.id == 8l) {
 			if (directionId == 0) {
 				stationName = FAIRVIEW_PARK_MALL;
 			} else {
 				stationName = UNIVERSITY;
 			}
-		} else if (route.id == 9l) {
+		} else if (mRoute.id == 9l) {
 			if (directionId == 0) {
 				stationName = CONESTOGA_MALL;
 			} else {
 				stationName = U_W_DAVIS_CENTER;
 			}
-		} else if (route.id == 10l) {
+		} else if (mRoute.id == 10l) {
 			if (directionId == 0) {
 				stationName = FAIRVIEW_PARK_MALL;
 			} else {
 				stationName = CONESTOGA_COLLEGE_DOON;
 			}
-		} else if (route.id == 11l) {
+		} else if (mRoute.id == 11l) {
 			if (directionId == 0) {
 				stationName = FOREST_GLEN_PLAZA;
 			} else {
 				stationName = CHARLES_ST_TERMINAL;
 			}
-		} else if (route.id == 12l) {
+		} else if (mRoute.id == 12l) {
 			if (directionId == 0) {
 				stationName = CONESTOGA_MALL;
 			} else {
 				stationName = FAIRVIEW_PARK_MALL;
 			}
-		} else if (route.id == 13l) {
+		} else if (mRoute.id == 13l) {
 			if (directionId == 0) {
 				stationName = THE_BOARDWALK;
 			} else {
 				stationName = U_W_DAVIS_CENTER;
 			}
-		} else if (route.id == 14l) {
+		} else if (mRoute.id == 14l) {
 			if (directionId == 0) {
 				stationName = CONESTOGA_MALL;
 			}
-		} else if (route.id == 15l) {
+		} else if (mRoute.id == 15l) {
 			if (directionId == 0) {
 				stationName = LACKNER_VICTORIA;
 			} else {
 				stationName = CHARLES_ST_TERMINAL;
 			}
-		} else if (route.id == 16l) {
+		} else if (mRoute.id == 16l) {
 			if (directionId == 0) {
 				stationName = FOREST_GLEN_PLAZA;
 			} else {
 				stationName = CONESTOGA_COLLEGE;
 			}
-		} else if (route.id == 17l) {
+		} else if (mRoute.id == 17l) {
 			if (directionId == 0) {
 				stationName = LACKNER_VICTORIA;
 			} else {
 				stationName = FAIRVIEW_PARK_MALL;
 			}
-		} else if (route.id == 19l) {
+		} else if (mRoute.id == 19l) {
 			if (directionId == 0) {
 				stationName = HIGHLAND_HILLS_MALL;
 			} else {
 				stationName = CHARLES_ST_TERMINAL;
 			}
-		} else if (route.id == 20l) {
+		} else if (mRoute.id == 20l) {
 			if (directionId == 0) {
 				stationName = HIGHLAND_VICTORIA_HILLS_MALLS;
 			} else {
 				stationName = CHARLES_ST_TERMINAL;
 			}
-		} else if (route.id == 21l) {
+		} else if (mRoute.id == 21l) {
 			if (directionId == 0) {
 				stationName = ELMIRA;
 			} else {
 				stationName = CONESTOGA_MALL;
 			}
-		} else if (route.id == 22l) {
+		} else if (mRoute.id == 22l) {
 			if (directionId == 0) {
 				stationName = HIGHLAND_HILLS_MALL;
 			} else {
 				stationName = CHARLES_ST_TERMINAL;
 			}
-		} else if (route.id == 23l) {
+		} else if (mRoute.id == 23l) {
 			if (directionId == 0) {
 				stationName = FAIRVIEW_PARK_MALL;
 			} else {
 				stationName = CHARLES_ST_TERMINAL;
 			}
-		} else if (route.id == 24l) {
+		} else if (mRoute.id == 24l) {
 			if (directionId == 0) {
 				stationName = ROLLING_MEADOWS;
 			} else {
 				stationName = CHARLES_ST_TERMINAL;
 			}
-		} else if (route.id == 25l) {
+		} else if (mRoute.id == 25l) {
 			if (directionId == 0) {
 				stationName = GOLDEN_MEADOW;
 			} else {
 				stationName = CHARLES_ST_TERMINAL;
 			}
-		} else if (route.id == 27l) {
+		} else if (mRoute.id == 27l) {
 			if (directionId == 0) {
 				stationName = QUINTE_MORRISON;
 			} else {
 				stationName = FAIRVIEW_PARK_MALL;
 			}
-		} else if (route.id == 29l) {
+		} else if (mRoute.id == 29l) {
 			if (directionId == 0) {
 				stationName = KING_UNIVERSITY;
 			} else {
 				stationName = THE_BOARDWALK;
 			}
-		} else if (route.id == 31l) {
+		} else if (mRoute.id == 31l) {
 			if (directionId == 0) {
 				stationName = COLUMBIA_SUNDEW;
 			} else {
 				stationName = CONESTOGA_MALL;
 			}
-		} else if (route.id == 33l) {
+		} else if (mRoute.id == 33l) {
 			if (directionId == 0) {
 				stationName = HURON;
 			} else {
 				stationName = FOREST_GLEN;
 			}
-		} else if (route.id == 51l) {
+		} else if (mRoute.id == 51l) {
 			if (directionId == 0) {
 				stationName = AINSLIE;
 			} else {
 				stationName = HESPELER;
 			}
-		} else if (route.id == 52l) {
+		} else if (mRoute.id == 52l) {
 			if (directionId == 0) {
 				stationName = FAIRVIEW_PARK_MALL;
 			} else {
 				stationName = AINSLIE_ST_TERMINAL;
 			}
-		} else if (route.id == 53l) {
+		} else if (mRoute.id == 53l) {
 			if (directionId == 0) {
 				stationName = AINSLIE_ST_TERMINAL;
 			} else {
 				stationName = CAMBRIDGE_CENTRE;
 			}
-		} else if (route.id == 54l) {
+		} else if (mRoute.id == 54l) {
 			if (directionId == 0) {
 				stationName = AINSLIE_ST_TERMINAL;
 			}
-		} else if (route.id == 55l) {
+		} else if (mRoute.id == 55l) {
 			if (directionId == 1) {
 				stationName = AINSLIE_ST_TERMINAL;
 			}
-		} else if (route.id == 56l) {
+		} else if (mRoute.id == 56l) {
 			directionId = 0; // merge 2 directions
+			// if (directionId == 0) {
 			stationName = CAMBRIDGE_CENTRE;
-		} else if (route.id == 57l) {
+			// }
+		} else if (mRoute.id == 57l) {
 			if (directionId == 1) {
 				stationName = AINSLIE_ST_TERMINAL;
 			}
-		} else if (route.id == 58l) {
+		} else if (mRoute.id == 58l) {
 			if (directionId == 0) {
 				stationName = AINSLIE_ST_TERMINAL;
 			}
-		} else if (route.id == 59l) {
+		} else if (mRoute.id == 59l) {
 			if (directionId == 0) {
 				stationName = AINSLIE_ST_TERMINAL;
 			}
-		} else if (route.id == 60l) {
+		} else if (mRoute.id == 60l) {
 			if (directionId == 0) {
 				stationName = CAMBRIDGE_CENTRE;
 			}
-		} else if (route.id == 61l) {
+		} else if (mRoute.id == 61l) {
 			if (directionId == 0) {
 				stationName = CAMBRIDGE_CENTRE;
 			} else {
 				stationName = CONESTOGA_COLLEGE_DOON;
 			}
-		} else if (route.id == 62l) {
+		} else if (mRoute.id == 62l) {
 			if (directionId == 1) {
 				stationName = AINSLIE_ST_TERMINAL;
 			}
-		} else if (route.id == 63l) {
+		} else if (mRoute.id == 63l) {
 			if (directionId == 0) {
 				stationName = AINSLIE_ST_TERMINAL;
 			}
-		} else if (route.id == 64l) {
+		} else if (mRoute.id == 64l) {
 			directionId = 1; // merge 2 directions
 			stationName = CAMBRIDGE_CENTRE;
-		} else if (route.id == 67l) {
+		} else if (mRoute.id == 67l) {
 			if (directionId == 0) {
 				stationName = INDUSTRIAL_LANGS;
 			} else {
 				stationName = CAMBRIDGE_CENTRE;
 			}
-		} else if (route.id == 72l) {
+		} else if (mRoute.id == 72l) {
 			if (directionId == 0) {
 				stationName = SPORTSWORLD_CROSSING;
 			}
-		} else if (route.id == 73l) {
+		} else if (mRoute.id == 73l) {
 			if (directionId == 0) {
 				stationName = LAKE_LOUISE_CONSERVATION;
 			} else {
 				stationName = MC_CORMICK_C_C;
 			}
-		} else if (route.id == 75l) {
+		} else if (mRoute.id == 75l) {
 			if (directionId == 0) {
 				stationName = CAMBRIDGE_CENTRE;
 			}
-		} else if (route.id == 76l) {
+		} else if (mRoute.id == 76l) {
 			if (directionId == 0) {
 				stationName = PIONEER_PARK_PLAZA;
 			} else {
 				stationName = CONESTOGA_COLLEGE;
 			}
-		} else if (route.id == 92l) {
+		} else if (mRoute.id == 92l) {
 			if (directionId == 0) {
 				stationName = ERB;
 			} else {
 				stationName = COLUMBIA;
 			}
-		} else if (route.id == 110l) {
+		} else if (mRoute.id == 110l) {
 			if (directionId == 0) {
 				stationName = FAIRVIEW_PARK_MALL;
 			} else {
 				stationName = CONESTOGA_COLLEGE_DOON;
 			}
 
-		} else if (route.id == 111l) {
+		} else if (mRoute.id == 111l) {
 			if (directionId == 0) {
 				stationName = CONESTOGA_COLLEGE_DOON;
 			} else {
 				stationName = AINSLIE_ST_TERMINAL;
 			}
-		} else if (route.id == 116l) {
+		} else if (mRoute.id == 116l) {
 			if (directionId == 0) {
 				stationName = FOREST_GLEN_PLAZA;
 			} else {
 				stationName = CONESTOGA_COLLEGE_DOON;
 			}
-		} else if (route.id == 200l) {
+		} else if (mRoute.id == 200l) {
 			if (directionId == 0) {
 				stationName = CONESTOGA_MALL;
 			} else {
 				stationName = AINSLIE_TERMINAL;
 			}
-		} else if (route.id == 201l) {
+		} else if (mRoute.id == 201l) {
 			if (directionId == 0) {
 				stationName = FOREST_GLEN_PLAZA;
 			} else {
 				stationName = CONESTOGA_MALL;
 			}
-		} else if (route.id == 202l) {
+		} else if (mRoute.id == 202l) {
 			if (directionId == 0) {
 				stationName = THE_BOARDWALK;
 			} else {
 				stationName = CONESTOGA_MALL;
 			}
-		} else if (route.id == 203l) {
+		} else if (mRoute.id == 203l) {
 			if (directionId == 0) {
 				stationName = CONESTOGA_COLLEGE;
 			} else {
