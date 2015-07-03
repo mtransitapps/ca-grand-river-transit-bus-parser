@@ -21,6 +21,7 @@ import org.mtransit.parser.mt.data.MTrip;
 // http://www.regionofwaterloo.ca/opendatadownloads/GRT_Merged_GTFS.zip
 // http://www.regionofwaterloo.ca/opendatadownloads/GRT_GTFS_Winter2015.zip
 // http://www.regionofwaterloo.ca/opendatadownloads/GRT_GTFS.zip
+// http://www.regionofwaterloo.ca/opendatadownloads/GRT_Daily_GTFS.zip
 public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
 	public static void main(String[] args) {
