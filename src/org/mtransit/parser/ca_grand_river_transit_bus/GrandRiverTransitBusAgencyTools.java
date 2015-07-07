@@ -13,7 +13,7 @@ import org.mtransit.parser.gtfs.data.GStop;
 import org.mtransit.parser.gtfs.data.GTrip;
 import org.mtransit.parser.mt.data.MAgency;
 import org.mtransit.parser.mt.data.MRoute;
-import org.mtransit.parser.mt.data.MSpec;
+import org.mtransit.parser.CleanUtils;
 import org.mtransit.parser.mt.data.MTrip;
 
 // http://www.regionofwaterloo.ca/en/regionalgovernment/OpenDataHome.asp
@@ -38,11 +38,11 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public void start(String[] args) {
-		System.out.printf("Generating Grand River Transit bus data...\n");
+		System.out.printf("\nGenerating Grand River Transit bus data...\n");
 		long start = System.currentTimeMillis();
 		this.serviceIds = extractUsefulServiceIds(args, this);
 		super.start(args);
-		System.out.printf("Generating Grand River Transit bus data... DONE in %s.\n", Utils.getPrettyDuration(System.currentTimeMillis() - start));
+		System.out.printf("\nGenerating Grand River Transit bus data... DONE in %s.\n", Utils.getPrettyDuration(System.currentTimeMillis() - start));
 	}
 
 	@Override
@@ -581,13 +581,13 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public String cleanTripHeadsign(String tripHeadsign) {
-		return MSpec.cleanLabel(tripHeadsign);
+		return CleanUtils.cleanLabel(tripHeadsign);
 	}
 
 	@Override
 	public String cleanStopName(String gStopName) {
-		gStopName = MSpec.cleanNumbers(gStopName);
-		return MSpec.cleanLabel(gStopName);
+		gStopName = CleanUtils.cleanNumbers(gStopName);
+		return CleanUtils.cleanLabel(gStopName);
 	}
 
 	@Override
