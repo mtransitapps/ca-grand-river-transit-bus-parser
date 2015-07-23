@@ -129,7 +129,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public String getRouteColor(GRoute gRoute) {
-		int routeId = Integer.parseInt(gRoute.route_id);
+		int routeId = Integer.parseInt(gRoute.getRouteId());
 		switch (routeId) {
 		// @formatter:off
 		case 1: return COLOR_0099CC;
@@ -255,7 +255,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public void setTripHeadsign(MRoute mRoute, MTrip mTrip, GTrip gTrip, GSpec gtfs) {
-		int directionId = gTrip.direction_id;
+		int directionId = gTrip.getDirectionId();
 		String stationName = null;
 		if (mRoute.id == 1l) {
 			if (directionId == 0) {
@@ -563,7 +563,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				stationName = CAMBRIDGE_CENTRE;
 			}
 		} else {
-			stationName = cleanTripHeadsign(gTrip.trip_headsign);
+			stationName = cleanTripHeadsign(gTrip.getTripHeadsign());
 			if (stationName.startsWith(gTrip.getRouteId())) {
 				stationName = stationName.substring(gTrip.getRouteId().length()).trim();
 			}
@@ -592,6 +592,6 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public String getStopCode(GStop gStop) {
-		return gStop.stop_id; // using stop ID as stop code
+		return gStop.getStopId(); // using stop ID as stop code
 	}
 }
