@@ -113,6 +113,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String COLOR_D0BA00 = "D0BA00";
 	private static final String COLOR_000099 = "000099";
 	private static final String COLOR_089018 = "089018";
+	private static final String COLOR_92278F = "92278F";
 	private static final String COLOR_999966 = "999966";
 	private static final String COLOR_993366 = "993366";
 	private static final String COLOR_FF9966 = "FF9966";
@@ -174,6 +175,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		case 29: return COLOR_993366;
 		case 31: return COLOR_999966;
 		case 33: return COLOR_089018;
+		case 34: return COLOR_92278F;
 		case 51: return COLOR_CC0000;
 		case 52: return COLOR_000099;
 		case 53: return COLOR_009933;
@@ -202,7 +204,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		case 201: return COLOR_000000;
 		case 202: return COLOR_000000;
 		case 203: return COLOR_000000;
+		case 204: return COLOR_000000;
 		case 888: return null;
+		case 889: return null;
 		case 9801: return COLOR_009CE0;
 		case 9851: return COLOR_009CE0;
 		case 9852: return COLOR_003986;
@@ -266,6 +270,11 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String AINSLIE_ST_TERMINAL = "Ainslie St Terminal";
 	private static final String SPORTSWORLD_CROSSING = "Sportsworld Xing";
 	private static final String HURON = "Huron";
+	private static final String BINGEMANS = "Bingemans";
+	private static final String UW_SPECIAL_9903 = "UW Special";
+	private static final String ST_MARY_S_EXPRESS_9903 = "St. Mary's Express";
+	private static final String FAIRVIEW_EXPRESS_9951 = "Fairview Express";
+	private static final String FOREST_GLEN_EXPRESS_9951 = "Forest Glen Express";
 
 	@Override
 	public void setTripHeadsign(MRoute mRoute, MTrip mTrip, GTrip gTrip, GSpec gtfs) {
@@ -490,6 +499,11 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(FOREST_GLEN, gTrip.getDirectionId());
 				return;
 			}
+		} else if (mRoute.id == 34l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignString(BINGEMANS, gTrip.getDirectionId());
+				return;
+			}
 		} else if (mRoute.id == 51l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(AINSLIE, gTrip.getDirectionId());
@@ -661,11 +675,37 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CAMBRIDGE_CENTRE, gTrip.getDirectionId());
 				return;
 			}
+		} else if (mRoute.id == 9903l) {
+			if (gTrip.getDirectionId() == 0) {
+				if (UW_SPECIAL_9903.equals(gTrip.getTripHeadsign())) {
+					mTrip.setHeadsignString(gTrip.getTripHeadsign(), 0);
+					return;
+				} else if (ST_MARY_S_EXPRESS_9903.equals(gTrip.getTripHeadsign())) {
+					mTrip.setHeadsignString(gTrip.getTripHeadsign(), 1);
+					return;
+				}
+			}
+			System.out.printf("\nUnepected trip to to split %s\n", gTrip);
+			System.exit(-1);
+		} else if (mRoute.id == 9951l) {
+			if (gTrip.getDirectionId() == 0) {
+				if (FOREST_GLEN_EXPRESS_9951.equals(gTrip.getTripHeadsign())) {
+					mTrip.setHeadsignString(gTrip.getTripHeadsign(), 0);
+					return;
+				} else if (FAIRVIEW_EXPRESS_9951.equals(gTrip.getTripHeadsign())) {
+					mTrip.setHeadsignString(gTrip.getTripHeadsign(), 1);
+					return;
+				}
+			}
+			System.out.printf("\nUnepected trip to to split %s\n", gTrip);
+			System.exit(-1);
 		}
 		mTrip.setHeadsignString(cleanTripHeadsign(gTrip.getTripHeadsign()), gTrip.getDirectionId());
 	}
 
 	private static final Pattern STARTS_WITH_RSN = Pattern.compile("(^[\\d]+\\s)", Pattern.CASE_INSENSITIVE);
+
+	private static final Pattern STARTS_WITH_TO = Pattern.compile("(^to\\s)", Pattern.CASE_INSENSITIVE);
 
 	@Override
 	public String cleanTripHeadsign(String tripHeadsign) {
@@ -678,6 +718,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		if (indexOfVIA >= 0) {
 			tripHeadsign = tripHeadsign.substring(0, indexOfVIA);
 		}
+		tripHeadsign = STARTS_WITH_TO.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
 		tripHeadsign = CleanUtils.removePoints(tripHeadsign);
 		tripHeadsign = CleanUtils.cleanStreetTypes(tripHeadsign);
 		return CleanUtils.cleanLabel(tripHeadsign);
