@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
@@ -303,7 +304,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { "2075", "2081", "3627" })) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "3628", "2069", "2075" })) //
+						Arrays.asList(new String[] { "3628", "3628_merged_1267883273", "2069", "2075" })) //
 				.compileBothTripSort());
 		map2.put(75l, new RouteTripSpec(75l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, SAGINAW, //
@@ -575,6 +576,19 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public String getStopCode(GStop gStop) {
-		return gStop.getStopId(); // using stop ID as stop code
+		return String.valueOf(getStopId(gStop)); // using stop ID as stop code
+	}
+
+	private static final Pattern DIGITS = Pattern.compile("[\\d]+");
+
+	@Override
+	public int getStopId(GStop gStop) {
+		if (!Utils.isDigitsOnly(gStop.getStopId())) {
+			Matcher matcher = DIGITS.matcher(gStop.getStopId());
+			if (matcher.find()) {
+				return Integer.parseInt(matcher.group());
+			}
+		}
+		return super.getStopId(gStop);
 	}
 }
