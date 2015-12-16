@@ -304,7 +304,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { "2075", "2081", "3627" })) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "3628", "3628_merged_1267883273", "2069", "2075" })) //
+						Arrays.asList(new String[] { "3628", "3628_merged_1267883347", "3628_merged_1267883273", "2069", "2075" })) //
 				.compileBothTripSort());
 		map2.put(75l, new RouteTripSpec(75l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, SAGINAW, //
@@ -329,6 +329,14 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { "3891", "1992", "1994", "2786", "2787", "1286", "4072", "1972", "3465", "2526", "2670" })) //
 				.addTripSort(1, //
 						Arrays.asList(new String[] { "2670", "1971", "1972", "4072", "2511", "3162", "3590", "1994" })) //
+				.compileBothTripSort());
+		map2.put(889l, new RouteTripSpec(92l, //
+				0, MTrip.HEADSIGN_TYPE_STRING, SPORTSWORLD, //
+				1, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL) //
+				.addTripSort(0, //
+						Arrays.asList(new String[] { "6101", "6103", "1570" })) //
+				.addTripSort(1, //
+						Arrays.asList(new String[] { "1571", "3517", "6101" })) //
 				.compileBothTripSort());
 		map2.put(9903l, new RouteTripSpec(9903l, //
 				0, MTrip.HEADSIGN_TYPE_STRING, UW, //
