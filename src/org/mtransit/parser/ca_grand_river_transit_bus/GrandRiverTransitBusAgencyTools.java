@@ -278,6 +278,8 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String WOODSIDE = "Woodside";
 	private static final String ST_MARY_S = "St Mary's";
 	private static final String FOREST_GLEN = "Forest Gln";
+	private static final String MELRAN = "Melran";
+	private static final String FISHER_MILLS = "Fisher Mills";
 
 	private static HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
 	static {
@@ -506,10 +508,21 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			if (mTrip.getHeadsignId() == 0) {
 				mTrip.setHeadsignString(AINSLIE_TERMINAL, mTrip.getHeadsignId());
 				return true;
+			} else if (mTrip.getHeadsignId() == 1) {
+				mTrip.setHeadsignString(FISHER_MILLS + SLASH + MELRAN, mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 52l) {
+			if (mTrip.getHeadsignId() == 0) {
+				mTrip.setHeadsignString(FAIRVIEW_PARK, mTrip.getHeadsignId());
+				return true;
 			}
 		} else if (mTrip.getRouteId() == 67l) {
 			if (mTrip.getHeadsignId() == 0) {
 				mTrip.setHeadsignString(LANGS, mTrip.getHeadsignId());
+				return true;
+			} else if (mTrip.getHeadsignId() == 1) {
+				mTrip.setHeadsignString(CAMBRIDGE_CENTRE, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 92l) {
@@ -534,7 +547,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				return true;
 			}
 		}
-		return super.mergeHeadsign(mTrip, mTripToMerge);
+		System.out.printf("\nUnepected trips to merge %s & %s\n", mTrip, mTripToMerge);
+		System.exit(-1);
+		return false;
 	}
 
 	private static final Pattern BUS_PLUS = Pattern.compile("( bus plus$)", Pattern.CASE_INSENSITIVE);
