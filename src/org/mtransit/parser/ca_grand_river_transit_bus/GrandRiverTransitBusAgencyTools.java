@@ -328,7 +328,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				0, MTrip.HEADSIGN_TYPE_STRING, ERB, //
 				1, MTrip.HEADSIGN_TYPE_STRING, COLUMBIA) //
 				.addTripSort(0, //
-						Arrays.asList(new String[] { "3891", "1992", "1994", "2786", "2787", "1286", "4072", "1972", "3465", "2526", "2670" })) //
+						Arrays.asList(new String[] { "3891", "1992", "1994", //
+								"2783", "1167", "3620", //
+								"2786", "2787", "1286", "4072", "1972", "3465", "2526", "2670" })) //
 				.addTripSort(1, //
 						Arrays.asList(new String[] { "2670", "1971", "1972", "4072", "2511", "3162", "3590", "1994" })) //
 				.compileBothTripSort());
