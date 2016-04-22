@@ -207,6 +207,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		case 73: return COLOR_0099CC;
 		case 75: return COLOR_B72700;
 		case 76: return COLOR_000066;
+		case 77: return null; // TODO ?
 		case 91: return null;
 		case 92: return COLOR_003986;
 		case 110: return COLOR_0066CC;
@@ -270,6 +271,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String WATERLOO = "Waterloo";
 	private static final String WATERLOO_INDUSTRIAL = WATERLOO + " " + INDUSTRIAL_SHORT;
 	private static final String THE_BOARDWALK = "The Boardwalk";
+	private static final String NEW_HAMBURG = "New Hamburg";
 	private static final String AINSLIE_TERMINAL = "Ainslie Terminal";
 	private static final String SPORTSWORLD = "Sportsworld";
 	private static final String HURON = "Huron";
@@ -280,6 +282,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String FOREST_GLEN = "Forest Gln";
 	private static final String MELRAN = "Melran";
 	private static final String FISHER_MILLS = "Fisher Mills";
+	private static final String ELMIRA = "Elmira";
 
 	private static HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
 	static {
@@ -421,6 +424,14 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				gTripHeadsign = gTripHeadsignBeforeVIA;
 			}
 		}
+		if (mRoute.getId() == 77l) {
+			// TODO 77 trips have only 1 stop..
+			List<GTripStop> gTrips = gtfs.getTripStops(gTrip.getTripId());
+			if (gTrips != null && gTrips.size() == 1) {
+				mTrip.setHeadsignString(cleanTripHeadsign(gTripHeadsign) + " " + gTrip.getDirectionId(), gTrip.getDirectionId());
+				return;
+			}
+		}
 		mTrip.setHeadsignString(cleanTripHeadsign(gTripHeadsign), gTrip.getDirectionId());
 	}
 
@@ -488,6 +499,11 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(WATERLOO_INDUSTRIAL, mTrip.getHeadsignId());
 				return true;
 			}
+		} else if (mTrip.getRouteId() == 21l) {
+			if (mTrip.getHeadsignId() == 0) {
+				mTrip.setHeadsignString(ELMIRA, mTrip.getHeadsignId());
+				return true;
+			}
 		} else if (mTrip.getRouteId() == 22l) {
 			if (mTrip.getHeadsignId() == 0) {
 				mTrip.setHeadsignString(HIGHLAND_HILLS, mTrip.getHeadsignId());
@@ -538,6 +554,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		} else if (mTrip.getRouteId() == 200l) {
 			if (mTrip.getHeadsignId() == 0) {
 				mTrip.setHeadsignString(UW_CONESTOGA_MALL, mTrip.getHeadsignId());
+				return true;
+			} else if (mTrip.getHeadsignId() == 1) {
+				mTrip.setHeadsignString(AINSLIE_TERMINAL, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 203l) {
@@ -594,6 +613,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public String cleanStopName(String gStopName) {
+		gStopName = gStopName.toLowerCase(Locale.ENGLISH);
 		gStopName = CleanUtils.cleanNumbers(gStopName);
 		gStopName = CleanUtils.cleanStreetTypes(gStopName);
 		return CleanUtils.cleanLabel(gStopName);
