@@ -271,7 +271,6 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String WATERLOO = "Waterloo";
 	private static final String WATERLOO_INDUSTRIAL = WATERLOO + " " + INDUSTRIAL_SHORT;
 	private static final String THE_BOARDWALK = "The Boardwalk";
-	private static final String NEW_HAMBURG = "New Hamburg";
 	private static final String AINSLIE_TERMINAL = "Ainslie Terminal";
 	private static final String SPORTSWORLD = "Sportsworld";
 	private static final String HURON = "Huron";
