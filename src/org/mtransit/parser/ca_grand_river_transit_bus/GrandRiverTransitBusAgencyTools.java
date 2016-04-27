@@ -271,6 +271,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String WATERLOO = "Waterloo";
 	private static final String WATERLOO_INDUSTRIAL = WATERLOO + " " + INDUSTRIAL_SHORT;
 	private static final String THE_BOARDWALK = "The Boardwalk";
+	private static final String NEW_HAMBURG = "New Hamburg";
 	private static final String AINSLIE_TERMINAL = "Ainslie Terminal";
 	private static final String SPORTSWORLD = "Sportsworld";
 	private static final String HURON = "Huron";
@@ -325,6 +326,18 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { "1744", "3999", "1732" })) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { "1732", "3957", "1744" })) //
+				.compileBothTripSort());
+		map2.put(77l, new RouteTripSpec(77l, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, THE_BOARDWALK, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, NEW_HAMBURG) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"7033", "7035", "4002" //
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"4002", "7009", "7033" //
+						})) //
 				.compileBothTripSort());
 		map2.put(92l, new RouteTripSpec(92l, //
 				0, MTrip.HEADSIGN_TYPE_STRING, ERB, //
@@ -421,14 +434,6 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				gTripHeadsign = gTripHeadsignBeforeVIA;
 			} else {
 				gTripHeadsign = gTripHeadsignBeforeVIA;
-			}
-		}
-		if (mRoute.getId() == 77l) {
-			// TODO 77 trips have only 1 stop..
-			List<GTripStop> gTrips = gtfs.getTripStops(gTrip.getTripId());
-			if (gTrips != null && gTrips.size() == 1) {
-				mTrip.setHeadsignString(cleanTripHeadsign(gTripHeadsign) + " " + gTrip.getDirectionId(), gTrip.getDirectionId());
-				return;
 			}
 		}
 		mTrip.setHeadsignString(cleanTripHeadsign(gTripHeadsign), gTrip.getDirectionId());
