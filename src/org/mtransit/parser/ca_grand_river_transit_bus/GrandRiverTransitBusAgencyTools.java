@@ -299,9 +299,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, WOODSIDE) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { "2139", "2143", "1517" })) //
+						Arrays.asList(new String[] { "2137", "2139", "2143", "1517" })) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "1518", "2130", "2139" })) //
+						Arrays.asList(new String[] { "1518", "2130", "2137"/* , "2139" */})) //
 				.compileBothTripSort());
 		map2.put(73l, new RouteTripSpec(73l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, MC_CORMICK_C_C, //
