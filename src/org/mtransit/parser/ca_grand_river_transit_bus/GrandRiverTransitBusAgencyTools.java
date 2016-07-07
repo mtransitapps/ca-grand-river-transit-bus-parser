@@ -349,6 +349,18 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(1, //
 						Arrays.asList(new String[] { "2670", "1971", "1972", "4072", "2511", "3162", "3590", "1994" })) //
 				.compileBothTripSort());
+		map2.put(204l, new RouteTripSpec(204l, //
+				0, MTrip.HEADSIGN_TYPE_STRING, "Lackner", //
+				1, MTrip.HEADSIGN_TYPE_STRING, THE_BOARDWALK) //
+				.addTripSort(0, //
+						Arrays.asList(new String[] { //
+						"4000", "1095", "3485", "1180", "2709", "1923", "2339", "1057" //
+						})) //
+				.addTripSort(1, //
+						Arrays.asList(new String[] { //
+						"1057", "1030", "1678", "2352", "2558", "4000" //
+						})) //
+				.compileBothTripSort());
 		map2.put(889l, new RouteTripSpec(889l, //
 				0, MTrip.HEADSIGN_TYPE_STRING, SPORTSWORLD, //
 				1, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL) //
