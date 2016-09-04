@@ -287,6 +287,57 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
 	static {
 		HashMap<Long, RouteTripSpec> map2 = new HashMap<Long, RouteTripSpec>();
+		map2.put(10l, new RouteTripSpec(10l, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, FAIRVIEW_PARK, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CONESTOGA_COLLEGE) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"1729", //
+								"3641", // !=
+								"1732", // !=
+								"1733", // !=
+								"1734", // !=
+								"1735", // !=
+								"1736", // !=
+								"1748", // ==
+								"1749", "1754", // !=
+								"1755", // ==
+								"1553" //
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"1553", //
+								"1701", // ==
+								"1702", // !=
+								"1703", // ==
+								"1706", // ==
+								"1707", "1713", // !=
+								"1714", // ==
+								"1731", //
+								"1732", // !=
+								"1733", // ==
+								"1734", // !=
+								"1728", // ==
+								"1729" //
+						})) //
+				.compileBothTripSort());
+		map2.put(22l, new RouteTripSpec(22l, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Charles Terminal", //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Highland Hills") //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"2974", // Highland Hills
+								"2985", // == FISCHER-HALLMAN / OTTAWA
+								"3894", // != FISCHER-HALLMAN / ACTIVA
+								"2076", // != Activa / Grey Fox
+								"2987", // == ACTIVA / WILDERNESS
+								"1765", "2556" //
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"2556", "1769", "2953", "2974" //
+						})) //
+				.compileBothTripSort());
 		map2.put(27l, new RouteTripSpec(27l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, QUINTE_MORRISON, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, FAIRVIEW_PARK) //
@@ -299,17 +350,44 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, WOODSIDE) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { "2137", "2139", "2143", "1517" })) //
+						Arrays.asList(new String[] { //
+						"2134", // != ??
+								"2137", //
+								"2138", // !=
+								"2139", // ==
+								"2140", //
+								"2143", // ==
+								"2144", "2158", // !=
+								"2205", "2211", // !=
+								"2159", // ==
+								"1517" //
+						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "1518", "2130", "2137"/* , "2139" */})) //
+						Arrays.asList(new String[] { //
+						"1518", //
+								"2126", // ==
+								"2127", // !=
+								"2128", // ==
+								"2130", //
+								"2134", // ==
+								"2135", // !=
+								"2136", // !=
+								"2137", //
+								"2139", // != ??
+						})) //
 				.compileBothTripSort());
 		map2.put(73l, new RouteTripSpec(73l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, MC_CORMICK_C_C, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, LAKE_LOUISE_CONSERVATION) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { "2075", "2081", "3627" })) //
+						Arrays.asList(new String[] { //
+						"2075", "2081", "3627" //
+						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "3628", "3628_merged_1267883347", "3628_merged_1267883273", "2069", "2075" })) //
+						Arrays.asList(new String[] { //
+						"3628", "3628_merged_1267883347", "3628_merged_1267883273", //
+								"2069", "2075" //
+						})) //
 				.compileBothTripSort());
 		map2.put(75l, new RouteTripSpec(75l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, SAGINAW, //
@@ -459,8 +537,11 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 3l) {
-			if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(DOWNTOWN, mTrip.getHeadsignId());
+			if (mTrip.getHeadsignId() == 0) {
+				mTrip.setHeadsignString("Forest Gln", mTrip.getHeadsignId());
+				return true;
+			} else if (mTrip.getHeadsignId() == 1) {
+				mTrip.setHeadsignString("Charles Terminal", mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 4l) {
@@ -507,6 +588,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mTrip.getRouteId() == 13l) {
 			if (mTrip.getHeadsignId() == 0) {
+			} else if (mTrip.getHeadsignId() == 1) {
 				mTrip.setHeadsignString(THE_BOARDWALK, mTrip.getHeadsignId());
 				return true;
 			}
