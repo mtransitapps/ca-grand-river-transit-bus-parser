@@ -95,9 +95,13 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	@Override
 	public String getRouteLongName(GRoute gRoute) {
 		String routeLongName = gRoute.getRouteLongName();
+		if (Utils.isUppercaseOnly(routeLongName, true, true)) {
+			routeLongName = routeLongName.toLowerCase(Locale.ENGLISH);
+		}
 		routeLongName = BUS_PLUS.matcher(routeLongName).replaceAll(BUS_PLUS_REPLACEMENT);
+		routeLongName = CleanUtils.CLEAN_AND.matcher(routeLongName).replaceAll(CleanUtils.CLEAN_AND_REPLACEMENT);
 		routeLongName = CleanUtils.cleanSlashes(routeLongName);
-		return routeLongName;
+		return CleanUtils.cleanLabel(routeLongName);
 	}
 
 	private static final String AGENCY_COLOR = "0168B3"; // BLUE (PDF SCHEDULE)
