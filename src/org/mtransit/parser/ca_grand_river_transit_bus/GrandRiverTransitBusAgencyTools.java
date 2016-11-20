@@ -636,6 +636,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			if (mTrip.getHeadsignId() == 0) {
 				mTrip.setHeadsignString(FAIRVIEW_PARK, mTrip.getHeadsignId());
 				return true;
+			} else if (mTrip.getHeadsignId() == 1) {
+				mTrip.setHeadsignString(AINSLIE_TERMINAL, mTrip.getHeadsignId());
+				return true;
 			}
 		} else if (mTrip.getRouteId() == 67l) {
 			if (mTrip.getHeadsignId() == 0) {
