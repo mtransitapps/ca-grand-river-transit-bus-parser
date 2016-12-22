@@ -397,9 +397,17 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, SAGINAW, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CAMBRIDGE_CENTRE) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { "1386", "1345", "3394" })) //
+						Arrays.asList(new String[] { //
+						"1064", // Cambridge Centre - Bay 5
+								"1345", //
+								"3394" //
+						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "3394", "1352", "3797" })) //
+						Arrays.asList(new String[] { //
+						"3394", //
+								"1352", //
+								"1064" // Cambridge Centre - Bay 5
+						})) //
 				.compileBothTripSort());
 		map2.put(76l, new RouteTripSpec(76l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CONESTOGA_COLLEGE, //
