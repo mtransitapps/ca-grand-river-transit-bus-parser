@@ -537,6 +537,27 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"3520" // Dover / Rose
 						})) //
 				.compileBothTripSort());
+		map2.put(72L, new RouteTripSpec(72L, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Boxwood / Maple Grv", //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Sportsworld") //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"1572", // Sportsworld
+								"3939", // ==
+								"1287", // !=
+								"2310", "1036", // !=
+								"3849", // ==
+								"3646", // Boxwood / Maple Grove
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"3646", // Boxwood / Maple Grove
+								"3649", // ==
+								"2316", // !=
+								"2317", // ==
+								"1572", // Sportsworld
+						})) //
+				.compileBothTripSort());
 		map2.put(73l, new RouteTripSpec(73l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, MC_CORMICK_C_C, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, LAKE_LOUISE_CONSERVATION) //
@@ -584,6 +605,38 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { //
 						"4002", "7009", "7033" //
+						})) //
+				.compileBothTripSort());
+		map2.put(78L, new RouteTripSpec(78L, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Family Ctr", //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, FOREST_GLEN) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"1024", // Forest Glen
+								"1028", // ++
+								"1031", // The Family Centre
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"1031", // The Family Centre
+								"1035", // ++
+								"1024", // Forest Glen
+						})) //
+				.compileBothTripSort());
+		map2.put(91l, new RouteTripSpec(91l, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, UW, // Waterloo
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Charles Terminal") // Kitchener
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"2551", // Charles Terminal
+								"1909", // ++
+								"2519", // U.W. - B.C. Matthews Hall
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"2519", // U.W. - B.C. Matthews Hall
+								"1165", // ++
+								"2551", // Charles Terminal
 						})) //
 				.compileBothTripSort());
 		map2.put(92l, new RouteTripSpec(92l, //
