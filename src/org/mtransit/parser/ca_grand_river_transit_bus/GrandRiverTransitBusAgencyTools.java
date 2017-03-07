@@ -629,7 +629,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.NORTH.intValue(), //
 						Arrays.asList(new String[] { //
 						"2551", // Charles Terminal
-								"1909", // ++
+								"1910", // ++
 								"2519", // U.W. - B.C. Matthews Hall
 						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
