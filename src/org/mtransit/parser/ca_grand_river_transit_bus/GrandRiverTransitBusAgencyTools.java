@@ -393,11 +393,15 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { //
 						"1410", // Rose / Argyle
 								"1414", //
+								"1427", // ==
+								"1058", // Cambridge Centre Station
 								"1064" // Cambridge Centre - Bay 5
 						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { //
-						"1064", // Cambridge Centre - Bay 5
+						"1058", // Cambridge Centre Station
+								"1064", // Cambridge Centre - Bay 5
+								"1392", // ==
 								"1401", //
 								"1410" // Rose / Argyle
 						})) //
@@ -465,6 +469,8 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
 						"1058", // Cambridge Centre - Bay 2
+								"1064", // Cambridge Centre Station
+								"6021", // ==
 								"1364", //
 								"1371" // Saginaw / Burnett
 						})) //
@@ -472,7 +478,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { //
 						"1371", // Saginaw / Burnett
 								"1380", //
-								"1058" // Cambridge Centre - Bay 2
+								"6103", // ==
+								"1058", // Cambridge Centre - Bay 2
+								"1064", // Cambridge Centre Station
 						})) //
 				.compileBothTripSort());
 		map2.put(62l, new RouteTripSpec(62l, //
@@ -480,29 +488,29 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, WOODSIDE) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
-						"2134", // != ??
-								"2137", //
-								"2138", // !=
-								"2139", // ==
-								"2140", //
-								"2143", // ==
-								"2144", "2158", // !=
-								"2205", "2211", // !=
-								"2159", // ==
-								"1517" //
+						"2139", // Hillcrest / Churchill
+								"2147", // == Cedar / Southwood
+								"2148", // != Cedar / Woodside
+								"2151", // != St. Gregorys / St. Andrews
+								"2152", // != Stanley / Borden
+								"2250", // != Southwood / Cedar
+								"2252", // != Southwood / Wedgewood
+								"2153", // == Stanley / Tait
+								"1517", // Ainslie Terminal
 						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { //
-						"1518", //
-								"2126", // ==
-								"2127", // !=
-								"2128", // ==
-								"2130", //
-								"2134", // ==
-								"2135", // !=
-								"2136", // !=
-								"2137", //
-								"2139", // != ??
+						"1518", // Ainslie Terminal
+								"2126", // == Grand / Victoria
+								"2127", // != Crombie / Grand
+								"2128", // == Middleton / Francis
+								"2131", // == Stanley / Tait
+								"2132", // != Stanley / St. Andrews
+								"2136", // != Woodside / Cedar
+								"2262", // != Fourth / Vincent
+								"2266", // != Southwood / Cedar
+								"2137", // == Southgate / Day
+								"2139", // Hillcrest / Churchill
 						})) //
 				.compileBothTripSort());
 		map2.put(63L, new RouteTripSpec(63L, //
@@ -629,13 +637,26 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.NORTH.intValue(), //
 						Arrays.asList(new String[] { //
 						"2551", // Charles Terminal
-								"1910", // ++
+								"5028", // == Park / Allen
+								"3743", // != William / Caroline
+								"1909", // != King / Bridgeport
+								"1960", // != Caroline / Willis Way
+								"5014", // != Bridgeport / King
+								"1910", // == King / Elgin
 								"2519", // U.W. - B.C. Matthews Hall
 						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { //
 						"2519", // U.W. - B.C. Matthews Hall
-								"1165", // ++
+								"2535", // == King / Central
+								"1957", // != King / Bridgeport
+								"1959", // != King / William
+								"5065", // != King / Bridgeport
+								"5031", // != Park / Norman
+								"5029", // == Park / Allen
+								"3227", // == Victoria / Joseph
+								"1901", // != King / Victoria
+								"2457", // == King / Water
 								"2551", // Charles Terminal
 						})) //
 				.compileBothTripSort());
@@ -817,6 +838,14 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		} else if (mTrip.getRouteId() == 14l) {
 			if (mTrip.getHeadsignId() == 0) {
 				mTrip.setHeadsignString(WATERLOO_INDUSTRIAL, mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 16l) {
+			if (mTrip.getHeadsignId() == 0) {
+				mTrip.setHeadsignString(CONESTOGA_COLLEGE, mTrip.getHeadsignId());
+				return true;
+			} else if (mTrip.getHeadsignId() == 1) {
+				mTrip.setHeadsignString(FOREST_GLEN, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 21l) {
