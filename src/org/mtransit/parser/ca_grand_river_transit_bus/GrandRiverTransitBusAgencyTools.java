@@ -740,6 +740,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			return; // split
 		}
 		String gTripHeadsign = gTrip.getTripHeadsign();
+		if (StringUtils.isEmpty(gTripHeadsign)) {
+			gTripHeadsign = mRoute.getLongName();
+		}
 		gTripHeadsign = STARTS_WITH_RSN.matcher(gTripHeadsign).replaceAll(StringUtils.EMPTY);
 		if (gTripHeadsign.length() > mRoute.getLongName().length()) {
 			gTripHeadsign = Pattern.compile("((^|\\W){1}(" + mRoute.getLongName() + ")(\\W|$){1})", Pattern.CASE_INSENSITIVE).matcher(gTripHeadsign)
@@ -936,7 +939,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
 	private static final Pattern STARTS_WITH_TO = Pattern.compile("(^to\\s)", Pattern.CASE_INSENSITIVE);
 
-	private static final Pattern INDUSTRIAL = Pattern.compile("(industrial)", Pattern.CASE_INSENSITIVE);
+	private static final Pattern INDUSTRIAL = Pattern.compile("(industrial|indsutrial)", Pattern.CASE_INSENSITIVE);
 	private static final String INDUSTRIAL_REPLACEMENT = INDUSTRIAL_SHORT;
 
 	private static final Pattern UW_ = Pattern.compile("((^|\\W){1}(uw)(\\W|$){1})", Pattern.CASE_INSENSITIVE);
