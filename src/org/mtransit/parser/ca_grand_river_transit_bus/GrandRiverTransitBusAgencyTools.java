@@ -83,6 +83,11 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	@Override
+	public boolean excludeRoute(GRoute gRoute) {
+		return super.excludeRoute(gRoute);
+	}
+
+	@Override
 	public Integer getAgencyRouteType() {
 		return MAgency.ROUTE_TYPE_BUS;
 	}
@@ -514,18 +519,18 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						})) //
 				.compileBothTripSort());
 		map2.put(63L, new RouteTripSpec(63L, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Dundas / Franklin", //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CAMBRIDGE_CENTRE, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
 						"1519", // Ainslie Terminal
-								"2169", //
-								"2176" // Dundas / Franklin
+								"2169", // ++
+								"1505", // South Cambridge Shopping Ct
 						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { //
-						"2176", // Dundas / Franklin
-								"2182", //
+						"1505", // South Cambridge Shopping Ct
+								"2182", // ++
 								"1520" // Ainslie Terminal
 						})) //
 				.compileBothTripSort());
@@ -584,7 +589,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CAMBRIDGE_CENTRE) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
-						"1064", // Cambridge Centre - Bay 5
+						"1058", // Cambridge Centre Station
 								"1345", //
 								"3394" //
 						})) //
@@ -592,7 +597,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { //
 						"3394", //
 								"1352", //
-								"1064" // Cambridge Centre - Bay 5
+								"1058", // Cambridge Centre Station
 						})) //
 				.compileBothTripSort());
 		map2.put(76l, new RouteTripSpec(76l, //
