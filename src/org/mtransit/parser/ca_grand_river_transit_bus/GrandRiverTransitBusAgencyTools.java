@@ -642,24 +642,12 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.NORTH.intValue(), //
 						Arrays.asList(new String[] { //
 						"2551", // Charles Terminal
-								"5028", // == Park / Allen
-								"3743", // != William / Caroline
-								"1909", // != King / Bridgeport
-								"1960", // != Caroline / Willis Way
-								"5014", // != Bridgeport / King
-								"1910", // == King / Elgin
+								"5061", // ++
 								"2519", // U.W. - B.C. Matthews Hall
 						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { //
 						"2519", // U.W. - B.C. Matthews Hall
-								"2535", // == King / Central
-								"1957", // != King / Bridgeport
-								"1959", // != King / William
-								"5065", // != King / Bridgeport
-								"5031", // != Park / Norman
-								"5029", // == Park / Allen
-								"3227", // == Victoria / Joseph
 								"1901", // != King / Victoria
 								"2457", // == King / Water
 								"2551", // Charles Terminal
