@@ -249,6 +249,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		case 9983: return COLOR_089018;
 		// @formatter:on
 		default:
+			if (isGoodEnoughAccepted()) {
+				return null;
+			}
 			System.out.printf("\nUnexpected route color %s!\n", gRoute);
 			System.exit(-1);
 			return null;
@@ -416,15 +419,15 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Blair Rd") //
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
-						"2196", // Bismark / Blair
+						"3792", // Blair / Esther
 								"2206", //
 								"1521" // Ainslie Terminal
 						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { //
-						"1514", // Ainslie Terminal
+						"1517", // Ainslie Terminal
 								"2191", // Sunset / Saxony
-								"2196" // Bismark / Blair
+								"3792", // Blair / Esther
 						})) //
 				.compileBothTripSort());
 		map2.put(58L, new RouteTripSpec(58L, //
@@ -770,6 +773,11 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public boolean mergeHeadsign(MTrip mTrip, MTrip mTripToMerge) {
+		if (!isGoodEnoughAccepted()) {
+			System.out.printf("\nUnepected trips to merge %s & %s\n", mTrip, mTripToMerge);
+			System.exit(-1);
+			return false; // TODO use better merge
+		}
 		if (mTrip.getRouteId() == 2l) {
 			if (mTrip.getHeadsignId() == 0) {
 				mTrip.setHeadsignString(DOWNTOWN, mTrip.getHeadsignId());
