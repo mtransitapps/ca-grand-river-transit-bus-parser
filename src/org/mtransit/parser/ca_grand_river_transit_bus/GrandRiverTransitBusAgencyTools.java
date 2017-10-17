@@ -435,7 +435,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
 						Arrays.asList(new String[] { //
-						"1516", // Ainslie Terminal
+						"1521", // Ainslie Terminal
 								"2100", //
 								"2108" // Elgin / Avenue
 						})) //
@@ -607,9 +607,15 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CONESTOGA_COLLEGE, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, PIONEER_PARK) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { "1744", "3999", "1732" })) //
+						Arrays.asList(new String[] { //
+						"1744", // Pioneer / Old Carriage
+								"3801", // Conestoga College / Pinnacle
+						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "1732", "3957", "1744" })) //
+						Arrays.asList(new String[] { //
+						"3801", // Conestoga College / Pinnacle
+								"1744", // Pioneer / Old Carriage
+						})) //
 				.compileBothTripSort());
 		map2.put(77l, new RouteTripSpec(77l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, THE_BOARDWALK, //
