@@ -603,17 +603,17 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1058", // Cambridge Centre Station
 						})) //
 				.compileBothTripSort());
-		map2.put(76l, new RouteTripSpec(76l, //
+		map2.put(76L, new RouteTripSpec(76L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CONESTOGA_COLLEGE, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, PIONEER_PARK) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
 						"1744", // Pioneer / Old Carriage
-								"3801", // Conestoga College / Pinnacle
+								"1732", // Conestoga College Door 3
 						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { //
-						"3801", // Conestoga College / Pinnacle
+						"1732", // Conestoga College Door 3
 								"1744", // Pioneer / Old Carriage
 						})) //
 				.compileBothTripSort());
