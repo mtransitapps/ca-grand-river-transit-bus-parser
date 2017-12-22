@@ -435,7 +435,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
 						Arrays.asList(new String[] { //
-						"1521", // Ainslie Terminal
+						"1516", // != Ainslie Terminal
+								"1521", // != Ainslie Terminal
+								"1605", // ==
 								"2100", //
 								"2108" // Elgin / Avenue
 						})) //
@@ -592,7 +594,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CAMBRIDGE_CENTRE) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
-						"1058", // Cambridge Centre Station
+						"1064", // Cambridge Centre Station
 								"1345", //
 								"3394" //
 						})) //
@@ -600,7 +602,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { //
 						"3394", //
 								"1352", //
-								"1058", // Cambridge Centre Station
+								"1064", // Cambridge Centre Station
 						})) //
 				.compileBothTripSort());
 		map2.put(76L, new RouteTripSpec(76L, //
