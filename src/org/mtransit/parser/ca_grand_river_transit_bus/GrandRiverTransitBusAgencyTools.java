@@ -499,6 +499,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
 						"2139", // Hillcrest / Churchill
+								"2146", // Kent / Cedar
 								"2147", // == Cedar / Southwood
 								"2148", // != Cedar / Woodside
 								"2151", // != St. Gregorys / St. Andrews
@@ -594,7 +595,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CAMBRIDGE_CENTRE) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
-						"1064", // Cambridge Centre Station
+						"1064", // != Cambridge Centre Station
+								"1058", // != Cambridge Centre Station
+								"1275", // ==
 								"1345", //
 								"3394" //
 						})) //
@@ -602,7 +605,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { //
 						"3394", //
 								"1352", //
-								"1064", // Cambridge Centre Station
+								"1320", // ==
+								"1058", // != Cambridge Centre Station
+								"1064", // != Cambridge Centre Station
 						})) //
 				.compileBothTripSort());
 		map2.put(76L, new RouteTripSpec(76L, //
@@ -665,14 +670,33 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						})) //
 				.compileBothTripSort());
 		map2.put(92l, new RouteTripSpec(92l, //
-				0, MTrip.HEADSIGN_TYPE_STRING, ERB, //
-				1, MTrip.HEADSIGN_TYPE_STRING, COLUMBIA) //
+				0, MTrip.HEADSIGN_TYPE_STRING, "CW", //
+				1, MTrip.HEADSIGN_TYPE_STRING, "CCW") //
 				.addTripSort(0, //
-						Arrays.asList(new String[] { "3891", "1992", "1994", //
-								"2783", "1167", "3620", //
-								"2786", "2787", "1286", "4072", "1972", "3465", "2526", "2670" })) //
+						Arrays.asList(new String[] { //
+						"3891", // Fischer-Hallman / Highland
+								"1992", // ++
+								"1972", // Fischer-Hallman / Erb
+								"3465", // ++
+								"3773", // ++
+								"1970", // ++
+								"1971", // Erb / Churchill {43.453374,-80.551137}
+								"1972", // Fischer-Hallman / Erb
+						})) //
 				.addTripSort(1, //
-						Arrays.asList(new String[] { "2670", "1971", "1972", "4072", "2511", "3162", "3590", "1994" })) //
+						Arrays.asList(new String[] { //
+						"1994", // Erb / Fischer-Hallman
+								"4053", // ++
+								"1090", // University / Seagram
+								"2783", // ==
+								"1167", // != Laurier => END
+								"3620", // != => CONTINUE
+								"1094", // ++
+								"3162", // ==
+								"3590", // != Fischer-Hallman / Erb =>
+								"1994", // != Erb / Fischer-Hallman =>
+						// "1994", // Erb / Fischer-Hallman
+						})) //
 				.compileBothTripSort());
 		map2.put(204l, new RouteTripSpec(204l, //
 				0, MTrip.HEADSIGN_TYPE_STRING, "Lackner", //
