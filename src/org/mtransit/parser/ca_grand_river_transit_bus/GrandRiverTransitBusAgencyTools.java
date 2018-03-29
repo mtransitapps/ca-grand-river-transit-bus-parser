@@ -300,38 +300,38 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
 	static {
 		HashMap<Long, RouteTripSpec> map2 = new HashMap<Long, RouteTripSpec>();
-		map2.put(10l, new RouteTripSpec(10l, //
+		map2.put(10L, new RouteTripSpec(10L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, FAIRVIEW_PARK, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CONESTOGA_COLLEGE) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
 						Arrays.asList(new String[] { //
-						"1729", //
-								"3641", // !=
-								"1732", // !=
-								"1733", // !=
-								"1734", // !=
-								"1735", // !=
-								"1736", // !=
+						"1729", // != Conestoga College Residence
+								"1732", // != Conestoga College Door 3
+								"1733", // <>
+								"1734", // <>
+								"1728", // <>
+								"1718", // !=
+								"1743", // !=
+								"1744", // ==
 								"1748", // ==
-								"1749", "1754", // !=
+								"1749", // !=
+								"1754", // !=
 								"1755", // ==
-								"1553" //
+								"1553", // Fairview Park
 						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { //
-						"1553", //
-								"1701", // ==
-								"1702", // !=
-								"1703", // ==
+						"1553", // Fairview Park
 								"1706", // ==
-								"1707", "1713", // !=
+								"1707", // !=
+								"1713", // !=
 								"1714", // ==
-								"1731", //
-								"1732", // !=
-								"1733", // ==
-								"1734", // !=
-								"1728", // ==
-								"1729" //
+								"1731", // ==
+								"1732", // != Conestoga College Door 3 {43.390289,-80.403511}
+								"1733", // <>
+								"1734", // <>
+								"1728", // <>
+								"1729", // != Conestoga College Residence
 						})) //
 				.compileBothTripSort());
 		map2.put(22l, new RouteTripSpec(22l, //
@@ -695,7 +695,6 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"3162", // ==
 								"3590", // != Fischer-Hallman / Erb =>
 								"1994", // != Erb / Fischer-Hallman =>
-						// "1994", // Erb / Fischer-Hallman
 						})) //
 				.compileBothTripSort());
 		map2.put(204l, new RouteTripSpec(204l, //
