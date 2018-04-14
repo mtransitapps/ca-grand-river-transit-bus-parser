@@ -531,11 +531,11 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { //
 						"1519", // Ainslie Terminal
 								"2169", // ++
-								"2176", // Dundas / South Cambridge Centre
+								"1505", // Main / South Cambridge Centre
 						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { //
-						"2176", // Dundas / South Cambridge Centre
+						"1505", // Main / South Cambridge Centre
 								"2182", // ++
 								"1520" // Ainslie Terminal
 						})) //
