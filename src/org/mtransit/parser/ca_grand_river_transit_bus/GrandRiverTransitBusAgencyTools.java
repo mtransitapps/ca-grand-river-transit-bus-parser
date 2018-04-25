@@ -228,6 +228,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		case 202: return COLOR_000000;
 		case 203: return COLOR_000000;
 		case 204: return COLOR_000000;
+		case 205: return COLOR_000000;
 		case 888: return null;
 		case 889: return null;
 		case 9801: return COLOR_009CE0;
@@ -249,9 +250,6 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		case 9983: return COLOR_089018;
 		// @formatter:on
 		default:
-			if (isGoodEnoughAccepted()) {
-				return null;
-			}
 			System.out.printf("\nUnexpected route color %s!\n", gRoute);
 			System.exit(-1);
 			return null;
@@ -306,11 +304,11 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.NORTH.intValue(), //
 						Arrays.asList(new String[] { //
 						"1729", // != Conestoga College Residence
+								"3641", // !=
 								"1732", // != Conestoga College Door 3
-								"1733", // <>
-								"1734", // <>
-								"1728", // <>
-								"1718", // !=
+								"1733", // <> !=
+								"1734", // <> !=
+								"1735", // ==
 								"1743", // !=
 								"1744", // ==
 								"1748", // ==
@@ -327,7 +325,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1713", // !=
 								"1714", // ==
 								"1731", // ==
-								"1732", // != Conestoga College Door 3 {43.390289,-80.403511}
+								"1732", // != Conestoga College Door 3
 								"1733", // <>
 								"1734", // <>
 								"1728", // <>
@@ -455,20 +453,24 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { //
 						"2279", // == Christopher / Myers
 								"2280", // !=
-								"2283", //
+								"2283", // ++
 								"2286", // !=
 								"2287", // ==
+								"2288", // ==
+								"2289", // !=
+								"2291", // ==
 								"2295", // ==
 								"2299", "2300", // !=
 								"2297", "1507", // !=
 								"2301", // ==
 								"2125", // ==
 								"1512", // Ainslie Terminal
-								"1519", // Ainslie Terminal
+								"1522", // Ainslie Terminal
 						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { //
-						"1522", // Ainslie Terminal
+						"1519", // Ainslie Terminal
+								// "1522", // Ainslie Terminal
 								"2271", //
 								"2279" // == Christopher / Myers
 						})) //
@@ -529,7 +531,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
-						"1519", // Ainslie Terminal
+						"1522", // Ainslie Terminal
 								"2169", // ++
 								"1505", // Main / South Cambridge Centre
 						})) //
@@ -697,16 +699,44 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1994", // != Erb / Fischer-Hallman =>
 						})) //
 				.compileBothTripSort());
-		map2.put(204l, new RouteTripSpec(204l, //
+		map2.put(204L, new RouteTripSpec(204L, //
 				0, MTrip.HEADSIGN_TYPE_STRING, "Lackner", //
 				1, MTrip.HEADSIGN_TYPE_STRING, THE_BOARDWALK) //
 				.addTripSort(0, //
 						Arrays.asList(new String[] { //
-						"4000", "1095", "3485", "1180", "2709", "1923", "2339", "1057" //
+						"4000", // The Boardwalk
+								"1095", // ++
+								"1180", // ++
+								"2709", // ++
+								"1923", // ++
+								"2339", // ++
+								"1057", // Ottawa / Lackner
 						})) //
 				.addTripSort(1, //
 						Arrays.asList(new String[] { //
-						"1057", "1030", "1678", "2352", "2558", "4000" //
+						"1277", // Ottawa / Lackner
+								"1678", // ++
+								"2352", // ++
+								"2558", // ++
+								"4000", // The Boardwalk
+						})) //
+				.compileBothTripSort());
+		map2.put(205L, new RouteTripSpec(205L, //
+				0, MTrip.HEADSIGN_TYPE_STRING, "Ottawa / River", //
+				1, MTrip.HEADSIGN_TYPE_STRING, "Sunrise Ctr") //
+				.addTripSort(0, //
+						Arrays.asList(new String[] { //
+						"1676", // Sunrise Centre
+								"2851", // !=
+								"1671", // Ottawa / Mcgee
+								"1277", // Ottawa / Lackner
+						})) //
+				.addTripSort(1, //
+						Arrays.asList(new String[] { //
+						"1057", // Ottawa / Lackner
+								"1690", // Ottawa / Mcgee
+								"2633", // !=
+								"1676", // Sunrise Centre
 						})) //
 				.compileBothTripSort());
 		map2.put(889l, new RouteTripSpec(889l, //
