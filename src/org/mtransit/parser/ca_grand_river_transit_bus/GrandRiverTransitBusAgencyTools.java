@@ -304,11 +304,11 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.NORTH.intValue(), //
 						Arrays.asList(new String[] { //
 						"1729", // != Conestoga College Residence
-								"3641", // !=
 								"1732", // != Conestoga College Door 3
 								"1733", // <> !=
 								"1734", // <> !=
-								"1735", // ==
+								"1728", // <> !=
+								"1718", // ==
 								"1743", // !=
 								"1744", // ==
 								"1748", // ==
@@ -727,7 +727,8 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(0, //
 						Arrays.asList(new String[] { //
 						"1676", // Sunrise Centre
-								"2851", // !=
+								"2851", // ++
+								"4098", // Ottawa / River
 								"1671", // Ottawa / Mcgee
 								"1277", // Ottawa / Lackner
 						})) //
@@ -735,8 +736,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { //
 						"1057", // Ottawa / Lackner
 								"1690", // Ottawa / Mcgee
-								"2633", // !=
-								"1676", // Sunrise Centre
+								"4097", // Ottawa / River
+								"2633", // ++
+								"5013", // Sunrise Centre
 						})) //
 				.compileBothTripSort());
 		map2.put(889l, new RouteTripSpec(889l, //
