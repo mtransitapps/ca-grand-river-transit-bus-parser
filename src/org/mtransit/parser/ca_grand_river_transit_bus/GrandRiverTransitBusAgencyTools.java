@@ -260,40 +260,28 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String VIA = " via ";
 
 	private static final String SLASH = " / ";
+	private static final String CHARLES_TERMINAL = "Charles Terminal";
 	private static final String FAIRVIEW = "Fairview";
-	private static final String DOWNTOWN = "Downtown";
 	private static final String FAIRVIEW_PARK = FAIRVIEW + " Pk";
 	private static final String UNIVERSITY = "University";
 	private static final String UW = "UW";
 	private static final String CONESTOGA_MALL = "Conestoga Mall";
-	private static final String UW_CONESTOGA_MALL = UW + SLASH + CONESTOGA_MALL;
 	private static final String QUINTE_MORRISON = "Quinte" + SLASH + "Morrison";
 	private static final String HIGHLAND_HILLS = "Highland Hls";
-	private static final String COLUMBIA = "Columbia";
-	private static final String ERB = "Erb";
 	private static final String CONESTOGA_COLLEGE = "Conestoga College";
 	private static final String PIONEER_PARK = "Pioneer Pk";
 	private static final String MC_CORMICK_C_C = "McCormick CC";
 	private static final String LAKE_LOUISE_CONSERVATION = "Lk Louise" + SLASH + "Conservation";
 	private static final String INDUSTRIAL_SHORT = "Ind";
-	private static final String LANGS = "Langs";
 	private static final String CAMBRIDGE_CENTRE = "Cambridge Ctr";
 	private static final String SAGINAW = "Saginaw";
-	private static final String WATERLOO = "Waterloo";
-	private static final String WATERLOO_INDUSTRIAL = WATERLOO + " " + INDUSTRIAL_SHORT;
 	private static final String THE_BOARDWALK = "The Boardwalk";
 	private static final String NEW_HAMBURG = "New Hamburg";
 	private static final String AINSLIE_TERMINAL = "Ainslie Terminal";
 	private static final String SPORTSWORLD = "Sportsworld";
-	private static final String HURON = "Huron";
-	private static final String BINGEMANS = "Bingemans";
-	private static final String BRIDGEPORT = "Bridgeport";
 	private static final String WOODSIDE = "Woodside";
 	private static final String ST_MARY_S = "St Mary's";
 	private static final String FOREST_GLEN = "Forest Gln";
-	private static final String MELRAN = "Melran";
-	private static final String FISHER_MILLS = "Fisher Mills";
-	private static final String ELMIRA = "Elmira";
 
 	private static HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
 	static {
@@ -333,8 +321,8 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						})) //
 				.compileBothTripSort());
 		map2.put(22l, new RouteTripSpec(22l, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Charles Terminal", //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Highland Hills") //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CHARLES_TERMINAL, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, HIGHLAND_HILLS) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
 						"2974", // Highland Hills
@@ -560,7 +548,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.compileBothTripSort());
 		map2.put(72L, new RouteTripSpec(72L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Boxwood / Maple Grv", //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Sportsworld") //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, SPORTSWORLD) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
 						"1572", // Sportsworld
@@ -656,7 +644,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.compileBothTripSort());
 		map2.put(91l, new RouteTripSpec(91l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, UW, // Waterloo
-				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Charles Terminal") // Kitchener
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CHARLES_TERMINAL) // Kitchener
 				.addTripSort(MDirectionType.NORTH.intValue(), //
 						Arrays.asList(new String[] { //
 						"2551", // Charles Terminal
@@ -842,154 +830,159 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public boolean mergeHeadsign(MTrip mTrip, MTrip mTripToMerge) {
-		if (!isGoodEnoughAccepted()) {
-			System.out.printf("\nUnepected trips to merge %s & %s\n", mTrip, mTripToMerge);
-			System.exit(-1);
-			return false; // TODO use better merge
-		}
-		if (mTrip.getRouteId() == 2l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(DOWNTOWN, mTrip.getHeadsignId());
+		List<String> headsignsValues = Arrays.asList(mTrip.getHeadsignValue(), mTripToMerge.getHeadsignValue());
+		if (mTrip.getRouteId() == 2L) {
+			if (Arrays.asList( //
+					"Westheights", // same
+					CHARLES_TERMINAL).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(CHARLES_TERMINAL, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 3l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString("Forest Gln", mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString("Charles Terminal", mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 4l) {
-			if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(DOWNTOWN, mTrip.getHeadsignId());
+		} else if (mTrip.getRouteId() == 3L) {
+			if (Arrays.asList( //
+					"Chandler", //
+					CHARLES_TERMINAL).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(CHARLES_TERMINAL, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 5l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(BRIDGEPORT, mTrip.getHeadsignId());
+		} else if (mTrip.getRouteId() == 4L) {
+			if (Arrays.asList( //
+					"Westmount", //
+					CHARLES_TERMINAL).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(CHARLES_TERMINAL, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 7l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(UW_CONESTOGA_MALL, mTrip.getHeadsignId());
-				return true;
-			} else {
-				mTrip.setHeadsignString(FAIRVIEW, mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 8l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(UNIVERSITY, mTrip.getHeadsignId());
-				return true;
-			} else {
-				mTrip.setHeadsignString(FAIRVIEW, mTrip.getHeadsignId());
+		} else if (mTrip.getRouteId() == 5L) {
+			if (Arrays.asList( //
+					"Uptown", //
+					"Bridgeport" //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("Bridgeport", mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 9l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(CONESTOGA_MALL, mTrip.getHeadsignId());
+		} else if (mTrip.getRouteId() == 7L) {
+			if (Arrays.asList( //
+					CHARLES_TERMINAL, //
+					"C - " + CONESTOGA_MALL, //
+					"D - " + UW, // via University
+					"E - " + UW, // via Columbia
+					UW + SLASH + CONESTOGA_MALL // ++
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("UW" + SLASH + CONESTOGA_MALL, mTrip.getHeadsignId());
 				return true;
-			} else {
-				mTrip.setHeadsignString(UW, mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 12l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(CONESTOGA_MALL, mTrip.getHeadsignId());
-				return true;
-			} else {
+			} else if (Arrays.asList( //
+					CHARLES_TERMINAL, //
+					"A - " + FAIRVIEW_PARK, // via Connaught
+					"B - " + FAIRVIEW_PARK, // via Weber
+					"F - " + FAIRVIEW_PARK, // via Wilson
+					FAIRVIEW_PARK // ++
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(FAIRVIEW_PARK, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 13l) {
-			if (mTrip.getHeadsignId() == 0) {
-			} else if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(THE_BOARDWALK, mTrip.getHeadsignId());
+		} else if (mTrip.getRouteId() == 8L) {
+			if (Arrays.asList( //
+					CHARLES_TERMINAL, // same
+					UNIVERSITY + SLASH + "King" //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(UNIVERSITY + SLASH + "King", mTrip.getHeadsignId());
 				return true;
-			}
-		} else if (mTrip.getRouteId() == 14l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(WATERLOO_INDUSTRIAL, mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 16l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(CONESTOGA_COLLEGE, mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(FOREST_GLEN, mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 21l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(ELMIRA, mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 22l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(HIGHLAND_HILLS, mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(DOWNTOWN, mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 33l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(HURON, mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 34l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(BINGEMANS, mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 51l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(AINSLIE_TERMINAL, mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(FISHER_MILLS + SLASH + MELRAN, mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 52l) {
-			if (mTrip.getHeadsignId() == 0) {
+			} else if (Arrays.asList( //
+					CHARLES_TERMINAL, // same
+					"Westmount" + SLASH + "Union", //
+					FAIRVIEW_PARK //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(FAIRVIEW_PARK, mTrip.getHeadsignId());
 				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
+			}
+		} else if (mTrip.getRouteId() == 9L) {
+			if (Arrays.asList( //
+					UNIVERSITY + SLASH + "King", // same
+					"Laurier", //
+					"UW" //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("UW", mTrip.getHeadsignId());
+				return true;
+			} else if (Arrays.asList( //
+					UNIVERSITY + SLASH + "King", // same
+					"Cedarbrae" + SLASH + "Gln Forrest", //
+					"Northfield" + SLASH + "Weber", //
+					CONESTOGA_MALL //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(CONESTOGA_MALL, mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 12L) {
+			if (Arrays.asList( //
+					UNIVERSITY + SLASH + "King", //
+					"Forest Gln", //
+					CONESTOGA_MALL //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(CONESTOGA_MALL, mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 13L) {
+			if (Arrays.asList( //
+					"Sir John A Macdonald", //
+					"The Boardwalk" //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("The Boardwalk", mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 14L) { // TODO split?
+			if (Arrays.asList( //
+					// StringUtils.EMPTY, //
+					"Kumpf", //
+					"Waterloo Ind" //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("Waterloo Ind", mTrip.getHeadsignId()); // TODO really?
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 33L) {
+			if (Arrays.asList( //
+					"Trillium" + SLASH + "Groff", //
+					"Vlg", // ??
+					"Huron Vlg" //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("Huron Vlg", mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 51L) {
+			if (Arrays.asList( //
+					"A - Fisher Mills", //
+					"B - Melran", //
+					"Fisher Mills" + SLASH + "Melran" // ++
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("Fisher Mills" + SLASH + "Melran", mTrip.getHeadsignId());
+				return true;
+			} else if (Arrays.asList( //
+					CAMBRIDGE_CENTRE, //
+					"Holiday Inn Dr", //
+					AINSLIE_TERMINAL //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(AINSLIE_TERMINAL, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 67l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(LANGS, mTrip.getHeadsignId());
+		} else if (mTrip.getRouteId() == 200L) {
+			if (Arrays.asList( //
+					AINSLIE_TERMINAL, // same
+					CONESTOGA_MALL //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(CONESTOGA_MALL, mTrip.getHeadsignId());
 				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(CAMBRIDGE_CENTRE, mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 92l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(ERB, mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(COLUMBIA, mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 200l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(UW_CONESTOGA_MALL, mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
+			} else if (Arrays.asList( //
+					AINSLIE_TERMINAL, // same
+					FAIRVIEW_PARK //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(AINSLIE_TERMINAL, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 203l) {
-			if (mTrip.getHeadsignId() == 0) {
+		} else if (mTrip.getRouteId() == 203L) {
+			if (Arrays.asList( //
+					CAMBRIDGE_CENTRE, // same
+					SPORTSWORLD //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(SPORTSWORLD, mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(CAMBRIDGE_CENTRE, mTrip.getHeadsignId());
 				return true;
 			}
 		}
@@ -1044,6 +1037,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		tripHeadsign = CleanUtils.CLEAN_AND.matcher(tripHeadsign).replaceAll(CleanUtils.CLEAN_AND_REPLACEMENT);
 		tripHeadsign = CleanUtils.removePoints(tripHeadsign);
 		tripHeadsign = CleanUtils.cleanStreetTypes(tripHeadsign);
+		tripHeadsign = CleanUtils.cleanSlashes(tripHeadsign);
 		return CleanUtils.cleanLabel(tripHeadsign);
 	}
 
