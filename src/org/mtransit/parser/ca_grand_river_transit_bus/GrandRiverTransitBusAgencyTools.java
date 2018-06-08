@@ -365,19 +365,23 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
 						"2257", // Grand Ridge / Oak Hill
-								"2258", // ==
-								"2267", // == Westgate Ctr
-								"3861", "1522", // !=
-								"3534", "1511", // !=
+								"2267", // Cedar / Westgate Centre
+								"3861", // ==
+								"2268", // !=
+								"1511", // != Ainslie Terminal =>
+								"3862", // !=
+								"1522", // != Ainslie Terminal =>
 						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { //
-						"1520", // Ainslie Terminal
-								"1523", "3864", // !=
-								"2186", "2248", // !=
-								"2249", // ==
-								"2256", // ==
-								"2257" // Grand Ridge / Oak Hill
+						"1520", // Ainslie Terminal <=
+								"1523", // != Ainslie / Walnut
+								"3863", // != Cedar / Grand
+								"2186", // != Main / Water
+								"2245", // != Grand / South Square
+								"3864", // == Cedar / Glenmorris
+								"2249", // Cedar / Westgate Centre
+								"2257", // Grand Ridge / Oak Hill
 						})) //
 				.compileBothTripSort());
 		map2.put(56L, new RouteTripSpec(56L, //
