@@ -730,7 +730,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1690", // Ottawa / Mcgee
 								"4097", // Ottawa / River
 								"2633", // ++
-								"5013", // Sunrise Centre
+								"4095", // ==
+								"1676", // != Sunrise Centre =>
+								"5013", // != Sunrise Centre =>
 						})) //
 				.compileBothTripSort());
 		map2.put(889l, new RouteTripSpec(889l, //
@@ -940,6 +942,14 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 					"Waterloo Ind" //
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString("Waterloo Ind", mTrip.getHeadsignId()); // TODO really?
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 21L) {
+			if (Arrays.asList( //
+					"St Jacobs Mkt", //
+					"Arthur / Church" //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("Arthur / Church", mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 33L) {
