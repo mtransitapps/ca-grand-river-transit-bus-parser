@@ -232,14 +232,18 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		case 888: return null;
 		case 889: return null;
 		case 9801: return COLOR_009CE0;
+		case 9841: return null; // TODO?
 		case 9851: return COLOR_009CE0;
 		case 9852: return COLOR_003986;
 		case 9901: return COLOR_009CE0;
 		case 9903: return COLOR_089018;
 		case 9904: return COLOR_880091;
 		case 9905: return COLOR_B72700;
+		case 9922: return null; // TODO?
 		case 9931: return COLOR_009CE0;
 		case 9932: return COLOR_003986;
+		case 9941: return null; // TODO?
+		case 9942: return null; // TODO?
 		case 9951: return COLOR_009CE0;
 		case 9952: return COLOR_003986;
 		case 9953: return COLOR_089018;
@@ -997,6 +1001,14 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 					SPORTSWORLD //
 					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(SPORTSWORLD, mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 9941L) {
+			if (Arrays.asList( //
+					"Exam", //
+					"Huron Hts" //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("Huron Hts", mTrip.getHeadsignId());
 				return true;
 			}
 		}
