@@ -529,11 +529,11 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { //
 						"1522", // Ainslie Terminal
 								"2169", // ++
-								"1505", // Main / South Cambridge Centre
+								"2176", // Dundas / South Cambridge Centre
 						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { //
-						"1505", // Main / South Cambridge Centre
+						"2176", // Dundas / South Cambridge Centre
 								"2182", // ++
 								"1520" // Ainslie Terminal
 						})) //
@@ -613,13 +613,15 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, PIONEER_PARK) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
-						"1744", // Pioneer / Old Carriage
+						"1830", // Old Carriage / Pioneer
+								"3999", // ++
 								"1732", // Conestoga College Door 3
 						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { //
 						"1732", // Conestoga College Door 3
-								"1744", // Pioneer / Old Carriage
+								"3953", // +
+								"1830", // Old Carriage / Pioneer
 						})) //
 				.compileBothTripSort());
 		map2.put(77l, new RouteTripSpec(77l, //
