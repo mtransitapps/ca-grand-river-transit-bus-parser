@@ -301,11 +301,11 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.NORTH.intValue(), //
 						Arrays.asList(new String[] { //
 						"1729", // != Conestoga College Residence
+								"3641", // !=
 								"1732", // != Conestoga College Door 3
 								"1733", // <> !=
 								"1734", // <> !=
-								"1728", // <> !=
-								"1718", // ==
+								"1735", // != ==
 								"1743", // !=
 								"1744", // ==
 								"1748", // ==
