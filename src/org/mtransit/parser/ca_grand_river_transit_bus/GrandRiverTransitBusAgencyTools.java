@@ -44,6 +44,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			args[1] = "../../mtransitapps/ca-grand-river-transit-bus-android/res/raw/";
 			args[2] = ""; // files-prefix
 		}
+		if (!"next_".equalsIgnoreCase(args[2])) {
+			ALL_ROUTE_TRIPS2.remove(33L);
+		}
 		new GrandRiverTransitBusAgencyTools().start(args);
 	}
 
@@ -310,13 +313,39 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1790", // End Of Groff
 						})) //
 				.compileBothTripSort());
-		map2.put(27l, new RouteTripSpec(27l, //
+		map2.put(27L, new RouteTripSpec(27L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, QUINTE_MORRISON, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, FAIRVIEW_PARK) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { "1046", "1564", "1651" })) //
+						Arrays.asList(new String[] { //
+						"1046", //
+								"1564", //
+								"1651", //
+						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "1651", "1658", "1558" })) //
+						Arrays.asList(new String[] { //
+						"1651", //
+								"1658", //
+								"1558", //
+						})) //
+				.compileBothTripSort());
+		map2.put(33L, new RouteTripSpec(33L, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Block Line Sta", // FOREST_GLEN
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Sunrise Ctr") //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"1676", // Sunrise Centre
+								"3704", // ++
+								"1766", // Forest Glen
+								"2026", // Courtland / Block Line Station
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"2026", // Courtland / Block Line Station
+								"1768", // Forest Glen
+								"3739", // ++
+								"1676", // Sunrise Centre
+						})) //
 				.compileBothTripSort());
 		map2.put(54L, new RouteTripSpec(54L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Lisbon Pines", //
