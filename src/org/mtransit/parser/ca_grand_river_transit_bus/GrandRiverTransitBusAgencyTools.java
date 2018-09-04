@@ -367,25 +367,20 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
 						"2257", // Grand Ridge / Oak Hill
-								"2267", // == Cedar / Westgate Centre
-								"3861", // !=
-								"3862", // !=
+								"3862", // ==
+								"2159", // !=
 								"1522", // != Ainslie Terminal =>
-								"3534", // !=
 								"2268", // !=
+								"2212", // !=
 								"1511", // != Ainslie Terminal =>
-
 						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { //
-						"1520", // Ainslie Terminal <=
+						"1520", // == Ainslie Terminal <=
 								"1523", // != Ainslie / Walnut
-								"3863", // != Cedar / Grand
-								"3864", // != Cedar / Glenmorris
 								"2186", // != Main / Water
 								"2245", // != Grand / South Square
-								"2248", // !=
-								"2249", // == Cedar / Westgate Centre
+								"3863", // == Cedar / Grand
 								"2257", // Grand Ridge / Oak Hill
 						})) //
 				.compileBothTripSort());
@@ -972,6 +967,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		} else if (mTrip.getRouteId() == 13L) {
 			if (Arrays.asList( //
 					"Sir John A Macdonald", //
+					"Erbsville", //
 					"The Boardwalk" //
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString("The Boardwalk", mTrip.getHeadsignId());
@@ -1014,6 +1010,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 			if (Arrays.asList( //
 					"Huron", // ==
+					"Block Line Sta", //
 					FOREST_GLEN //
 					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(FOREST_GLEN, mTrip.getHeadsignId());
@@ -1021,15 +1018,19 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mTrip.getRouteId() == 51L) {
 			if (Arrays.asList( //
-					"A - Fisher Mills", //
-					"B - Melran", //
+					"A - " + "Fisher Mills", //
+					"A-" + "Fisher Mills", //
+					"B - " + "Melran", //
+					"B-" + "Melran", //
 					"Fisher Mills" + SLASH + "Melran" // ++
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString("Fisher Mills" + SLASH + "Melran", mTrip.getHeadsignId());
 				return true;
 			} else if (Arrays.asList( //
 					CAMBRIDGE_CENTRE, //
+					CAMBRIDGE_CENTRE + " Sta", //
 					"Holiday Inn Dr", //
+					"Groh / Holiday Inn", //
 					AINSLIE_TERMINAL //
 					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(AINSLIE_TERMINAL, mTrip.getHeadsignId());
@@ -1052,11 +1053,12 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mTrip.getRouteId() == 203L) {
 			if (Arrays.asList( //
-					CAMBRIDGE_CENTRE, // same
-					CONESTOGA_COLLEGE, //
-					SPORTSWORLD //
+					CAMBRIDGE_CENTRE, // <>
+					SPORTSWORLD, //
+					SPORTSWORLD + " Sta", //
+					CONESTOGA_COLLEGE //
 					).containsAll(headsignsValues)) {
-				mTrip.setHeadsignString(SPORTSWORLD, mTrip.getHeadsignId());
+				mTrip.setHeadsignString(CONESTOGA_COLLEGE, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 9941L) {
