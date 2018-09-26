@@ -244,6 +244,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		case 888: return null;
 		case 889: return null;
 		case 9801: return COLOR_009CE0;
+		case 9802: return null; // TODO?
 		case 9841: return null; // TODO?
 		case 9851: return COLOR_009CE0;
 		case 9852: return COLOR_003986;
