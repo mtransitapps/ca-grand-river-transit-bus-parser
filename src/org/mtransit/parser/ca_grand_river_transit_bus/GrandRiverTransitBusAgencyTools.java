@@ -10,12 +10,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+import org.mtransit.commons.GrandRiverTransitCommons;
 import org.mtransit.parser.CleanUtils;
 import org.mtransit.parser.DefaultAgencyTools;
 import org.mtransit.parser.Pair;
 import org.mtransit.parser.SplitUtils;
-import org.mtransit.parser.Utils;
 import org.mtransit.parser.SplitUtils.RouteTripSpec;
+import org.mtransit.parser.Utils;
 import org.mtransit.parser.gtfs.data.GCalendar;
 import org.mtransit.parser.gtfs.data.GCalendarDate;
 import org.mtransit.parser.gtfs.data.GRoute;
@@ -24,7 +25,6 @@ import org.mtransit.parser.gtfs.data.GStop;
 import org.mtransit.parser.gtfs.data.GTrip;
 import org.mtransit.parser.gtfs.data.GTripStop;
 import org.mtransit.parser.mt.data.MAgency;
-import org.mtransit.parser.mt.data.MDirectionType;
 import org.mtransit.parser.mt.data.MRoute;
 import org.mtransit.parser.mt.data.MTrip;
 import org.mtransit.parser.mt.data.MTripStop;
@@ -43,9 +43,6 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			args[0] = "input/gtfs.zip";
 			args[1] = "../../mtransitapps/ca-grand-river-transit-bus-android/res/raw/";
 			args[2] = ""; // files-prefix
-		}
-		if (!"next_".equalsIgnoreCase(args[2])) {
-			ALL_ROUTE_TRIPS2.remove(33L);
 		}
 		new GrandRiverTransitBusAgencyTools().start(args);
 	}
@@ -243,6 +240,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		case 205: return COLOR_000000;
 		case 888: return null;
 		case 889: return null;
+		case 901: return null; // TODO ?
 		case 9801: return COLOR_009CE0;
 		case 9802: return null; // TODO?
 		case 9841: return null; // TODO?
@@ -283,15 +281,11 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String UNIVERSITY = "University";
 	private static final String UW = "UW";
 	private static final String CONESTOGA_MALL = "Conestoga Mall";
-	private static final String QUINTE_MORRISON = "Quinte" + SLASH + "Morrison";
 	private static final String CONESTOGA_COLLEGE = "Conestoga College";
-	private static final String PIONEER_PARK = "Pioneer Pk";
 	private static final String MC_CORMICK = "McCormick";
 	private static final String INDUSTRIAL_SHORT = "Ind";
 	private static final String CAMBRIDGE_CENTRE = "Cambridge Ctr";
 	private static final String SAGINAW = "Saginaw";
-	private static final String THE_BOARDWALK = "The Boardwalk";
-	private static final String NEW_HAMBURG = "New Hamburg";
 	private static final String AINSLIE_TERMINAL = "Ainslie Terminal";
 	private static final String SPORTSWORLD = "Sportsworld";
 	private static final String WOODSIDE = "Woodside";
@@ -302,74 +296,24 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
 	static {
 		HashMap<Long, RouteTripSpec> map2 = new HashMap<Long, RouteTripSpec>();
-		map2.put(26L, new RouteTripSpec(26L, //
-				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, FOREST_GLEN, //
-				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "South") //
-				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList(new String[] { //
-						"1790", // End Of Groff
-								"3723", // ++
-								"1765", // Forest Glen
-						})) //
-				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(new String[] { //
-						"1765", // Forest Glen
-								"1781", // ++
-								"1790", // End Of Groff
-						})) //
-				.compileBothTripSort());
-		map2.put(27L, new RouteTripSpec(27L, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, QUINTE_MORRISON, //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, FAIRVIEW_PARK) //
-				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { //
-						"1046", //
-								"1564", //
-								"1651", //
-						})) //
-				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { //
-						"1651", //
-								"1658", //
-								"1558", //
-						})) //
-				.compileBothTripSort());
-		map2.put(33L, new RouteTripSpec(33L, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Block Line Sta", // FOREST_GLEN
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Sunrise Ctr") //
-				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { //
-						"1676", // Sunrise Centre
-								"3704", // ++
-								"1766", // Forest Glen
-								"2026", // Courtland / Block Line Station
-						})) //
-				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { //
-						"2026", // Courtland / Block Line Station
-								"1768", // Forest Glen
-								"3739", // ++
-								"1676", // Sunrise Centre
-						})) //
-				.compileBothTripSort());
 		map2.put(54L, new RouteTripSpec(54L, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Lisbon Pines", //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL) //
-				.addTripSort(MDirectionType.EAST.intValue(), //
+				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Lisbon Pines", //
+				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL) //
+				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"1517", // Ainslie Terminal
 								"2224" // Lisbon Pines / Myers
 						})) //
-				.addTripSort(MDirectionType.WEST.intValue(), //
+				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"2224", // Lisbon Pines / Myers
 								"1516" // Ainslie Terminal
 						})) //
 				.compileBothTripSort());
 		map2.put(55L, new RouteTripSpec(55L, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL, //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Grand Rdg / Oak Hl") //
-				.addTripSort(MDirectionType.EAST.intValue(), //
+				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL, //
+				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Grand Rdg / Oak Hl") //
+				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"2257", // Grand Ridge / Oak Hill
 								"3862", // ==
@@ -379,7 +323,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"2212", // !=
 								"1511", // != Ainslie Terminal =>
 						})) //
-				.addTripSort(MDirectionType.WEST.intValue(), //
+				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"1520", // == Ainslie Terminal <=
 								"1523", // != Ainslie / Walnut
@@ -390,9 +334,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						})) //
 				.compileBothTripSort());
 		map2.put(56L, new RouteTripSpec(56L, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CAMBRIDGE_CENTRE, //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Rose / Argyle") //
-				.addTripSort(MDirectionType.EAST.intValue(), //
+				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, CAMBRIDGE_CENTRE, //
+				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Rose / Argyle") //
+				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"1410", // Rose / Argyle
 								"1414", //
@@ -400,7 +344,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1058", // Cambridge Centre Station
 								"1064" // Cambridge Centre - Bay 5
 						})) //
-				.addTripSort(MDirectionType.WEST.intValue(), //
+				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"1058", // Cambridge Centre Station
 								"1064", // Cambridge Centre - Bay 5
@@ -410,15 +354,15 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						})) //
 				.compileBothTripSort());
 		map2.put(57L, new RouteTripSpec(57L, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL, //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Blair Rd") //
-				.addTripSort(MDirectionType.EAST.intValue(), //
+				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL, //
+				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Blair Rd") //
+				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"3792", // Blair / Esther
 								"2206", //
 								"1521" // Ainslie Terminal
 						})) //
-				.addTripSort(MDirectionType.WEST.intValue(), //
+				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"1517", // Ainslie Terminal
 								"2191", // Sunset / Saxony
@@ -426,9 +370,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						})) //
 				.compileBothTripSort());
 		map2.put(58L, new RouteTripSpec(58L, //
-				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Elgin / Avenue", //
-				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL) //
-				.addTripSort(MDirectionType.NORTH.intValue(), //
+				GrandRiverTransitCommons.NORTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Elgin / Avenue", //
+				GrandRiverTransitCommons.SOUTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL) //
+				.addTripSort(GrandRiverTransitCommons.NORTH_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"1516", // != Ainslie Terminal
 								"1521", // != Ainslie Terminal
@@ -436,7 +380,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"2100", //
 								"2108" // Elgin / Avenue
 						})) //
-				.addTripSort(MDirectionType.SOUTH.intValue(), //
+				.addTripSort(GrandRiverTransitCommons.SOUTH_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"2108", // Elgin / Avenue
 								"2116", //
@@ -444,9 +388,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						})) //
 				.compileBothTripSort());
 		map2.put(59L, new RouteTripSpec(59L, //
-				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL, //
-				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Christopher / Myers") //
-				.addTripSort(MDirectionType.NORTH.intValue(), //
+				GrandRiverTransitCommons.NORTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL, //
+				GrandRiverTransitCommons.SOUTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Christopher / Myers") //
+				.addTripSort(GrandRiverTransitCommons.NORTH_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"2279", // == Christopher / Myers
 								"2280", // !=
@@ -468,7 +412,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1512", // != Ainslie Terminal =>
 								"1522", // != Ainslie Terminal =>
 						})) //
-				.addTripSort(MDirectionType.SOUTH.intValue(), //
+				.addTripSort(GrandRiverTransitCommons.SOUTH_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"1519", // Ainslie Terminal
 								"2271", //
@@ -476,9 +420,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						})) //
 				.compileBothTripSort());
 		map2.put(60L, new RouteTripSpec(60L, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Saginaw / Burnett", //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CAMBRIDGE_CENTRE) //
-				.addTripSort(MDirectionType.EAST.intValue(), //
+				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Saginaw / Burnett", //
+				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, CAMBRIDGE_CENTRE) //
+				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"1058", // Cambridge Centre - Bay 2
 								"1064", // Cambridge Centre Station
@@ -486,7 +430,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1364", //
 								"1371" // Saginaw / Burnett
 						})) //
-				.addTripSort(MDirectionType.WEST.intValue(), //
+				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"1371", // Saginaw / Burnett
 								"1380", //
@@ -496,9 +440,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						})) //
 				.compileBothTripSort());
 		map2.put(62L, new RouteTripSpec(62L, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL, //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, WOODSIDE) //
-				.addTripSort(MDirectionType.EAST.intValue(), //
+				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL, //
+				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, WOODSIDE) //
+				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"2290", // != Cedar / Southgate <=
 								"2137", // == Southgate / Day <=
@@ -516,7 +460,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"2153", // == Stanley / Tait
 								"1517", // Ainslie Terminal
 						})) //
-				.addTripSort(MDirectionType.WEST.intValue(), //
+				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"1518", // Ainslie Terminal
 								"2126", // == Grand / Victoria
@@ -532,9 +476,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						})) //
 				.compileBothTripSort());
 		map2.put(63L, new RouteTripSpec(63L, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CAMBRIDGE_CENTRE, //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL) //
-				.addTripSort(MDirectionType.EAST.intValue(), //
+				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, CAMBRIDGE_CENTRE, //
+				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL) //
+				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"1522", // Ainslie Terminal
 								"2169", // ++
@@ -543,7 +487,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"2176", // != Dundas / South Cambridge Centre =>
 								"1505", // != Main / South Cambridge Centre =>
 						})) //
-				.addTripSort(MDirectionType.WEST.intValue(), //
+				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"1505", // != Main / South Cambridge Centre <=
 								"2176", // != Dundas / South Cambridge Centre <=
@@ -553,15 +497,15 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						})) //
 				.compileBothTripSort());
 		map2.put(64L, new RouteTripSpec(64L, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CAMBRIDGE_CENTRE, //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Dover / Rose") //
-				.addTripSort(MDirectionType.EAST.intValue(), //
+				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, CAMBRIDGE_CENTRE, //
+				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Dover / Rose") //
+				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"3520", // Dover / Rose
 								"1444", //
 								"1067" // Cambridge Centre - Bay 8
 						})) //
-				.addTripSort(MDirectionType.WEST.intValue(), //
+				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"1067", // Cambridge Centre - Bay 8
 								"1432", //
@@ -569,9 +513,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						})) //
 				.compileBothTripSort());
 		map2.put(72L, new RouteTripSpec(72L, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Boxwood / Maple Grv", //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, SPORTSWORLD) //
-				.addTripSort(MDirectionType.EAST.intValue(), //
+				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Boxwood / Maple Grv", //
+				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, SPORTSWORLD) //
+				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"1572", // Sportsworld
 								"3939", // ==
@@ -580,7 +524,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"3849", // ==
 								"3646", // Boxwood / Maple Grove
 						})) //
-				.addTripSort(MDirectionType.WEST.intValue(), //
+				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"3646", // Boxwood / Maple Grove
 								"3649", // ==
@@ -589,10 +533,10 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1572", // Sportsworld
 						})) //
 				.compileBothTripSort());
-		map2.put(75l, new RouteTripSpec(75l, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, SAGINAW, //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CAMBRIDGE_CENTRE) //
-				.addTripSort(MDirectionType.EAST.intValue(), //
+		map2.put(75L, new RouteTripSpec(75L, //
+				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, SAGINAW, //
+				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, CAMBRIDGE_CENTRE) //
+				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"1064", // != Cambridge Centre Station
 								"1058", // != Cambridge Centre Station
@@ -600,7 +544,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1345", //
 								"3394" //
 						})) //
-				.addTripSort(MDirectionType.WEST.intValue(), //
+				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"3394", //
 								"1352", //
@@ -609,74 +553,16 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1064", // != Cambridge Centre Station
 						})) //
 				.compileBothTripSort());
-		map2.put(76L, new RouteTripSpec(76L, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CONESTOGA_COLLEGE, //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, PIONEER_PARK) //
-				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { //
-						"1830", // != Old Carriage / Pioneer <=
-								"1744", // != Pioneer / Old Carriage <=
-								"1746", // ==
-								"3999", // ==
-								"3964", // !=
-								"3966", // !=
-								"2044", // !=
-								"3801", // !=
-								"3641", // ==
-								"1732", // Conestoga College Door 3
-						})) //
-				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { //
-						"1732", // Conestoga College Door 3
-								"1734", // ==
-								"1728", // !=
-								"3998", // !=
-								"2308", // !=
-								"3957", // !=
-								"3953", // ==
-								"1824", // ==
-								"1744", // != Pioneer / Old Carriage =>
-								"1830", // != Old Carriage / Pioneer =>
-						})) //
-				.compileBothTripSort());
-		map2.put(77l, new RouteTripSpec(77l, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, THE_BOARDWALK, //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, NEW_HAMBURG) //
-				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { //
-						"7033", "7035", "4002" //
-						})) //
-				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { //
-						"4002", "7009", "7033" //
-						})) //
-				.compileBothTripSort());
-		map2.put(78L, new RouteTripSpec(78L, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Family Ctr", //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, FOREST_GLEN) //
-				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { //
-						"1024", // Forest Glen
-								"1028", // ++
-								"1031", // The Family Centre
-						})) //
-				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { //
-						"1031", // The Family Centre
-								"1035", // ++
-								"1024", // Forest Glen
-						})) //
-				.compileBothTripSort());
-		map2.put(91l, new RouteTripSpec(91l, //
-				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, UW, // Waterloo
-				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CHARLES_TERMINAL) // Kitchener
-				.addTripSort(MDirectionType.NORTH.intValue(), //
+		map2.put(91L, new RouteTripSpec(91L, //
+				GrandRiverTransitCommons.NORTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, UW, // Waterloo
+				GrandRiverTransitCommons.SOUTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, CHARLES_TERMINAL) // Kitchener
+				.addTripSort(GrandRiverTransitCommons.NORTH_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"2551", // Charles Terminal
 								"1910", // ++
 								"2519", // U.W. - B.C. Matthews Hall
 						})) //
-				.addTripSort(MDirectionType.SOUTH.intValue(), //
+				.addTripSort(GrandRiverTransitCommons.SOUTH_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"2519", // U.W. - B.C. Matthews Hall
 								"1901", // != King / Victoria
@@ -684,10 +570,10 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"2551", // Charles Terminal
 						})) //
 				.compileBothTripSort());
-		map2.put(92l, new RouteTripSpec(92l, //
-				0, MTrip.HEADSIGN_TYPE_STRING, "CW", //
-				1, MTrip.HEADSIGN_TYPE_STRING, "CCW") //
-				.addTripSort(0, //
+		map2.put(92L, new RouteTripSpec(92L, //
+				GrandRiverTransitCommons.CLOCKWISE_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "CW", //
+				GrandRiverTransitCommons.COUNTERCLOCKWISE_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "CCW") //
+				.addTripSort(GrandRiverTransitCommons.CLOCKWISE_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"3891", // Fischer-Hallman / Highland
 								"1992", // ++
@@ -698,7 +584,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1971", // Erb / Churchill {43.453374,-80.551137}
 								"1972", // Fischer-Hallman / Erb
 						})) //
-				.addTripSort(1, //
+				.addTripSort(GrandRiverTransitCommons.COUNTERCLOCKWISE_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"1994", // Erb / Fischer-Hallman
 								"4053", // ++
@@ -712,75 +598,35 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1994", // != Erb / Fischer-Hallman =>
 						})) //
 				.compileBothTripSort());
-		map2.put(204L, new RouteTripSpec(204L, //
-				0, MTrip.HEADSIGN_TYPE_STRING, "Lackner", //
-				1, MTrip.HEADSIGN_TYPE_STRING, THE_BOARDWALK) //
-				.addTripSort(0, //
+		map2.put(9903L, new RouteTripSpec(9903L, //
+				GrandRiverTransitCommons.NORTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, UW, //
+				GrandRiverTransitCommons.SOUTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, ST_MARY_S) //
+				.addTripSort(GrandRiverTransitCommons.NORTH_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
-						"4000", // The Boardwalk
-								"1095", // ++
-								"1180", // ++
-								"2709", // ++
-								"1923", // ++
-								"2339", // ++
-								"1057", // Ottawa / Lackner
+						"1143", //
+								"1150", //
+								"1124", //
 						})) //
-				.addTripSort(1, //
+				.addTripSort(GrandRiverTransitCommons.SOUTH_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
-						"1277", // Ottawa / Lackner
-								"1678", // ++
-								"2352", // ++
-								"2558", // ++
-								"4000", // The Boardwalk
+						"3228", //
+								"3474", //
 						})) //
 				.compileBothTripSort());
-		map2.put(205L, new RouteTripSpec(205L, //
-				0, MTrip.HEADSIGN_TYPE_STRING, "Ottawa / River", //
-				1, MTrip.HEADSIGN_TYPE_STRING, "Sunrise Ctr") //
-				.addTripSort(0, //
+		map2.put(9951L, new RouteTripSpec(9951L, //
+				GrandRiverTransitCommons.NORTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, FOREST_GLEN, //
+				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, FAIRVIEW) //
+				.addTripSort(GrandRiverTransitCommons.NORTH_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
-						"1676", // Sunrise Centre
-								"2851", // ++
-								"4098", // Ottawa / River
-								"1671", // Ottawa / Mcgee
-								"1277", // Ottawa / Lackner
+						"1840", // Huron Heights S.S.
+								"1771", // Forest Glen
 						})) //
-				.addTripSort(1, //
+				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
-						"1057", // Ottawa / Lackner
-								"1690", // Ottawa / Mcgee
-								"4097", // Ottawa / River
-								"2633", // ++
-								"4095", // ==
-								"1676", // != Sunrise Centre =>
-								"5013", // != Sunrise Centre =>
+						"3474", // St. Marys H.S.
+								"1554", // Fairview Park
 						})) //
 				.compileBothTripSort());
-		map2.put(889l, new RouteTripSpec(889l, //
-				0, MTrip.HEADSIGN_TYPE_STRING, SPORTSWORLD, //
-				1, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL) //
-				.addTripSort(0, //
-						Arrays.asList(new String[] { "6101", "6103", "1570" })) //
-				.addTripSort(1, //
-						Arrays.asList(new String[] { "1571", "3517", "6101" })) //
-				.compileBothTripSort());
-		map2.put(9903l, new RouteTripSpec(9903l, //
-				0, MTrip.HEADSIGN_TYPE_STRING, UW, //
-				1, MTrip.HEADSIGN_TYPE_STRING, ST_MARY_S) //
-				.addTripSort(0, //
-						Arrays.asList(new String[] { "1143", "1150", "1124" })) //
-				.addTripSort(1, //
-						Arrays.asList(new String[] { "3228", "3474" })) //
-				.compileBothTripSort());
-		map2.put(9951l, new RouteTripSpec(9951l, //
-				0, MTrip.HEADSIGN_TYPE_STRING, FOREST_GLEN, //
-				1, MTrip.HEADSIGN_TYPE_STRING, FAIRVIEW) //
-				.addTripSort(0, //
-						Arrays.asList(new String[] { "1840", "1771" })) //
-				.addTripSort(1, //
-						Arrays.asList(new String[] { "3474", "1554" })) //
-				.compileBothTripSort());
-
 		ALL_ROUTE_TRIPS2 = map2;
 	}
 
@@ -821,36 +667,8 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		}
 		String gTripHeadsign = gTrip.getTripHeadsign();
 		if (StringUtils.isEmpty(gTripHeadsign)) {
-			gTripHeadsign = mRoute.getLongName();
-		}
-		gTripHeadsign = STARTS_WITH_RSN.matcher(gTripHeadsign).replaceAll(StringUtils.EMPTY);
-		if (gTripHeadsign.length() > mRoute.getLongName().length()) {
-			gTripHeadsign = Pattern.compile("((^|\\W){1}(" + mRoute.getLongName() + ")(\\W|$){1})", Pattern.CASE_INSENSITIVE).matcher(gTripHeadsign)
-					.replaceAll(" ");
-		}
-		int indexOfTO = gTripHeadsign.toLowerCase(Locale.ENGLISH).indexOf(TO);
-		if (indexOfTO >= 0) {
-			String gTripHeadsignBeforeTO = gTripHeadsign.substring(0, indexOfTO);
-			String gTripHeadsignAfterTO = gTripHeadsign.substring(indexOfTO + TO.length());
-			if (mRoute.getLongName().equalsIgnoreCase(gTripHeadsignBeforeTO)) {
-				gTripHeadsign = gTripHeadsignAfterTO;
-			} else if (mRoute.getLongName().equalsIgnoreCase(gTripHeadsignAfterTO)) {
-				gTripHeadsign = gTripHeadsignBeforeTO;
-			} else {
-				gTripHeadsign = gTripHeadsignAfterTO;
-			}
-		}
-		int indexOfVIA = gTripHeadsign.toLowerCase(Locale.ENGLISH).indexOf(VIA);
-		if (indexOfVIA >= 0) {
-			String gTripHeadsignBeforeVIA = gTripHeadsign.substring(0, indexOfVIA);
-			String gTripHeadsignAfterVIA = gTripHeadsign.substring(indexOfVIA + VIA.length());
-			if (mRoute.getLongName().equalsIgnoreCase(gTripHeadsignBeforeVIA)) {
-				gTripHeadsign = gTripHeadsignAfterVIA;
-			} else if (mRoute.getLongName().equalsIgnoreCase(gTripHeadsignAfterVIA)) {
-				gTripHeadsign = gTripHeadsignBeforeVIA;
-			} else {
-				gTripHeadsign = gTripHeadsignBeforeVIA;
-			}
+			String routeLongName = mRoute.getLongName();
+			gTripHeadsign = routeLongName;
 		}
 		mTrip.setHeadsignString(cleanTripHeadsign(gTripHeadsign), gTrip.getDirectionId());
 	}
@@ -988,8 +806,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mTrip.getRouteId() == 13L) {
 			if (Arrays.asList( //
-					"Sir John A Macdonald", //
-					"Erbsville", //
+					"Laurelwood / Erbsville", //
 					"The Boardwalk" //
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString("The Boardwalk", mTrip.getHeadsignId());
@@ -997,7 +814,6 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mTrip.getRouteId() == 14L) { // TODO split?
 			if (Arrays.asList( //
-					// StringUtils.EMPTY, //
 					"Kumpf", //
 					"Waterloo Ind" //
 			).containsAll(headsignsValues)) {
@@ -1082,6 +898,14 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 					CONESTOGA_COLLEGE //
 					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(CONESTOGA_COLLEGE, mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 205L) {
+			if (Arrays.asList( //
+					"Ottawa / River", //
+					"Sunrise Ctr" //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("Sunrise Ctr", mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 9941L) {
