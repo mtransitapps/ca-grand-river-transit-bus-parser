@@ -565,8 +565,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(GrandRiverTransitCommons.SOUTH_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"2519", // U.W. - B.C. Matthews Hall
-								"1901", // != King / Victoria
-								"2457", // == King / Water
+								"2526", // ++
 								"2551", // Charles Terminal
 						})) //
 				.compileBothTripSort());
