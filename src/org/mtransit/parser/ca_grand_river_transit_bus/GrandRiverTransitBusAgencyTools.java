@@ -240,7 +240,8 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		case 205: return COLOR_000000;
 		case 888: return null;
 		case 889: return null;
-		case 901: return null; // TODO ?
+		case 901: return null; // TODO?
+		case 902: return null; // TODO?
 		case 9801: return COLOR_009CE0;
 		case 9802: return null; // TODO?
 		case 9841: return null; // TODO?
@@ -595,6 +596,24 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"3162", // ==
 								"3590", // != Fischer-Hallman / Erb =>
 								"1994", // != Erb / Fischer-Hallman =>
+						})) //
+				.compileBothTripSort());
+		map2.put(902L, new RouteTripSpec(902L, //
+				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "East", //
+				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "West") //
+				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
+						Arrays.asList(new String[] { //
+						"3540", // Queen / Guelph
+								"1309", // !=
+								"7066", // <>
+								"7065", // != J. H. Lodge
+						})) //
+				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
+						Arrays.asList(new String[] { //
+						"7065", // != J. H. Lodge
+								"7066", // <>
+								"1299", // !=
+								"1250", // Queen / Adam
 						})) //
 				.compileBothTripSort());
 		map2.put(9903L, new RouteTripSpec(9903L, //
