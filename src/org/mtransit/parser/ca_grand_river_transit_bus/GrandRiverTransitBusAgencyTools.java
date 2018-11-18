@@ -298,17 +298,19 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	static {
 		HashMap<Long, RouteTripSpec> map2 = new HashMap<Long, RouteTripSpec>();
 		map2.put(54L, new RouteTripSpec(54L, //
-				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Lisbon Pines", //
+				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Littles Corners", //
 				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL) //
 				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"1517", // Ainslie Terminal
-								"2224" // Lisbon Pines / Myers
+								"1528", // ++
+								"2225", // Gatehouse / Mcnicho
 						})) //
 				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
-						"2224", // Lisbon Pines / Myers
-								"1516" // Ainslie Terminal
+						"2225", // Gatehouse / Mcnicho
+								"2235", // ++
+								"1516", // Ainslie Terminal
 						})) //
 				.compileBothTripSort());
 		map2.put(55L, new RouteTripSpec(55L, //
