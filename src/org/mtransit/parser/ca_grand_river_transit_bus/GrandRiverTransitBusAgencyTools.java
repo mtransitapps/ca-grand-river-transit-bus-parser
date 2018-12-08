@@ -280,7 +280,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String FAIRVIEW = "Fairview";
 	private static final String FAIRVIEW_PARK = FAIRVIEW + " Pk";
 	private static final String UNIVERSITY = "University";
-	private static final String UW = "UW";
+	private static final String UNIVERSITY_OF_WATERLOO_SHORT = "UW";
 	private static final String CONESTOGA_MALL = "Conestoga Mall";
 	private static final String CONESTOGA_COLLEGE = "Conestoga College";
 	private static final String MC_CORMICK = "McCormick";
@@ -557,7 +557,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						})) //
 				.compileBothTripSort());
 		map2.put(91L, new RouteTripSpec(91L, //
-				GrandRiverTransitCommons.NORTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, UW, // Waterloo
+				GrandRiverTransitCommons.NORTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, UNIVERSITY_OF_WATERLOO_SHORT, // Waterloo
 				GrandRiverTransitCommons.SOUTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, CHARLES_TERMINAL) // Kitchener
 				.addTripSort(GrandRiverTransitCommons.NORTH_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
@@ -619,7 +619,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						})) //
 				.compileBothTripSort());
 		map2.put(9903L, new RouteTripSpec(9903L, //
-				GrandRiverTransitCommons.NORTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, UW, //
+				GrandRiverTransitCommons.NORTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, UNIVERSITY_OF_WATERLOO_SHORT, //
 				GrandRiverTransitCommons.SOUTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, ST_MARY_S) //
 				.addTripSort(GrandRiverTransitCommons.NORTH_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
@@ -742,11 +742,11 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			if (Arrays.asList( //
 					CHARLES_TERMINAL, //
 					"C - " + CONESTOGA_MALL, //
-					"D - " + UW, // via University
-					"E - " + UW, // via Columbia
-					UW + SLASH + CONESTOGA_MALL // ++
+					"D - " + UNIVERSITY_OF_WATERLOO_SHORT, // via University
+					"E - " + UNIVERSITY_OF_WATERLOO_SHORT, // via Columbia
+					UNIVERSITY_OF_WATERLOO_SHORT + SLASH + CONESTOGA_MALL // ++
 			).containsAll(headsignsValues)) {
-				mTrip.setHeadsignString("UW" + SLASH + CONESTOGA_MALL, mTrip.getHeadsignId());
+				mTrip.setHeadsignString(UNIVERSITY_OF_WATERLOO_SHORT + SLASH + CONESTOGA_MALL, mTrip.getHeadsignId());
 				return true;
 			} else if (Arrays.asList( //
 					CHARLES_TERMINAL, //
@@ -785,9 +785,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			if (Arrays.asList( //
 					UNIVERSITY + SLASH + KING, // <>
 					"Laurier", //
-					"UW" //
-			).containsAll(headsignsValues)) {
-				mTrip.setHeadsignString("UW", mTrip.getHeadsignId());
+					UNIVERSITY_OF_WATERLOO_SHORT //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(UNIVERSITY_OF_WATERLOO_SHORT, mTrip.getHeadsignId());
 				return true;
 			} else if (Arrays.asList( //
 					UNIVERSITY + SLASH + KING, // <>
@@ -827,9 +827,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		} else if (mTrip.getRouteId() == 13L) {
 			if (Arrays.asList( //
 					"Laurelwood / Erbsville", //
-					"The Boardwalk" //
+					"The Boardwalk Sta" //
 			).containsAll(headsignsValues)) {
-				mTrip.setHeadsignString("The Boardwalk", mTrip.getHeadsignId());
+				mTrip.setHeadsignString("The Boardwalk Sta", mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 14L) { // TODO split?
@@ -898,7 +898,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		} else if (mTrip.getRouteId() == 200L) {
 			if (Arrays.asList( //
 					AINSLIE_TERMINAL, // same
-					UW, //
+					UNIVERSITY_OF_WATERLOO_SHORT, //
 					CONESTOGA_MALL //
 					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(CONESTOGA_MALL, mTrip.getHeadsignId());
@@ -923,9 +923,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		} else if (mTrip.getRouteId() == 205L) {
 			if (Arrays.asList( //
 					"Ottawa / River", //
-					"Sunrise Ctr" //
+					"Sunrise Ctr Sta" //
 			).containsAll(headsignsValues)) {
-				mTrip.setHeadsignString("Sunrise Ctr", mTrip.getHeadsignId());
+				mTrip.setHeadsignString("Sunrise Ctr Sta", mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 9941L) {
@@ -951,13 +951,13 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final Pattern ENDS_WITH_BUSPLUS = Pattern.compile("( busplus$)", Pattern.CASE_INSENSITIVE);
 	private static final Pattern ENDS_WITH_SPECIAL = Pattern.compile("( special$)", Pattern.CASE_INSENSITIVE);
 
-	private static final Pattern STARTS_WITH_TO = Pattern.compile("(^to\\s)", Pattern.CASE_INSENSITIVE);
+	private static final Pattern STARTS_WITH_TO = Pattern.compile("(^(.* to|to) )", Pattern.CASE_INSENSITIVE);
 
 	private static final Pattern INDUSTRIAL = Pattern.compile("(industrial|indsutrial)", Pattern.CASE_INSENSITIVE);
 	private static final String INDUSTRIAL_REPLACEMENT = INDUSTRIAL_SHORT;
 
-	private static final Pattern UW_ = Pattern.compile("((^|\\W){1}(uw)(\\W|$){1})", Pattern.CASE_INSENSITIVE);
-	private static final String UW_REPLACEMENT = "$2" + UW + "$4";
+	private static final Pattern UNIVERSITY_OF_WATERLOO_ = Pattern.compile("((^|\\W){1}(uw|university of waterloo)(\\W|$){1})", Pattern.CASE_INSENSITIVE);
+	private static final String UNIVERSITY_OF_WATERLOO_SHORT_REPLACEMENT = "$2" + UNIVERSITY_OF_WATERLOO_SHORT + "$4";
 
 	private static final Pattern WLU = Pattern.compile("((^|\\W){1}(wlu)(\\W|$){1})", Pattern.CASE_INSENSITIVE);
 	private static final String WLU_REPLACEMENT = "$2WLU$4";
@@ -983,7 +983,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		tripHeadsign = ENDS_WITH_BUSPLUS.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
 		tripHeadsign = ENDS_WITH_SPECIAL.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
 		tripHeadsign = INDUSTRIAL.matcher(tripHeadsign).replaceAll(INDUSTRIAL_REPLACEMENT);
-		tripHeadsign = UW_.matcher(tripHeadsign).replaceAll(UW_REPLACEMENT);
+		tripHeadsign = UNIVERSITY_OF_WATERLOO_.matcher(tripHeadsign).replaceAll(UNIVERSITY_OF_WATERLOO_SHORT_REPLACEMENT);
 		tripHeadsign = WLU.matcher(tripHeadsign).replaceAll(WLU_REPLACEMENT);
 		tripHeadsign = CleanUtils.CLEAN_AND.matcher(tripHeadsign).replaceAll(CleanUtils.CLEAN_AND_REPLACEMENT);
 		tripHeadsign = CleanUtils.removePoints(tripHeadsign);
