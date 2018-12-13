@@ -297,6 +297,34 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
 	static {
 		HashMap<Long, RouteTripSpec> map2 = new HashMap<Long, RouteTripSpec>();
+		map2.put(52L, new RouteTripSpec(52L, //
+				0, MTrip.HEADSIGN_TYPE_STRING, "Fairway Sta", //
+				1, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL) //
+				.addTripSort(0, //
+						Arrays.asList(new String[] { //
+						"1512", // Ainslie Terminal
+								"1625", // King / Lowther
+								"1628", // ==
+								"1629", // !=
+								"1638", // !=
+								"3934", // !=
+								"2318", // !=
+								"1590", // ==
+								"1557", // Fairway Station
+						})) //
+				.addTripSort(1, //
+						Arrays.asList(new String[] { //
+						"1557", // Fairway Station
+								"1569", // ==
+								"1573", // !==
+								"1575", // != Shantz Hill / Preston Pkwy {43.39964,-80.375548}
+								"1583", // !==
+								"3939", // !==
+								"3942", // !==
+								"1585", // ==
+								"1512", // Ainslie Terminal
+						})) //
+				.compileBothTripSort());
 		map2.put(54L, new RouteTripSpec(54L, //
 				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Littles Corners", //
 				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL) //
@@ -319,12 +347,22 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"2257", // Grand Ridge / Oak Hill
-								"3862", // ==
-								"2159", // !=
-								"1522", // != Ainslie Terminal =>
+								"2260", // ==
+								"2261", // !=
+								"2264", // !=
+								"2265", // ==
+								"2266", // ==
+								"2148", // !=
+								"2267", // ==
+								"3861", // ==
+								"3534", // !==
+								"2211", // !=
 								"2268", // !=
 								"2212", // !=
-								"1511", // != Ainslie Terminal =>
+								"1511", // !== Ainslie Terminal =>
+								"3862", // !==
+								"2159", // !=
+								"1522", // !== Ainslie Terminal =>
 						})) //
 				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
@@ -332,7 +370,13 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1523", // != Ainslie / Walnut
 								"2186", // != Main / Water
 								"2245", // != Grand / South Square
+								"2246", // !=
+								"2248", // !=
 								"3863", // == Cedar / Grand
+								"3864", // !=
+								"2249", // ==
+								"2290", // !=
+								"2250", // ==
 								"2257", // Grand Ridge / Oak Hill
 						})) //
 				.compileBothTripSort());
@@ -345,7 +389,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1414", //
 								"1427", // ==
 								"1058", // Cambridge Centre Station
-								"1064" // Cambridge Centre - Bay 5
+								"1064", // Cambridge Centre - Bay 5
 						})) //
 				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
@@ -353,7 +397,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1064", // Cambridge Centre - Bay 5
 								"1392", // ==
 								"1401", //
-								"1410" // Rose / Argyle
+								"1410", // Rose / Argyle
 						})) //
 				.compileBothTripSort());
 		map2.put(57L, new RouteTripSpec(57L, //
@@ -363,7 +407,13 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { //
 						"3792", // Blair / Esther
 								"2206", //
-								"1521" // Ainslie Terminal
+								"2209", // ==
+								"2210", // !=
+								"2211", // !=
+								"3861", // !=
+								"3862", // !=
+								"2268", // ==
+								"1521", // Ainslie Terminal
 						})) //
 				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
