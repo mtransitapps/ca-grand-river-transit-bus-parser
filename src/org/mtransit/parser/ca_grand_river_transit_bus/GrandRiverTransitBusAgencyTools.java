@@ -292,7 +292,6 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String CHURCH = "Church";
 	private static final String CONESTOGA = "Conestoga";
 	private static final String CONESTOGA_COLLEGE = CONESTOGA + " College";
-	private static final String CONESTOGA_MALL = CONESTOGA + " Mall";
 	private static final String CONESTOGA_STATION = CONESTOGA + " Sta";
 	private static final String DANIEL = "Daniel";
 	private static final String ERBSVILLE = "Erbsville";
@@ -990,9 +989,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			if (Arrays.asList( //
 					AINSLIE_TERMINAL, // <>
 					UNIVERSITY_OF_WATERLOO_SHORT, //
-					CONESTOGA_MALL //
+					CONESTOGA_STATION //
 					).containsAll(headsignsValues)) {
-				mTrip.setHeadsignString(CONESTOGA_MALL, mTrip.getHeadsignId());
+				mTrip.setHeadsignString(CONESTOGA_STATION, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 203L) {
