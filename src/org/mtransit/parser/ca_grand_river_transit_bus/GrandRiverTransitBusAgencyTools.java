@@ -520,14 +520,10 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"1058", // Cambridge Centre - Bay 2
-								"1064", // Cambridge Centre Station
 								"6021", // ==
-								"5064", // !=
-								"5065", // !=
 								"1359", // !=
 								"1360", // !=
 								"1361", // ==
-								"6021", // ==
 								"1364", //
 								"1371", // Saginaw / Burnett
 						})) //
@@ -538,11 +534,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1381", // ==
 								"1382", // !=
 								"1383", // !=
-								"5068", // !=
 								"1384", // ==
 								"6103", // ==
-								"1058", // Cambridge Centre - Bay 2
-								"1064", // Cambridge Centre Station
+								"1065", // Cambridge Centre Station
 						})) //
 				.compileBothTripSort());
 		map2.put(62L, new RouteTripSpec(62L, //
