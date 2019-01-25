@@ -979,6 +979,14 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(AINSLIE_TERMINAL, mTrip.getHeadsignId());
 				return true;
 			}
+		} else if (mTrip.getRouteId() == 67L) {
+			if (Arrays.asList( //
+					"Special", //
+					"Lovell Ind" //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("Lovell Ind", mTrip.getHeadsignId());
+				return true;
+			}
 		} else if (mTrip.getRouteId() == 200L) {
 			if (Arrays.asList( //
 					AINSLIE_TERMINAL, // <>
@@ -1012,6 +1020,13 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 					HURON_HEIGHTS //
 					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(HURON_HEIGHTS, mTrip.getHeadsignId());
+				return true;
+			}
+			if (Arrays.asList( //
+					CHARLES_TERMINAL, //
+					FAIRWAY_STATION //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(FAIRWAY_STATION, mTrip.getHeadsignId());
 				return true;
 			}
 		}
