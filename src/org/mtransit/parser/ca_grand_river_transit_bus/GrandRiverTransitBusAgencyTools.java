@@ -697,6 +697,27 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1994", // != Erb / Fischer-Hallman =>
 						})) //
 				.compileBothTripSort());
+		map2.put(901L, new RouteTripSpec(901L, //
+				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Freeport", //
+				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Trinity") //
+				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
+						Arrays.asList(new String[] { //
+						"7063", // Trinity Village
+								"7062", // <>
+								"7060", // <>
+								"1046", // <> Fairway Station
+								"7064", // Grand River Hospital - Freeport Campus
+						})) //
+				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
+						Arrays.asList(new String[] { //
+						"7064", // Grand River Hospital - Freeport Campus
+								"7061", // ++
+								"1046", // <> Fairway Station
+								"7060", // <>
+								"7062", // <>
+								"7063", // Trinity Village
+						})) //
+				.compileBothTripSort());
 		map2.put(902L, new RouteTripSpec(902L, //
 				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "East", //
 				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "West") //
