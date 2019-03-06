@@ -618,10 +618,11 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"1572", // Sportsworld
-								"3939", // ==
+								"3939", // !=
+								"2315", // !=
+								"1288", // !=
 								"1287", // !=
-								"2310", "1036", // !=
-								"3849", // ==
+								"1036", // ==
 								"3646", // Boxwood / Maple Grove
 						})) //
 				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
