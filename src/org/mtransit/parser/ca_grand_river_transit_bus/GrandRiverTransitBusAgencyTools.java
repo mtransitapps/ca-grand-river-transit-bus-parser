@@ -524,7 +524,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1359", // !=
 								"1360", // !=
 								"1361", // ==
-								"1364", //
+								"1364", // ++
 								"1371", // Saginaw / Burnett
 						})) //
 				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
@@ -536,7 +536,8 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1383", // !=
 								"1384", // ==
 								"6103", // ==
-								"1065", // Cambridge Centre Station
+								"1064", // != Cambridge Centre Station =>
+								"1065", // != Cambridge Centre Station =>
 						})) //
 				.compileBothTripSort());
 		map2.put(62L, new RouteTripSpec(62L, //
@@ -1016,6 +1017,13 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 					CONESTOGA_STATION //
 					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(CONESTOGA_STATION, mTrip.getHeadsignId());
+				return true;
+			}
+			if (Arrays.asList( //
+					FAIRWAY_STATION, //
+					AINSLIE_TERMINAL // <>
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(AINSLIE_TERMINAL, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 203L) {
