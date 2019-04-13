@@ -721,21 +721,29 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						})) //
 				.compileBothTripSort());
 		map2.put(902L, new RouteTripSpec(902L, //
-				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "East", //
-				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "West") //
+				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Residences", // "East", //
+				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Hespeler Vlg") // "West") //
 				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
-						"3540", // Queen / Guelph
-								"1309", // !=
-								"7066", // <>
-								"7065", // != J. H. Lodge
+						"1250", // <> Queen / Guelph
+								"1029", // xx <> Cooper / Queen
+								"1299", // <> Tannery / Queen
+								"1029", // xx <> Cooper / Queen
+								"3540", // <> Queen / Adam
+								"5002", // <> Queen / Tannery
+								"7066", // <> Kribs / W. G. Johnson Centre
+								"7065", // <> Mulberry / Jacob Hespeler Lodge
 						})) //
 				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
-						"7065", // != J. H. Lodge
-								"7066", // <>
-								"1299", // !=
-								"1250", // Queen / Adam
+						"7065", // <> Mulberry / Jacob Hespeler Lodge
+								"7066", // <> Kribs / W. G. Johnson Centre
+								"1250", // <> Queen / Guelph
+								"1029", // xx <> Cooper / Queen
+								"1299", // <> Tannery / Queen
+								"3540", // <> Queen / Adam
+								"5002", // <> Queen / Tannery
+								"3540", // <> Queen / Adam
 						})) //
 				.compileBothTripSort());
 		map2.put(9903L, new RouteTripSpec(9903L, //
