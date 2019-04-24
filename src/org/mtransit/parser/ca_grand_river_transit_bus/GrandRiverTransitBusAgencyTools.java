@@ -345,7 +345,12 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(0, //
 						Arrays.asList(new String[] { //
 						"1512", // Ainslie Terminal
-								"1625", // King / Lowther
+								"1624", // ==
+								"1625", // != King / Lowther
+								"1626", // !=
+								"5032", // != Duke / Lowther
+								"5034", // !=
+								"1627", // ==
 								"1628", // ==
 								"1629", // !=
 								"1638", // !=
@@ -364,6 +369,12 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"3939", // !==
 								"3942", // !==
 								"1585", // ==
+								"1586", // ==
+								"1587", // !=
+								"1589", // !=
+								"5029", // !=
+								"5031", // !=
+								"1443", // ==
 								"1512", // Ainslie Terminal
 						})) //
 				.compileBothTripSort());
@@ -603,13 +614,18 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"3520", // Dover / Rose
-								"1444", //
+								"1442", // ==
+								"1588", // !=
+								"1589", // !=
+								"5031", // !=
+								"1443", // ==
+								"1444", // ++
 								"1067" // Cambridge Centre - Bay 8
 						})) //
 				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"1067", // Cambridge Centre - Bay 8
-								"1432", //
+								"1432", // ++
 								"3520" // Dover / Rose
 						})) //
 				.compileBothTripSort());
