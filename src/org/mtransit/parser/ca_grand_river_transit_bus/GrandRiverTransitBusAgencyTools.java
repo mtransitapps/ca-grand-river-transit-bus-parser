@@ -200,8 +200,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		case 23: return COLOR_FF99CC;
 		case 24: return COLOR_333333;
 		case 25: return COLOR_3399CC;
-		case 26: return null; // TODO?
+		case 26: return "D0BA00";
 		case 27: return COLOR_FF9966;
+		case 28: return "C4D600";
 		case 29: return COLOR_993366;
 		case 31: return COLOR_999966;
 		case 33: return COLOR_089018;
@@ -227,7 +228,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		case 76: return COLOR_000066;
 		case 77: return "E09400";
 		case 78: return "EA4AA3";
-		case 91: return null;
+		case 91: return "009CE0";
 		case 92: return COLOR_003986;
 		case 110: return COLOR_0066CC;
 		case 111: return COLOR_FF3366;
@@ -238,8 +239,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		case 203: return COLOR_000000;
 		case 204: return COLOR_000000;
 		case 205: return COLOR_000000;
-		case 888: return null;
-		case 889: return null;
+		case 302: return "05AA64";
 		case 901: return null; // TODO?
 		case 902: return null; // TODO?
 		case 9801: return COLOR_009CE0;
@@ -281,12 +281,14 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
 	private static final String AINSLIE_TERMINAL = "Ainslie Terminal";
 	private static final String ARTHUR = "Arthur";
-	private static final String BLOCK_LINE_STATION = "Block Line Sta";
+	private static final String BLOCK_LINE = "Block Line";
+	private static final String BLOCK_LINE_STATION = BLOCK_LINE + " Sta";
 	private static final String BLOOMINGDALE = "Bloomingdale";
 	private static final String BRIDGEPORT = "Bridgeport";
 	private static final String CAMBRIDGE_CENTRE = "Cambridge Ctr";
 	private static final String CAMBRIDGE_CENTRE_STATION = CAMBRIDGE_CENTRE + " Sta";
 	private static final String CEDARBRAE = "Cedarbrae";
+	private static final String CENTRAL_STATION = "Central" + " Sta";
 	private static final String CHANDLER = "Chandler";
 	private static final String CHARLES_TERMINAL = "Charles Terminal";
 	private static final String CHURCH = "Church";
@@ -294,11 +296,13 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String CONESTOGA_COLLEGE = CONESTOGA + " College";
 	private static final String CONESTOGA_STATION = CONESTOGA + " Sta";
 	private static final String DANIEL = "Daniel";
+	private static final String DRIFTWOOD = "Driftwood";
 	private static final String ERBSVILLE = "Erbsville";
 	private static final String EXAM = "Exam";
 	private static final String FAIRWAY_STATION = "Fairway" + " Sta";
 	private static final String FISHER_MILLS = "Fisher Mills";
 	private static final String FOREST_GLEN = "Forest Gln";
+	private static final String FREDERICK_STATION = "Frederick" + " Sta";
 	private static final String GLEN_FORREST = "Gln Forrest";
 	private static final String GROFF = "Groff";
 	private static final String GROH = "Groh";
@@ -314,11 +318,14 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String MC_CORMICK = "McCormick";
 	private static final String MELRAN = "Melran";
 	private static final String NORTHFIELD = "Northfield";
+	private static final String NORTHFIELD_STATION = NORTHFIELD + " Sta";
 	private static final String OTTAWA = "Ottawa";
 	private static final String RIVER = "River";
 	private static final String SAGINAW = "Saginaw";
 	private static final String SPORTSWORLD = "Sportsworld";
 	private static final String SPORTSWORLD_STATION = SPORTSWORLD + " Sta";
+	private static final String STANLEY_PARK = "Stanley Pk";
+	private static final String STRASBURG = "Strasburg";
 	private static final String ST_JACOBS_MARKET = "St Jacobs Mkt";
 	private static final String ST_MARY_S = "St Mary's";
 	private static final String SUNRISE_CTR_STATION = "Sunrise Ctr Sta";
@@ -330,7 +337,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String UPTOWN = "Uptown";
 	private static final String VILLAGE = "Vlg";
 	private static final String WATERLOO_INDUSTRIAL = "Waterloo " + INDUSTRIAL_SHORT;
-	private static final String WATERLOO_PUBLIC_SQUARE_STATION = "Waterloo Public Sq Sta";
+	private static final String WATERLOO_PUBLIC_SQUARE_STATION = "Waterloo Public Sq" + " Sta";
 	private static final String WEBER = "Weber";
 	private static final String WESTHEIGHTS = "Westheights";
 	private static final String WESTMOUNT = "Westmount";
@@ -340,7 +347,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	static {
 		HashMap<Long, RouteTripSpec> map2 = new HashMap<Long, RouteTripSpec>();
 		map2.put(52L, new RouteTripSpec(52L, //
-				0, MTrip.HEADSIGN_TYPE_STRING, "Fairway Sta", //
+				0, MTrip.HEADSIGN_TYPE_STRING, FAIRWAY_STATION, //
 				1, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL) //
 				.addTripSort(0, //
 						Arrays.asList(new String[] { //
@@ -357,11 +364,11 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"3934", // !=
 								"2318", // !=
 								"1590", // ==
-								"1557", // Fairway Station
+								"1557", "3499", // Fairway Station
 						})) //
 				.addTripSort(1, //
 						Arrays.asList(new String[] { //
-						"1557", // Fairway Station
+						"1557", "3499", // Fairway Station
 								"1569", // ==
 								"1573", // !==
 								"1575", // != Shantz Hill / Preston Pkwy {43.39964,-80.375548}
@@ -723,14 +730,14 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						"7063", // Trinity Village
 								"7062", // <>
 								"7060", // <>
-								"1046", // <> Fairway Station
+								"1046", "3495", // <> Fairway Station
 								"7064", // Grand River Hospital - Freeport Campus
 						})) //
 				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"7064", // Grand River Hospital - Freeport Campus
 								"7061", // ++
-								"1046", // <> Fairway Station
+								"1046", "3495", // <> Fairway Station
 								"7060", // <>
 								"7062", // <>
 								"7063", // Trinity Village
@@ -848,6 +855,13 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CHARLES_TERMINAL, mTrip.getHeadsignId());
 				return true;
 			}
+			if (Arrays.asList( //
+					WESTHEIGHTS + _SLASH_ + DRIFTWOOD, //
+					STANLEY_PARK //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(STANLEY_PARK, mTrip.getHeadsignId());
+				return true;
+			}
 		} else if (mTrip.getRouteId() == 3L) {
 			if (Arrays.asList( //
 					CHANDLER, //
@@ -874,12 +888,22 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(BRIDGEPORT, mTrip.getHeadsignId());
 				return true;
 			}
+		} else if (mTrip.getRouteId() == 6L) {
+			if (Arrays.asList( //
+					CENTRAL_STATION, //
+					CONESTOGA_STATION //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(CONESTOGA_STATION, mTrip.getHeadsignId());
+				return true;
+			}
 		} else if (mTrip.getRouteId() == 7L) {
 			if (Arrays.asList( //
 					CHARLES_TERMINAL, // <>
 					"C - " + CONESTOGA_STATION, //
 					"D - " + UNIVERSITY_OF_WATERLOO_SHORT, // via University
 					"E - " + UNIVERSITY_OF_WATERLOO_SHORT, // via Columbia
+					UNIVERSITY + _SLASH_ + KING, //
+					CONESTOGA_STATION, //
 					UNIVERSITY_OF_WATERLOO_SHORT + _SLASH_ + CONESTOGA_STATION // ++
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(UNIVERSITY_OF_WATERLOO_SHORT + _SLASH_ + CONESTOGA_STATION, mTrip.getHeadsignId());
@@ -889,6 +913,8 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 					"A - " + FAIRWAY_STATION, // via Connaught
 					"B - " + FAIRWAY_STATION, // via Weber
 					"F - " + FAIRWAY_STATION, // via Wilson
+					FREDERICK_STATION, //
+					WATERLOO_PUBLIC_SQUARE_STATION, //
 					FAIRWAY_STATION // ++
 					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(FAIRWAY_STATION, mTrip.getHeadsignId());
@@ -912,6 +938,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			} else if (Arrays.asList( //
 					CHARLES_TERMINAL, // <>
 					FAIRWAY_STATION, // <>
+					CENTRAL_STATION, //
 					WESTMOUNT + _SLASH_ + UNION //
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(FAIRWAY_STATION, mTrip.getHeadsignId());
@@ -938,9 +965,17 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		} else if (mTrip.getRouteId() == 10L) {
 			if (Arrays.asList( //
 					CONESTOGA_COLLEGE, // <>
+					"A-" + FAIRWAY_STATION, //
 					FAIRWAY_STATION //
 					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(FAIRWAY_STATION, mTrip.getHeadsignId());
+				return true;
+			}
+			if (Arrays.asList( //
+					"A-" + CONESTOGA_COLLEGE, //
+					CONESTOGA_COLLEGE // <>
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(CONESTOGA_COLLEGE, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 12L) {
@@ -954,6 +989,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 			if (Arrays.asList( //
 					FOREST_GLEN, //
+					WESTMOUNT + _SLASH_ + OTTAWA, //
 					FAIRWAY_STATION //
 					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(FAIRWAY_STATION, mTrip.getHeadsignId());
@@ -969,14 +1005,34 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		} else if (mTrip.getRouteId() == 14L) { // TODO split?
 			if (Arrays.asList( //
 					KUMPF, //
-					WATERLOO_INDUSTRIAL).containsAll(headsignsValues)) {
+					WATERLOO_INDUSTRIAL //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(WATERLOO_INDUSTRIAL, mTrip.getHeadsignId()); // TODO really?
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 16L) {
+			if (Arrays.asList( //
+					OTTAWA + _SLASH_ + STRASBURG, //
+					CONESTOGA_COLLEGE //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(CONESTOGA_COLLEGE, mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 19L) {
+			if (Arrays.asList( //
+					"Parkside" + _SLASH_ + NORTHFIELD, //
+					NORTHFIELD_STATION, //
+					ST_JACOBS_MARKET, //
+					NORTHFIELD_STATION + _SLASH_ + ST_JACOBS_MARKET // ++
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(NORTHFIELD_STATION + _SLASH_ + ST_JACOBS_MARKET, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 21L) {
 			if (Arrays.asList( //
 					ST_JACOBS_MARKET, //
-					ARTHUR + _SLASH_ + CHURCH).containsAll(headsignsValues)) {
+					ARTHUR + _SLASH_ + CHURCH //
+			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(ARTHUR + _SLASH_ + CHURCH, mTrip.getHeadsignId());
 				return true;
 			}
@@ -993,7 +1049,8 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 					HURON, // ==
 					TRILLIUM + _SLASH_ + GROFF, //
 					VILLAGE, //
-					HURON_VILLAGE).containsAll(headsignsValues)) {
+					HURON_VILLAGE //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(HURON_VILLAGE, mTrip.getHeadsignId());
 				return true;
 			}
@@ -1048,6 +1105,22 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 					AINSLIE_TERMINAL // <>
 					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(AINSLIE_TERMINAL, mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 201L) {
+			if (Arrays.asList( //
+					BLOCK_LINE_STATION, //
+					BLOCK_LINE + _SLASH_ + STRASBURG, //
+					CONESTOGA_STATION //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(CONESTOGA_STATION, mTrip.getHeadsignId());
+				return true;
+			}
+			if (Arrays.asList( //
+					BLOCK_LINE + _SLASH_ + STRASBURG, //
+					CONESTOGA_COLLEGE //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(CONESTOGA_COLLEGE, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 203L) {
