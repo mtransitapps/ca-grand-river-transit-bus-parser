@@ -1073,7 +1073,9 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			if (Arrays.asList( //
 					"Parkside" + _SLASH_ + NORTHFIELD, //
 					NORTHFIELD_STATION, //
+					"B-" + NORTHFIELD_STATION, //
 					ST_JACOBS_MARKET, //
+					"A-" + ST_JACOBS_MARKET, //
 					NORTHFIELD_STATION + _SLASH_ + ST_JACOBS_MARKET // ++
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(NORTHFIELD_STATION + _SLASH_ + ST_JACOBS_MARKET, mTrip.getHeadsignId());
