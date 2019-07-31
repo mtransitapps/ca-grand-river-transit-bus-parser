@@ -306,6 +306,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String GLEN_FORREST = "Gln Forrest";
 	private static final String GROFF = "Groff";
 	private static final String GROH = "Groh";
+	private static final String GUELPH = "Guelph";
 	private static final String HIGHLAND_HLS = "Highland Hls";
 	private static final String HOLIDAY_INN = "Holiday Inn";
 	private static final String HOLIDAY_INN_DRIVE = HOLIDAY_INN + " Dr";
@@ -1165,6 +1166,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			if (Arrays.asList( //
 					"A - " + FISHER_MILLS, //
 					"A-" + FISHER_MILLS, //
+					"A-" + GUELPH + _SLASH_ + FISHER_MILLS, //
 					"B - " + MELRAN, //
 					"B-" + MELRAN, //
 					CAMBRIDGE_CENTRE_STATION, //
