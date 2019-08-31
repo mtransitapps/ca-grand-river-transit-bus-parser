@@ -173,111 +173,114 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public String getRouteColor(GRoute gRoute) {
-		int rsn = Integer.parseInt(gRoute.getRouteShortName());
-		switch (rsn) {
-		// @formatter:off
-		case 1: return COLOR_0099CC;
-		case 2: return COLOR_FFCC33;
-		case 3: return COLOR_9900CC;
-		case 4: return COLOR_666633;
-		case 5: return COLOR_0099FF;
-		case 6: return COLOR_000066;
-		case 7: return COLOR_CC0000;
-		case 8: return COLOR_009933;
-		case 9: return COLOR_FF9933;
-		case 10: return COLOR_0066CC;
-		case 11: return COLOR_3366FF;
-		case 12: return COLOR_CC3399;
-		case 13: return COLOR_FFCC00;
-		case 14: return COLOR_003333;
-		case 15: return COLOR_993399;
-		case 16: return COLOR_669933;
-		case 17: return COLOR_666666;
-		case 19: return COLOR_CC6600;
-		case 20: return COLOR_CC99CC;
-		case 21: return COLOR_99CC00;
-		case 22: return COLOR_666699;
-		case 23: return COLOR_FF99CC;
-		case 24: return COLOR_333333;
-		case 25: return COLOR_3399CC;
-		case 26: return "D0BA00";
-		case 27: return COLOR_FF9966;
-		case 28: return "C4D600";
-		case 29: return COLOR_993366;
-		case 31: return COLOR_999966;
-		case 33: return COLOR_089018;
-		case 34: return COLOR_92278F;
-		case 51: return COLOR_CC0000;
-		case 52: return COLOR_000099;
-		case 53: return COLOR_009933;
-		case 54: return COLOR_0099CC;
-		case 55: return COLOR_993399;
-		case 56: return COLOR_D0BA00;
-		case 57: return COLOR_FF9900;
-		case 58: return COLOR_333300;
-		case 59: return COLOR_CC0099;
-		case 60: return COLOR_333366;
-		case 61: return COLOR_009999;
-		case 62: return COLOR_666666;
-		case 63: return COLOR_FFCC00;
-		case 64: return COLOR_990033;
-		case 67: return COLOR_E09400;
-		case 72: return COLOR_996666;
-		case 73: return COLOR_0099CC;
-		case 75: return COLOR_B72700;
-		case 76: return COLOR_000066;
-		case 77: return "E09400";
-		case 78: return "EA4AA3";
-		case 91: return "009CE0";
-		case 92: return COLOR_003986;
-		case 110: return COLOR_0066CC;
-		case 111: return COLOR_FF3366;
-		case 116: return COLOR_669933;
-		case 200: return COLOR_0066FF;
-		case 201: return COLOR_000000;
-		case 202: return COLOR_000000;
-		case 203: return COLOR_000000;
-		case 204: return COLOR_000000;
-		case 205: return COLOR_000000;
-		case 302: return "05AA64";
-		case 901: return null; // TODO?
-		case 902: return null; // TODO?
-		case 9801: return COLOR_009CE0;
-		case 9802: return null; // TODO?
-		case 9841: return null; // TODO?
-		case 9851: return COLOR_009CE0;
-		case 9852: return COLOR_003986;
-		case 9901: return COLOR_009CE0;
-		case 9903: return COLOR_089018;
-		case 9904: return COLOR_880091;
-		case 9905: return COLOR_B72700;
-		case 9922: return null; // TODO?
-		case 9931: return COLOR_009CE0;
-		case 9932: return COLOR_003986;
-		case 9941: return null; // TODO?
-		case 9942: return null; // TODO?
-		case 9951: return COLOR_009CE0;
-		case 9952: return COLOR_003986;
-		case 9953: return COLOR_089018;
-		case 9954: return COLOR_880091;
-		case 9961: return COLOR_009CE0;
-		case 9963: return COLOR_089018;
-		case 9964: return COLOR_880091;
-		case 9983: return COLOR_089018;
-		// @formatter:on
-		default:
-			System.out.printf("\nUnexpected route color %s!\n", gRoute);
-			System.exit(-1);
-			return null;
+		if (StringUtils.isEmpty(gRoute.getRouteColor())) {
+			int rsn = Integer.parseInt(gRoute.getRouteShortName());
+			switch (rsn) {
+			// @formatter:off
+			case 1: return COLOR_0099CC;
+			case 2: return COLOR_FFCC33;
+			case 3: return COLOR_9900CC;
+			case 4: return COLOR_666633;
+			case 5: return COLOR_0099FF;
+			case 6: return COLOR_000066;
+			case 7: return COLOR_CC0000;
+			case 8: return COLOR_009933;
+			case 9: return COLOR_FF9933;
+			case 10: return COLOR_0066CC;
+			case 11: return COLOR_3366FF;
+			case 12: return COLOR_CC3399;
+			case 13: return COLOR_FFCC00;
+			case 14: return COLOR_003333;
+			case 15: return COLOR_993399;
+			case 16: return COLOR_669933;
+			case 17: return COLOR_666666;
+			case 19: return COLOR_CC6600;
+			case 20: return COLOR_CC99CC;
+			case 21: return COLOR_99CC00;
+			case 22: return COLOR_666699;
+			case 23: return COLOR_FF99CC;
+			case 24: return COLOR_333333;
+			case 25: return COLOR_3399CC;
+			case 26: return "D0BA00";
+			case 27: return COLOR_FF9966;
+			case 28: return "C4D600";
+			case 29: return COLOR_993366;
+			case 31: return COLOR_999966;
+			case 33: return COLOR_089018;
+			case 34: return COLOR_92278F;
+			case 36: return null; // TODO ?
+			case 50: return null; // TODO ?
+			case 51: return COLOR_CC0000;
+			case 52: return COLOR_000099;
+			case 53: return COLOR_009933;
+			case 54: return COLOR_0099CC;
+			case 55: return COLOR_993399;
+			case 56: return COLOR_D0BA00;
+			case 57: return COLOR_FF9900;
+			case 58: return COLOR_333300;
+			case 59: return COLOR_CC0099;
+			case 60: return COLOR_333366;
+			case 61: return COLOR_009999;
+			case 62: return COLOR_666666;
+			case 63: return COLOR_FFCC00;
+			case 64: return COLOR_990033;
+			case 67: return COLOR_E09400;
+			case 72: return COLOR_996666;
+			case 73: return COLOR_0099CC;
+			case 75: return COLOR_B72700;
+			case 76: return COLOR_000066;
+			case 77: return "E09400";
+			case 78: return "EA4AA3";
+			case 91: return "009CE0";
+			case 92: return COLOR_003986;
+			case 110: return COLOR_0066CC;
+			case 111: return COLOR_FF3366;
+			case 116: return COLOR_669933;
+			case 200: return COLOR_0066FF;
+			case 201: return COLOR_000000;
+			case 202: return COLOR_000000;
+			case 203: return COLOR_000000;
+			case 204: return COLOR_000000;
+			case 205: return COLOR_000000;
+			case 302: return "05AA64";
+			case 901: return null; // TODO?
+			case 902: return null; // TODO?
+			case 9801: return COLOR_009CE0;
+			case 9802: return null; // TODO?
+			case 9841: return null; // TODO?
+			case 9851: return COLOR_009CE0;
+			case 9852: return COLOR_003986;
+			case 9901: return COLOR_009CE0;
+			case 9903: return COLOR_089018;
+			case 9904: return COLOR_880091;
+			case 9905: return COLOR_B72700;
+			case 9922: return null; // TODO?
+			case 9931: return COLOR_009CE0;
+			case 9932: return COLOR_003986;
+			case 9941: return null; // TODO?
+			case 9942: return null; // TODO?
+			case 9951: return COLOR_009CE0;
+			case 9952: return COLOR_003986;
+			case 9953: return COLOR_089018;
+			case 9954: return COLOR_880091;
+			case 9961: return COLOR_009CE0;
+			case 9963: return COLOR_089018;
+			case 9964: return COLOR_880091;
+			case 9983: return COLOR_089018;
+			// @formatter:on
+			default:
+				System.out.printf("\nUnexpected route color %s!\n", gRoute);
+				System.exit(-1);
+				return null;
+			}
 		}
+		return super.getRouteColor(gRoute);
 	}
-
-	private static final String _TO_ = " to ";
-	private static final String _VIA_ = " via ";
 
 	private static final String _SLASH_ = " / ";
 
 	private static final String INDUSTRIAL_SHORT = "Ind";
+	private static final String SECONDARY_SCHOOL_SHORT = "SS";
 
 	private static final String AINSLIE_TERMINAL = "Ainslie Terminal";
 	private static final String ARTHUR = "Arthur";
@@ -351,28 +354,18 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
 	static {
 		HashMap<Long, RouteTripSpec> map2 = new HashMap<Long, RouteTripSpec>();
-		map2.put(31L, new RouteTripSpec(31L, //
-				0, MTrip.HEADSIGN_TYPE_STRING, "Columbia" + _SLASH_ + "Sundew", //
-				1, MTrip.HEADSIGN_TYPE_STRING, CONESTOGA_STATION) //
+		map2.put(26L, new RouteTripSpec(26L, //
+				0, MTrip.HEADSIGN_TYPE_STRING, "Trillium" + _SLASH_ + "Washburn", //
+				1, MTrip.HEADSIGN_TYPE_STRING, BLOCK_LINE_STATION) //
 				.addTripSort(0, //
 						Arrays.asList(new String[] { //
-						"4005", // Conestoga Station
-								"1093", // ==
-								"5026", // !=
-								"1094", // ==
-								"4023", // Columbia / Sundew
+						"1463", // Block Line Station
+								"1781", // Trillium / Washburn
 						})) //
 				.addTripSort(1, //
 						Arrays.asList(new String[] { //
-						"4023", // Columbia / Sundew
-								"3899", // ==
-								"5025", // !=
-								"2520", // !=
-								"2521", // ==
-								"1121", // ==
-								"4016", // !=
-								"4050", // ==
-								"4005", // Conestoga Station
+						"1781", // Trillium / Washburn
+								"1463", // Block Line Station
 						})) //
 				.compileBothTripSort());
 		map2.put(54L, new RouteTripSpec(54L, //
@@ -380,54 +373,17 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL) //
 				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
-						"1517", // Ainslie Terminal
+						"1517", "1518", // Ainslie Terminal
+								"3535", // ++
 								"1528", // ++
-								"2225", // Gatehouse / Mcnicho
+								"2225", // Gatehouse / Mcnicho =>
 						})) //
 				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
-						"2225", // Gatehouse / Mcnicho
+						"2225", // Gatehouse / Mcnicho <=
 								"2235", // ++
-								"1516", // Ainslie Terminal
-						})) //
-				.compileBothTripSort());
-		map2.put(55L, new RouteTripSpec(55L, //
-				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL, //
-				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Grand Rdg / Oak Hl") //
-				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
-						Arrays.asList(new String[] { //
-						"2257", // Grand Ridge / Oak Hill
-								"2260", // ==
-								"2261", // !=
-								"2264", // !=
-								"2265", // ==
-								"2266", // ==
-								"2148", // !=
-								"2267", // ==
-								"3861", // ==
-								"3534", // !==
-								"2211", // !=
-								"2268", // !=
-								"2212", // !=
-								"1511", // !== Ainslie Terminal =>
-								"3862", // !==
-								"2159", // !=
-								"1522", // !== Ainslie Terminal =>
-						})) //
-				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
-						Arrays.asList(new String[] { //
-						"1520", // == Ainslie Terminal <=
-								"1523", // != Ainslie / Walnut
-								"2186", // != Main / Water
-								"2245", // != Grand / South Square
-								"2246", // !=
-								"2248", // !=
-								"3863", // == Cedar / Grand
-								"3864", // !=
-								"2249", // ==
-								"2290", // !=
-								"2250", // ==
-								"2257", // Grand Ridge / Oak Hill
+								"2159", // ++
+								"1516", "1518", // Ainslie Terminal
 						})) //
 				.compileBothTripSort());
 		map2.put(56L, new RouteTripSpec(56L, //
@@ -438,42 +394,14 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						"1410", // Rose / Argyle
 								"1414", //
 								"1427", // ==
-								"1058", // Cambridge Centre Station
-								"1064", // Cambridge Centre - Bay 5
+								"1058", "1065", // Cambridge Centre Station
 						})) //
 				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
-						"1058", // Cambridge Centre Station
-								"1064", // Cambridge Centre - Bay 5
+						"1064", "1065", // Cambridge Centre Station
 								"1392", // ==
 								"1401", //
 								"1410", // Rose / Argyle
-						})) //
-				.compileBothTripSort());
-		map2.put(57L, new RouteTripSpec(57L, //
-				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL, //
-				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Blair Rd") //
-				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
-						Arrays.asList(new String[] { //
-						"3792", // Blair / Esther
-								"2199", // ==
-								"5003", // !=
-								"2200", // !=
-								"2201", // ==
-								"2211", // ==
-								"2159", // !=
-								"2268", // !=
-								"2212", // !=
-								"1521", // == Ainslie Terminal
-						})) //
-				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
-						Arrays.asList(new String[] { //
-						"1517", // == Ainslie Terminal
-								"1523", // !=
-								"2186", // !=
-								"2187", // ==
-								"2191", // Sunset / Saxony
-								"3792", // Blair / Esther
 						})) //
 				.compileBothTripSort());
 		map2.put(58L, new RouteTripSpec(58L, //
@@ -482,16 +410,21 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(GrandRiverTransitCommons.NORTH_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"1516", // != Ainslie Terminal
-								"1521", // != Ainslie Terminal
+								// "1521", // != Ainslie Terminal
 								"1605", // ==
-								"2100", //
+								"2100", // ++
 								"2108" // Elgin / Avenue
 						})) //
 				.addTripSort(GrandRiverTransitCommons.SOUTH_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"2108", // Elgin / Avenue
 								"2116", //
-								"1518" // Ainslie Terminal
+								"2118", // ==
+								"2119", // !=
+								"2360", // !=
+								"2120", // ==
+								"2125", // ++
+								"1516", "1518" // Ainslie Terminal
 						})) //
 				.compileBothTripSort());
 		map2.put(59L, new RouteTripSpec(59L, //
@@ -507,8 +440,6 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"2289", // !==
 								"2291", // !=
 								"2294", // !==
-								"5047", // !==
-								"5048", // !==
 								"2295", // ==
 								"2299", // !+
 								"2300", // !=
@@ -516,8 +447,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1507", // !=
 								"2301", // ==
 								"2125", // ==
-								"1512", // != Ainslie Terminal =>
-								"1522", // != Ainslie Terminal =>
+								"1512", "1519", "1522", // != Ainslie Terminal =>
 						})) //
 				.addTripSort(GrandRiverTransitCommons.SOUTH_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
@@ -527,29 +457,19 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						})) //
 				.compileBothTripSort());
 		map2.put(60L, new RouteTripSpec(60L, //
-				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Saginaw / Burnett", //
+				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Saginaw" + _SLASH_ + "Burnett", //
 				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, CAMBRIDGE_CENTRE) //
 				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
-						"1058", // Cambridge Centre - Bay 2
+						"1058", "1064", // Cambridge Centre - Bay 2
 								"6021", // ==
-								"1359", // !=
-								"1360", // !=
-								"1361", // ==
-								"1364", // ++
 								"1371", // Saginaw / Burnett
 						})) //
 				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
 						"1371", // Saginaw / Burnett
-								"1380", // ++
-								"1381", // ==
-								"1382", // !=
-								"1383", // !=
-								"1384", // ==
 								"6103", // ==
 								"1064", // != Cambridge Centre Station =>
-								"1065", // != Cambridge Centre Station =>
 						})) //
 				.compileBothTripSort());
 		map2.put(62L, new RouteTripSpec(62L, //
@@ -595,18 +515,17 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { //
 						"1522", // Ainslie Terminal
 								"2169", // ++
-								"1504", // ==
+								"1504", // Franklin / Mclaren
 								"2174", // !=
 								"2176", // != Dundas / South Cambridge Centre =>
-								"1505", // != Main / South Cambridge Centre =>
 						})) //
 				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
-						"1505", // != Main / South Cambridge Centre <=
-								"2176", // != Dundas / South Cambridge Centre <=
+						"2176", // != Dundas / South Cambridge Centre <=
 								"1506", // ==
 								"2182", // ++
-								"1520", // Ainslie Terminal
+								"2159", // ==
+								"1519", "1520", "1522", // Ainslie Terminal
 						})) //
 				.compileBothTripSort());
 		map2.put(64L, new RouteTripSpec(64L, //
@@ -628,28 +547,6 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 						"1067", // Cambridge Centre - Bay 8
 								"1432", // ++
 								"3520" // Dover / Rose
-						})) //
-				.compileBothTripSort());
-		map2.put(72L, new RouteTripSpec(72L, //
-				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Boxwood / Maple Grv", //
-				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, SPORTSWORLD) //
-				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
-						Arrays.asList(new String[] { //
-						"1572", // Sportsworld
-								"3939", // !=
-								"2315", // !=
-								"1288", // !=
-								"1287", // !=
-								"1036", // ==
-								"3646", // Boxwood / Maple Grove
-						})) //
-				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
-						Arrays.asList(new String[] { //
-						"3646", // Boxwood / Maple Grove
-								"3649", // ==
-								"2316", // !=
-								"2317", // ==
-								"1572", // Sportsworld
 						})) //
 				.compileBothTripSort());
 		map2.put(75L, new RouteTripSpec(75L, //
@@ -986,6 +883,13 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(FAIRWAY_STATION, mTrip.getHeadsignId());
 				return true;
 			}
+			if (Arrays.asList( //
+					CENTRAL_STATION, //
+					UNIVERSITY + _SLASH_ + KING //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(UNIVERSITY + _SLASH_ + KING, mTrip.getHeadsignId());
+				return true;
+			}
 		} else if (mTrip.getRouteId() == 9L) {
 			if (Arrays.asList( //
 					UNIVERSITY + _SLASH_ + KING, // <>
@@ -1129,6 +1033,21 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(UNIVERSITY + _SLASH_ + KING, mTrip.getHeadsignId());
 				return true;
 			}
+			if (Arrays.asList( //
+					UNIVERSITY + _SLASH_ + UNIVERSITY_OF_WATERLOO_SHORT, //
+					THE_BOARDWALK_STATION //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(THE_BOARDWALK_STATION, mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 31L) {
+			if (Arrays.asList( //
+					UNIVERSITY_OF_WATERLOO_SHORT + " Sta", //
+					"Columbia" + _SLASH_ + "Sundew" //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("Columbia" + _SLASH_ + "Sundew", mTrip.getHeadsignId());
+				return true;
+			}
 		} else if (mTrip.getRouteId() == 33L) {
 			if (Arrays.asList( //
 					HURON, // ==
@@ -1169,6 +1088,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 					"A-" + GUELPH + _SLASH_ + FISHER_MILLS, //
 					"B - " + MELRAN, //
 					"B-" + MELRAN, //
+					"B-" + "Jamieson" + _SLASH_ + "Cooper", //
 					CAMBRIDGE_CENTRE_STATION, //
 					FISHER_MILLS + _SLASH_ + MELRAN //
 			).containsAll(headsignsValues)) {
@@ -1192,12 +1112,60 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(AINSLIE_TERMINAL, mTrip.getHeadsignId());
 				return true;
 			}
+		} else if (mTrip.getRouteId() == 55L) {
+			if (Arrays.asList( //
+					"St Andrews", //
+					"Cedar" + _SLASH_ + "Grand Rdg" //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("Cedar" + _SLASH_ + "Grand Rdg", mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 57L) {
+			if (Arrays.asList( //
+					"Blair", //
+					CONESTOGA_COLLEGE //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(CONESTOGA_COLLEGE, mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 61L) {
+			if (Arrays.asList( //
+					"Shantz Hl" + _SLASH_ + "Preston Pkwy", // <>
+					"Preston Pkwy" + _SLASH_ + "Fountain", //
+					CONESTOGA_COLLEGE //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(CONESTOGA_COLLEGE, mTrip.getHeadsignId());
+				return true;
+			}
+			if (Arrays.asList( //
+					"Shantz Hl" + _SLASH_ + "Preston Pkwy", // <>
+					CAMBRIDGE_CENTRE_STATION //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(CAMBRIDGE_CENTRE_STATION, mTrip.getHeadsignId());
+				return true;
+			}
 		} else if (mTrip.getRouteId() == 67L) {
 			if (Arrays.asList( //
 					"Special", //
 					"Lovell Ind" //
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString("Lovell Ind", mTrip.getHeadsignId());
+				return true;
+			}
+			if (Arrays.asList( //
+					"Lovell Ind", //
+					"Sportsworld Sta" //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("Sportsworld Sta", mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 72L) {
+			if (Arrays.asList( //
+					"Toyota", //
+					"Cherry Blossom", //
+					"Loblaws Distribution Ctr" //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("Loblaws Distribution Ctr", mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 77L) {
@@ -1260,6 +1228,22 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SUNRISE_CTR_STATION, mTrip.getHeadsignId());
 				return true;
 			}
+		} else if (mTrip.getRouteId() == 206L) {
+			if (Arrays.asList( //
+					AINSLIE_TERMINAL, // <>
+					"Southwood " + SECONDARY_SCHOOL_SHORT // <>
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("Southwood " + SECONDARY_SCHOOL_SHORT, mTrip.getHeadsignId());
+				return true;
+			}
+			if (Arrays.asList( //
+					AINSLIE_TERMINAL, // <>
+					"Southwood " + SECONDARY_SCHOOL_SHORT, // <>
+					FAIRWAY_STATION //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(FAIRWAY_STATION, mTrip.getHeadsignId());
+				return true;
+			}
 		} else if (mTrip.getRouteId() == 9941L) {
 			if (Arrays.asList( //
 					EXAM, //
@@ -1290,10 +1274,14 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final Pattern ENDS_WITH_BUSPLUS = Pattern.compile("( busplus$)", Pattern.CASE_INSENSITIVE);
 	private static final Pattern ENDS_WITH_SPECIAL = Pattern.compile("( special$)", Pattern.CASE_INSENSITIVE);
 
-	private static final Pattern STARTS_WITH_TO = Pattern.compile("(^(.* to|to) )", Pattern.CASE_INSENSITIVE);
-
 	private static final Pattern INDUSTRIAL = Pattern.compile("(industrial|indsutrial)", Pattern.CASE_INSENSITIVE);
 	private static final String INDUSTRIAL_REPLACEMENT = INDUSTRIAL_SHORT;
+
+	private static final Pattern SECONDARY_SCHOOL_ = Pattern.compile("((^|\\W){1}(secondary school)(\\W|$){1})", Pattern.CASE_INSENSITIVE);
+	private static final String SECONDARY_SCHOOL_REPLACEMENT = "$2" + SECONDARY_SCHOOL_SHORT + "$4";
+
+	private static final Pattern UNIVERSITY_ = Pattern.compile("((^|\\W){1}(univeristy)(\\W|$){1})", Pattern.CASE_INSENSITIVE);
+	private static final String UNIVERSITY_REPLACEMENT = "$2" + "University" + "$4";
 
 	private static final Pattern UNIVERSITY_OF_WATERLOO_ = Pattern.compile("((^|\\W){1}(uw|u\\.w\\.|university of waterloo)(\\W|$){1})",
 			Pattern.CASE_INSENSITIVE);
@@ -1308,21 +1296,16 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			tripHeadsign = tripHeadsign.toLowerCase(Locale.ENGLISH);
 		}
 		tripHeadsign = STARTS_WITH_RSN.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
-		int indexOfTO = tripHeadsign.toLowerCase(Locale.ENGLISH).indexOf(_TO_);
-		if (indexOfTO >= 0) {
-			tripHeadsign = tripHeadsign.substring(indexOfTO + _TO_.length());
-		}
-		int indexOfVIA = tripHeadsign.toLowerCase(Locale.ENGLISH).indexOf(_VIA_);
-		if (indexOfVIA >= 0) {
-			tripHeadsign = tripHeadsign.substring(0, indexOfVIA);
-		}
-		tripHeadsign = STARTS_WITH_TO.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
+		tripHeadsign = CleanUtils.keepTo(tripHeadsign);
+		tripHeadsign = CleanUtils.removeVia(tripHeadsign);
 		tripHeadsign = STARTS_WITH_IXPRESS.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
 		tripHeadsign = BUS_PLUS.matcher(tripHeadsign).replaceAll(BUS_PLUS_REPLACEMENT);
+		tripHeadsign = SECONDARY_SCHOOL_.matcher(tripHeadsign).replaceAll(SECONDARY_SCHOOL_REPLACEMENT);
 		tripHeadsign = ENDS_WITH_EXPRESS.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
 		tripHeadsign = ENDS_WITH_BUSPLUS.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
 		tripHeadsign = ENDS_WITH_SPECIAL.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
 		tripHeadsign = INDUSTRIAL.matcher(tripHeadsign).replaceAll(INDUSTRIAL_REPLACEMENT);
+		tripHeadsign = UNIVERSITY_.matcher(tripHeadsign).replaceAll(UNIVERSITY_REPLACEMENT);
 		tripHeadsign = UNIVERSITY_OF_WATERLOO_.matcher(tripHeadsign).replaceAll(UNIVERSITY_OF_WATERLOO_SHORT_REPLACEMENT);
 		tripHeadsign = WLU.matcher(tripHeadsign).replaceAll(WLU_REPLACEMENT);
 		tripHeadsign = CleanUtils.CLEAN_AND.matcher(tripHeadsign).replaceAll(CleanUtils.CLEAN_AND_REPLACEMENT);
