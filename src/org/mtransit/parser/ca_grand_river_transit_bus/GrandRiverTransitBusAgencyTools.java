@@ -290,6 +290,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String BRIDGEPORT = "Bridgeport";
 	private static final String CAMBRIDGE_CENTRE = "Cambridge Ctr";
 	private static final String CAMBRIDGE_CENTRE_STATION = CAMBRIDGE_CENTRE + " Sta";
+	private static final String CEDAR = "Cedar";
 	private static final String CEDARBRAE = "Cedarbrae";
 	private static final String CENTRAL_STATION = "Central" + " Sta";
 	private static final String CHANDLER = "Chandler";
@@ -327,6 +328,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String OTTAWA = "Ottawa";
 	private static final String RIVER = "River";
 	private static final String SAGINAW = "Saginaw";
+	private static final String SOUTHWOOD = "Southwood";
 	private static final String SPORTSWORLD = "Sportsworld";
 	private static final String SPORTSWORLD_STATION = SPORTSWORLD + " Sta";
 	private static final String STANLEY_PARK = "Stanley Pk";
@@ -1231,17 +1233,16 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		} else if (mTrip.getRouteId() == 206L) {
 			if (Arrays.asList( //
 					AINSLIE_TERMINAL, // <>
-					"Southwood " + SECONDARY_SCHOOL_SHORT // <>
-			).containsAll(headsignsValues)) {
-				mTrip.setHeadsignString("Southwood " + SECONDARY_SCHOOL_SHORT, mTrip.getHeadsignId());
+					FAIRWAY_STATION //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(FAIRWAY_STATION, mTrip.getHeadsignId());
 				return true;
 			}
 			if (Arrays.asList( //
 					AINSLIE_TERMINAL, // <>
-					"Southwood " + SECONDARY_SCHOOL_SHORT, // <>
-					FAIRWAY_STATION //
-					).containsAll(headsignsValues)) {
-				mTrip.setHeadsignString(FAIRWAY_STATION, mTrip.getHeadsignId());
+					SOUTHWOOD + _SLASH_ + CEDAR //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(SOUTHWOOD + _SLASH_ + CEDAR, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 9941L) {
