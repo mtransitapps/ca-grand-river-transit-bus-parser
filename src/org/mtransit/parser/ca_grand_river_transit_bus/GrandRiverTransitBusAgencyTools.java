@@ -463,15 +463,15 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, CAMBRIDGE_CENTRE) //
 				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
-						"1058", "1064", // Cambridge Centre - Bay 2
+						"1058", "1064", // Cambridge Centre Station <=
 								"6021", // ==
-								"1371", // Saginaw / Burnett
+								"1371", // Saginaw / Burnett =>
 						})) //
 				.addTripSort(GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, //
 						Arrays.asList(new String[] { //
-						"1371", // Saginaw / Burnett
+						"1371", // Saginaw / Burnett <=
 								"6103", // ==
-								"1064", // != Cambridge Centre Station =>
+								"1058", "1064", // != Cambridge Centre Station =>
 						})) //
 				.compileBothTripSort());
 		map2.put(62L, new RouteTripSpec(62L, //
@@ -683,6 +683,20 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"3540", // <> Queen / Adam
 								"5002", // <> Queen / Tannery
 								"3540", // <> Queen / Adam
+						})) //
+				.compileBothTripSort());
+		map2.put(8881L, new RouteTripSpec(8881L, //
+				0, MTrip.HEADSIGN_TYPE_STRING, BLOCK_LINE_STATION, //
+				1, MTrip.HEADSIGN_TYPE_STRING, "Lot 42" + "-" + "Oktoberfesthaus") //
+				.addTripSort(0, //
+						Arrays.asList(new String[] { //
+						"8008", // Lot 42 - Oktoberfesthaus
+								"1463", // Block Line Station
+						})) //
+				.addTripSort(1, //
+						Arrays.asList(new String[] { //
+						"1463", // Block Line Station
+								"8008", // Lot 42 - Oktoberfesthaus
 						})) //
 				.compileBothTripSort());
 		map2.put(9903L, new RouteTripSpec(9903L, //
@@ -1230,7 +1244,8 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SUNRISE_CTR_STATION, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 206L) {
+		}
+		if (mTrip.getRouteId() == 206L) {
 			if (Arrays.asList( //
 					AINSLIE_TERMINAL, // <>
 					FAIRWAY_STATION //
@@ -1245,7 +1260,17 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SOUTHWOOD + _SLASH_ + CEDAR, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 9941L) {
+		}
+		if (mTrip.getRouteId() == 302L) { // ION Bus
+			if (Arrays.asList( //
+					"ION Bus", //
+					FAIRWAY_STATION //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(FAIRWAY_STATION, mTrip.getHeadsignId());
+				return true;
+			}
+		}
+		if (mTrip.getRouteId() == 9941L) {
 			if (Arrays.asList( //
 					EXAM, //
 					HURON_HEIGHTS //
