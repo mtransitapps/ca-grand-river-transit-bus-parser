@@ -992,6 +992,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mTrip.getRouteId() == 19L) {
 			if (Arrays.asList( //
+					"Hazel" + _SLASH_ + "Albert", //
 					"Parkside" + _SLASH_ + NORTHFIELD, //
 					NORTHFIELD_STATION, //
 					"B-" + NORTHFIELD_STATION, //
