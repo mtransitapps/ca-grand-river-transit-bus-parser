@@ -619,29 +619,6 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1994", // != Erb / Fischer-Hallman =>
 						})) //
 				.compileBothTripSort());
-		map2.put(202L, new RouteTripSpec(202L, //
-				0, MTrip.HEADSIGN_TYPE_STRING, THE_BOARDWALK_STATION, //
-				1, MTrip.HEADSIGN_TYPE_STRING, CONESTOGA_STATION) //
-				.addTripSort(0, //
-						Arrays.asList(new String[] { //
-						"1127", // Conestoga Station
-								"2670", // ==
-								"1166", // !=
-								"3619", // ==
-								"4001", // The Boardwalk Station =>
-						})) //
-				.addTripSort(1, //
-						Arrays.asList(new String[] { //
-						"4001", // The Boardwalk Station <=
-								"4053", // ==
-								"2780", // !=
-								"1090", // ==
-								"3620", // ==
-								"2785", // !=
-								"2787", // ==
-								"3799", // Conestoga Station
-						})) //
-				.compileBothTripSort());
 		map2.put(901L, new RouteTripSpec(901L, //
 				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Freeport", //
 				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Trinity") //
@@ -1048,10 +1025,11 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mTrip.getRouteId() == 29L) {
 			if (Arrays.asList( //
-					CONESTOGA_STATION, //
-					UNIVERSITY + _SLASH_ + KING //
+					WEBER + _SLASH_ + "Lincoln", //
+					UNIVERSITY + _SLASH_ + KING, //
+					CONESTOGA_STATION //
 			).containsAll(headsignsValues)) {
-				mTrip.setHeadsignString(UNIVERSITY + _SLASH_ + KING, mTrip.getHeadsignId());
+				mTrip.setHeadsignString(CONESTOGA_STATION, mTrip.getHeadsignId());
 				return true;
 			}
 			if (Arrays.asList( //
@@ -1067,6 +1045,13 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 					"Columbia" + _SLASH_ + "Sundew" //
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString("Columbia" + _SLASH_ + "Sundew", mTrip.getHeadsignId());
+				return true;
+			}
+			if (Arrays.asList( //
+					"Columbia" + _SLASH_ + "King", //
+					CONESTOGA_STATION //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(CONESTOGA_STATION, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 33L) {
@@ -1238,6 +1223,14 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 					CONESTOGA_COLLEGE //
 					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(CONESTOGA_COLLEGE, mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 202L) {
+			if (Arrays.asList( //
+					UNIVERSITY + _SLASH_ + "Marsland", //
+					CONESTOGA_STATION //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(CONESTOGA_STATION, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 203L) {
