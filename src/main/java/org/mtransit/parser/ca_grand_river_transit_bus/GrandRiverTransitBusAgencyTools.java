@@ -359,20 +359,6 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
 	static {
 		HashMap<Long, RouteTripSpec> map2 = new HashMap<>();
-		map2.put(26L, new RouteTripSpec(26L, //
-				0, MTrip.HEADSIGN_TYPE_STRING, "Trillium" + _SLASH_ + "Washburn", //
-				1, MTrip.HEADSIGN_TYPE_STRING, BLOCK_LINE_STATION) //
-				.addTripSort(0, //
-						Arrays.asList(//
-								"1463", // Block Line Station
-								"1781" // Trillium / Washburn
-						)) //
-				.addTripSort(1, //
-						Arrays.asList(//
-								"1781", // Trillium / Washburn
-								"1463" // Block Line Station
-						)) //
-				.compileBothTripSort());
 		map2.put(54L, new RouteTripSpec(54L, //
 				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Littles Corners", //
 				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL) //
@@ -1154,6 +1140,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				return true;
 			}
 			if (Arrays.asList( //
+					CONESTOGA_COLLEGE, // <>
 					"Shantz Hl" + _SLASH_ + "Preston Pkwy", // <>
 					CAMBRIDGE_CENTRE_STATION //
 			).containsAll(headsignsValues)) {
