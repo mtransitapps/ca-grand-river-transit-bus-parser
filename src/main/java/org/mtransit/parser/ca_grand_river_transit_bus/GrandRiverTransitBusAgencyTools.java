@@ -272,8 +272,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			case 9983: return COLOR_089018;
 			// @formatter:on
 			default:
-				MTLog.logFatal("Unexpected route color %s!", gRoute);
-				return null;
+				throw new MTLog.Fatal("Unexpected route color %s!", gRoute);
 			}
 		}
 		return super.getRouteColor(gRoute);
@@ -1132,7 +1131,6 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mTrip.getRouteId() == 61L) {
 			if (Arrays.asList( //
-					"Shantz Hl" + _SLASH_ + "Preston Pkwy", // <>
 					"Preston Pkwy" + _SLASH_ + "Fountain", //
 					CONESTOGA_COLLEGE //
 			).containsAll(headsignsValues)) {
@@ -1140,6 +1138,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				return true;
 			}
 			if (Arrays.asList( //
+					"Fountain", // (RLN)
 					CONESTOGA_COLLEGE, // <>
 					"Shantz Hl" + _SLASH_ + "Preston Pkwy", // <>
 					CAMBRIDGE_CENTRE_STATION //
@@ -1282,8 +1281,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				return true;
 			}
 		}
-		MTLog.logFatal("Unexpected trips to merge %s & %s", mTrip, mTripToMerge);
-		return false;
+		throw new MTLog.Fatal("Unexpected trips to merge %s & %s", mTrip, mTripToMerge);
 	}
 
 	private static final Pattern BUS_PLUS = Pattern.compile("( bus plus$)", Pattern.CASE_INSENSITIVE);
