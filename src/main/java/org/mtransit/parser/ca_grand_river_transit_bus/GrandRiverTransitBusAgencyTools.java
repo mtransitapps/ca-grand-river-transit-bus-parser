@@ -508,6 +508,11 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, //
 						Arrays.asList(//
 								"1522", // Ainslie Terminal
+								"2163", // ==
+								"5068", // !=
+								"2164", // !=
+								"2166", // !=
+								"2167", // ==
 								"2169", // ++
 								"1504", // Franklin / Mclaren
 								"2174", // !=
