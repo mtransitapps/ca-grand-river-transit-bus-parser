@@ -354,7 +354,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String WESTMOUNT = "Westmount";
 	private static final String WOODSIDE = "Woodside";
 
-	private static HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
+	private static final HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
 
 	static {
 		HashMap<Long, RouteTripSpec> map2 = new HashMap<>();
@@ -1010,6 +1010,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 			if (Arrays.asList( //
 					GROFF, //
+					"Huron Natural Area", //
 					TRILLIUM + _SLASH_ + WASHBURN //
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(TRILLIUM + _SLASH_ + WASHBURN, mTrip.getHeadsignId());
