@@ -245,6 +245,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			case 203: return COLOR_000000;
 			case 204: return COLOR_000000;
 			case 205: return COLOR_000000;
+			case 206: return COLOR_000000;
 			case 302: return "05AA64";
 			case 901: return null; // TODO?
 			case 902: return null; // TODO?
@@ -272,7 +273,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			case 9983: return COLOR_089018;
 			// @formatter:on
 			default:
-				throw new MTLog.Fatal("Unexpected route color %s!", gRoute);
+				throw new MTLog.Fatal("Unexpected route color %s!", gRoute.toStringPlus());
 			}
 		}
 		return super.getRouteColor(gRoute);
