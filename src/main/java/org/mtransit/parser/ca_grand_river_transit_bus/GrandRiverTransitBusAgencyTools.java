@@ -1,7 +1,7 @@
 package org.mtransit.parser.ca_grand_river_transit_bus;
 
-import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.mtransit.commons.GrandRiverTransitCommons;
 import org.mtransit.parser.CleanUtils;
 import org.mtransit.parser.DefaultAgencyTools;
@@ -9,6 +9,7 @@ import org.mtransit.parser.MTLog;
 import org.mtransit.parser.Pair;
 import org.mtransit.parser.SplitUtils;
 import org.mtransit.parser.SplitUtils.RouteTripSpec;
+import org.mtransit.parser.StringUtils;
 import org.mtransit.parser.Utils;
 import org.mtransit.parser.gtfs.data.GCalendar;
 import org.mtransit.parser.gtfs.data.GCalendarDate;
@@ -31,6 +32,8 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static org.mtransit.parser.StringUtils.EMPTY;
+
 // http://www.regionofwaterloo.ca/en/regionalgovernment/OpenDataHome.asp
 // http://www.regionofwaterloo.ca/en/regionalGovernment/GRT_GTFSdata.asp
 // http://www.regionofwaterloo.ca/opendatadownloads/GRT_Merged_GTFS.zip
@@ -39,7 +42,7 @@ import java.util.regex.Pattern;
 // http://www.regionofwaterloo.ca/opendatadownloads/GRT_Daily_GTFS.zip
 public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
-	public static void main(String[] args) {
+	public static void main(@Nullable String[] args) {
 		if (args == null || args.length == 0) {
 			args = new String[3];
 			args[0] = "input/gtfs.zip";
@@ -49,70 +52,71 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		new GrandRiverTransitBusAgencyTools().start(args);
 	}
 
-	private HashSet<String> serviceIds;
+	@Nullable
+	private HashSet<Integer> serviceIdInts;
 
 	@Override
-	public void start(String[] args) {
+	public void start(@NotNull String[] args) {
 		MTLog.log("Generating Grand River Transit bus data...");
 		long start = System.currentTimeMillis();
-		this.serviceIds = extractUsefulServiceIds(args, this, true);
+		this.serviceIdInts = extractUsefulServiceIdInts(args, this, true);
 		super.start(args);
 		MTLog.log("Generating Grand River Transit bus data... DONE in %s.", Utils.getPrettyDuration(System.currentTimeMillis() - start));
 	}
 
 	@Override
 	public boolean excludingAll() {
-		return this.serviceIds != null && this.serviceIds.isEmpty();
+		return this.serviceIdInts != null && this.serviceIdInts.isEmpty();
 	}
 
 	@Override
-	public boolean excludeCalendar(GCalendar gCalendar) {
-		if (this.serviceIds != null) {
-			return excludeUselessCalendar(gCalendar, this.serviceIds);
+	public boolean excludeCalendar(@NotNull GCalendar gCalendar) {
+		if (this.serviceIdInts != null) {
+			return excludeUselessCalendarInt(gCalendar, this.serviceIdInts);
 		}
 		return super.excludeCalendar(gCalendar);
 	}
 
 	@Override
-	public boolean excludeCalendarDate(GCalendarDate gCalendarDates) {
-		if (this.serviceIds != null) {
-			return excludeUselessCalendarDate(gCalendarDates, this.serviceIds);
+	public boolean excludeCalendarDate(@NotNull GCalendarDate gCalendarDates) {
+		if (this.serviceIdInts != null) {
+			return excludeUselessCalendarDateInt(gCalendarDates, this.serviceIdInts);
 		}
 		return super.excludeCalendarDate(gCalendarDates);
 	}
 
 	@Override
-	public boolean excludeTrip(GTrip gTrip) {
+	public boolean excludeTrip(@NotNull GTrip gTrip) {
 		if ("Out Of Service".equalsIgnoreCase(gTrip.getTripHeadsign())) {
 			return true; // exclude
 		}
-		if (this.serviceIds != null) {
-			return excludeUselessTrip(gTrip, this.serviceIds);
+		if (this.serviceIdInts != null) {
+			return excludeUselessTripInt(gTrip, this.serviceIdInts);
 		}
 		return super.excludeTrip(gTrip);
 	}
 
 	@Override
-	public boolean excludeRoute(GRoute gRoute) {
+	public boolean excludeRoute(@NotNull GRoute gRoute) {
 		return super.excludeRoute(gRoute);
 	}
 
+	@NotNull
 	@Override
 	public Integer getAgencyRouteType() {
 		return MAgency.ROUTE_TYPE_BUS;
 	}
 
 	@Override
-	public long getRouteId(GRoute gRoute) {
+	public long getRouteId(@NotNull GRoute gRoute) {
 		return Long.parseLong(gRoute.getRouteShortName()); // using route short name as route ID
 	}
 
+	@NotNull
 	@Override
-	public String getRouteLongName(GRoute gRoute) {
-		String routeLongName = gRoute.getRouteLongName();
-		if (Utils.isUppercaseOnly(routeLongName, true, true)) {
-			routeLongName = routeLongName.toLowerCase(Locale.ENGLISH);
-		}
+	public String getRouteLongName(@NotNull GRoute gRoute) {
+		String routeLongName = gRoute.getRouteLongNameOrDefault();
+		routeLongName = CleanUtils.toLowerCaseUpperCaseWords(Locale.ENGLISH, routeLongName, getIgnoredWords());
 		routeLongName = BUS_PLUS.matcher(routeLongName).replaceAll(BUS_PLUS_REPLACEMENT);
 		routeLongName = CleanUtils.CLEAN_AND.matcher(routeLongName).replaceAll(CleanUtils.CLEAN_AND_REPLACEMENT);
 		routeLongName = CleanUtils.cleanSlashes(routeLongName);
@@ -121,156 +125,110 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
 	private static final String AGENCY_COLOR = "0168B3"; // BLUE (PDF SCHEDULE)
 
+	@NotNull
 	@Override
 	public String getAgencyColor() {
 		return AGENCY_COLOR;
 	}
 
-	private static final String COLOR_880091 = "880091";
-	private static final String COLOR_009CE0 = "009CE0";
-	private static final String COLOR_000000 = "000000";
-	private static final String COLOR_0066FF = "0066FF";
-	private static final String COLOR_FF3366 = "FF3366";
-	private static final String COLOR_003986 = "003986";
-	private static final String COLOR_B72700 = "B72700";
-	private static final String COLOR_996666 = "996666";
-	private static final String COLOR_E09400 = "E09400";
-	private static final String COLOR_990033 = "990033";
-	private static final String COLOR_009999 = "009999";
-	private static final String COLOR_333366 = "333366";
-	private static final String COLOR_CC0099 = "CC0099";
-	private static final String COLOR_333300 = "333300";
-	private static final String COLOR_FF9900 = "FF9900";
-	private static final String COLOR_D0BA00 = "D0BA00";
-	private static final String COLOR_000099 = "000099";
-	private static final String COLOR_089018 = "089018";
-	private static final String COLOR_92278F = "92278F";
-	private static final String COLOR_999966 = "999966";
-	private static final String COLOR_993366 = "993366";
-	private static final String COLOR_FF9966 = "FF9966";
-	private static final String COLOR_3399CC = "3399CC";
-	private static final String COLOR_333333 = "333333";
-	private static final String COLOR_FF99CC = "FF99CC";
-	private static final String COLOR_666699 = "666699";
-	private static final String COLOR_99CC00 = "99CC00";
-	private static final String COLOR_CC99CC = "CC99CC";
-	private static final String COLOR_CC6600 = "CC6600";
-	private static final String COLOR_666666 = "666666";
-	private static final String COLOR_669933 = "669933";
-	private static final String COLOR_993399 = "993399";
-	private static final String COLOR_003333 = "003333";
-	private static final String COLOR_FFCC00 = "FFCC00";
-	private static final String COLOR_CC3399 = "CC3399";
-	private static final String COLOR_3366FF = "3366FF";
-	private static final String COLOR_0066CC = "0066CC";
-	private static final String COLOR_FF9933 = "FF9933";
-	private static final String COLOR_009933 = "009933";
-	private static final String COLOR_CC0000 = "CC0000";
-	private static final String COLOR_000066 = "000066";
-	private static final String COLOR_0099FF = "0099FF";
-	private static final String COLOR_666633 = "666633";
-	private static final String COLOR_9900CC = "9900CC";
-	private static final String COLOR_FFCC33 = "FFCC33";
-	private static final String COLOR_0099CC = "0099CC";
-
-	@SuppressWarnings("DuplicateBranchesInSwitch")
+	@Nullable
 	@Override
-	public String getRouteColor(GRoute gRoute) {
+	public String getRouteColor(@NotNull GRoute gRoute) {
 		if (StringUtils.isEmpty(gRoute.getRouteColor())) {
 			int rsn = Integer.parseInt(gRoute.getRouteShortName());
 			switch (rsn) {
 			// @formatter:off
-			case 1: return COLOR_0099CC;
-			case 2: return COLOR_FFCC33;
-			case 3: return COLOR_9900CC;
-			case 4: return COLOR_666633;
-			case 5: return COLOR_0099FF;
-			case 6: return COLOR_000066;
-			case 7: return COLOR_CC0000;
-			case 8: return COLOR_009933;
-			case 9: return COLOR_FF9933;
-			case 10: return COLOR_0066CC;
-			case 11: return COLOR_3366FF;
-			case 12: return COLOR_CC3399;
-			case 13: return COLOR_FFCC00;
-			case 14: return COLOR_003333;
-			case 15: return COLOR_993399;
-			case 16: return COLOR_669933;
-			case 17: return COLOR_666666;
-			case 19: return COLOR_CC6600;
-			case 20: return COLOR_CC99CC;
-			case 21: return COLOR_99CC00;
-			case 22: return COLOR_666699;
-			case 23: return COLOR_FF99CC;
-			case 24: return COLOR_333333;
-			case 25: return COLOR_3399CC;
+			case 1: return "0099CC";
+			case 2: return "FFCC33";
+			case 3: return "9900CC";
+			case 4: return "666633";
+			case 5: return "0099FF";
+			case 6: return "000066";
+			case 7: return "CC0000";
+			case 8: return "009933";
+			case 9: return "FF9933";
+			case 10: return "0066CC";
+			case 11: return "3366FF";
+			case 12: return "CC3399";
+			case 13: return "FFCC00";
+			case 14: return "003333";
+			case 15: return "993399";
+			case 16: return "669933";
+			case 17: return "666666";
+			case 19: return "CC6600";
+			case 20: return "CC99CC";
+			case 21: return "99CC00";
+			case 22: return "666699";
+			case 23: return "FF99CC";
+			case 24: return "333333";
+			case 25: return "3399CC";
 			case 26: return "D0BA00";
-			case 27: return COLOR_FF9966;
+			case 27: return "FF9966";
 			case 28: return "C4D600";
-			case 29: return COLOR_993366;
-			case 31: return COLOR_999966;
-			case 33: return COLOR_089018;
-			case 34: return COLOR_92278F;
+			case 29: return "993366";
+			case 31: return "999966";
+			case 33: return "089018";
+			case 34: return "92278F";
 			case 36: return null; // TODO ?
 			case 50: return null; // TODO ?
-			case 51: return COLOR_CC0000;
-			case 52: return COLOR_000099;
-			case 53: return COLOR_009933;
-			case 54: return COLOR_0099CC;
-			case 55: return COLOR_993399;
-			case 56: return COLOR_D0BA00;
-			case 57: return COLOR_FF9900;
-			case 58: return COLOR_333300;
-			case 59: return COLOR_CC0099;
-			case 60: return COLOR_333366;
-			case 61: return COLOR_009999;
-			case 62: return COLOR_666666;
-			case 63: return COLOR_FFCC00;
-			case 64: return COLOR_990033;
-			case 67: return COLOR_E09400;
-			case 72: return COLOR_996666;
-			case 73: return COLOR_0099CC;
-			case 75: return COLOR_B72700;
-			case 76: return COLOR_000066;
+			case 51: return "CC0000";
+			case 52: return "000099";
+			case 53: return "009933";
+			case 54: return "0099CC";
+			case 55: return "993399";
+			case 56: return "D0BA00";
+			case 57: return "FF9900";
+			case 58: return "333300";
+			case 59: return "CC0099";
+			case 60: return "333366";
+			case 61: return "009999";
+			case 62: return "666666";
+			case 63: return "FFCC00";
+			case 64: return "990033";
+			case 67: return "E09400";
+			case 72: return "996666";
+			case 73: return "0099CC";
+			case 75: return "B72700";
+			case 76: return "000066";
 			case 77: return "E09400";
 			case 78: return "EA4AA3";
 			case 91: return "009CE0";
-			case 92: return COLOR_003986;
-			case 110: return COLOR_0066CC;
-			case 111: return COLOR_FF3366;
-			case 116: return COLOR_669933;
-			case 200: return COLOR_0066FF;
-			case 201: return COLOR_000000;
-			case 202: return COLOR_000000;
-			case 203: return COLOR_000000;
-			case 204: return COLOR_000000;
-			case 205: return COLOR_000000;
-			case 206: return COLOR_000000;
+			case 92: return "003986";
+			case 110: return "0066CC";
+			case 111: return "FF3366";
+			case 116: return "669933";
+			case 200: return "0066FF";
+			case 201: return "000000";
+			case 202: return "000000";
+			case 203: return "000000";
+			case 204: return "000000";
+			case 205: return "000000";
+			case 206: return "000000";
 			case 302: return "05AA64";
 			case 901: return null; // TODO?
 			case 902: return null; // TODO?
-			case 9801: return COLOR_009CE0;
+			case 9801: return "009CE0";
 			case 9802: return null; // TODO?
 			case 9841: return null; // TODO?
-			case 9851: return COLOR_009CE0;
-			case 9852: return COLOR_003986;
-			case 9901: return COLOR_009CE0;
-			case 9903: return COLOR_089018;
-			case 9904: return COLOR_880091;
-			case 9905: return COLOR_B72700;
+			case 9851: return "009CE0";
+			case 9852: return "003986";
+			case 9901: return "009CE0";
+			case 9903: return "089018";
+			case 9904: return "880091";
+			case 9905: return "B72700";
 			case 9922: return null; // TODO?
-			case 9931: return COLOR_009CE0;
-			case 9932: return COLOR_003986;
+			case 9931: return "009CE0";
+			case 9932: return "003986";
 			case 9941: return null; // TODO?
 			case 9942: return null; // TODO?
-			case 9951: return COLOR_009CE0;
-			case 9952: return COLOR_003986;
-			case 9953: return COLOR_089018;
-			case 9954: return COLOR_880091;
-			case 9961: return COLOR_009CE0;
-			case 9963: return COLOR_089018;
-			case 9964: return COLOR_880091;
-			case 9983: return COLOR_089018;
+			case 9951: return "009CE0";
+			case 9952: return "003986";
+			case 9953: return "089018";
+			case 9954: return "880091";
+			case 9961: return "009CE0";
+			case 9963: return "089018";
+			case 9964: return "880091";
+			case 9983: return "089018";
 			// @formatter:on
 			default:
 				throw new MTLog.Fatal("Unexpected route color %s!", gRoute.toStringPlus());
@@ -284,7 +242,8 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String INDUSTRIAL_SHORT = "Ind";
 	private static final String SECONDARY_SCHOOL_SHORT = "SS";
 
-	private static final String AINSLIE_TERMINAL = "Ainslie Terminal";
+	private static final String TERMINAL = "Term";
+	private static final String AINSLIE_TERMINAL = "Ainslie " + TERMINAL;
 	private static final String ARTHUR = "Arthur";
 	private static final String BLOCK_LINE = "Block Line";
 	private static final String BLOCK_LINE_STATION = BLOCK_LINE + " Sta";
@@ -296,7 +255,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String CEDARBRAE = "Cedarbrae";
 	private static final String CENTRAL_STATION = "Central" + " Sta";
 	private static final String CHANDLER = "Chandler";
-	private static final String CHARLES_TERMINAL = "Charles Terminal";
+	private static final String CHARLES_TERMINAL = "Charles " + TERMINAL;
 	private static final String CHURCH = "Church";
 	private static final String CONESTOGA = "Conestoga";
 	private static final String CONESTOGA_COLLEGE = CONESTOGA + " College";
@@ -359,6 +318,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
 	static {
 		HashMap<Long, RouteTripSpec> map2 = new HashMap<>();
+		//noinspection deprecation
 		map2.put(54L, new RouteTripSpec(54L, //
 				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Littles Corners", //
 				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL) //
@@ -377,6 +337,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1516", "1518" // Ainslie Terminal
 						)) //
 				.compileBothTripSort());
+		//noinspection deprecation
 		map2.put(56L, new RouteTripSpec(56L, //
 				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, CAMBRIDGE_CENTRE, //
 				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Rose / Argyle") //
@@ -400,6 +361,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1410" // Rose / Argyle
 						)) //
 				.compileBothTripSort());
+		//noinspection deprecation
 		map2.put(58L, new RouteTripSpec(58L, //
 				GrandRiverTransitCommons.NORTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Elgin / Avenue", //
 				GrandRiverTransitCommons.SOUTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL) //
@@ -420,6 +382,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1516" // != <> Ainslie Terminal =>
 						)) //
 				.compileBothTripSort());
+		//noinspection deprecation
 		map2.put(59L, new RouteTripSpec(59L, //
 				GrandRiverTransitCommons.NORTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL, //
 				GrandRiverTransitCommons.SOUTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Christopher / Myers") //
@@ -451,6 +414,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"2279" // == Christopher / Myers
 						)) //
 				.compileBothTripSort());
+		//noinspection deprecation
 		map2.put(60L, new RouteTripSpec(60L, //
 				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Saginaw" + _SLASH_ + "Burnett", //
 				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, CAMBRIDGE_CENTRE) //
@@ -467,6 +431,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1058", "1064" // != Cambridge Centre Station =>
 						)) //
 				.compileBothTripSort());
+		//noinspection deprecation
 		map2.put(62L, new RouteTripSpec(62L, //
 				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL, //
 				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, WOODSIDE) //
@@ -503,6 +468,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"2137" // == Southgate / Day =>
 						)) //
 				.compileBothTripSort());
+		//noinspection deprecation
 		map2.put(63L, new RouteTripSpec(63L, //
 				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, CAMBRIDGE_CENTRE, //
 				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, AINSLIE_TERMINAL) //
@@ -528,6 +494,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1519", "1520", "1522" // Ainslie Terminal
 						)) //
 				.compileBothTripSort());
+		//noinspection deprecation
 		map2.put(64L, new RouteTripSpec(64L, //
 				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, CAMBRIDGE_CENTRE, //
 				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Dover / Rose") //
@@ -549,6 +516,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"3520" // Dover / Rose
 						)) //
 				.compileBothTripSort());
+		//noinspection deprecation
 		map2.put(75L, new RouteTripSpec(75L, //
 				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, SAGINAW, //
 				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, CAMBRIDGE_CENTRE) //
@@ -569,6 +537,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1064" // != Cambridge Centre Station
 						)) //
 				.compileBothTripSort());
+		//noinspection deprecation
 		map2.put(91L, new RouteTripSpec(91L, //
 				GrandRiverTransitCommons.NORTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, UNIVERSITY_OF_WATERLOO_SHORT, // Waterloo
 				GrandRiverTransitCommons.SOUTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, CHARLES_TERMINAL) // Kitchener
@@ -585,6 +554,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"2551" // Charles Terminal
 						)) //
 				.compileBothTripSort());
+		//noinspection deprecation
 		map2.put(92L, new RouteTripSpec(92L, //
 				GrandRiverTransitCommons.CLOCKWISE_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "CW", //
 				GrandRiverTransitCommons.COUNTERCLOCKWISE_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "CCW") //
@@ -613,6 +583,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"1994" // != Erb / Fischer-Hallman =>
 						)) //
 				.compileBothTripSort());
+		//noinspection deprecation
 		map2.put(901L, new RouteTripSpec(901L, //
 				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Freeport", //
 				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Trinity") //
@@ -634,6 +605,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"7063" // Trinity Village
 						)) //
 				.compileBothTripSort());
+		//noinspection deprecation
 		map2.put(902L, new RouteTripSpec(902L, //
 				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Residences", // "East", //
 				GrandRiverTransitCommons.WEST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, "Hespeler Vlg") // "West") //
@@ -660,6 +632,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"3540" // <> Queen / Adam
 						)) //
 				.compileBothTripSort());
+		//noinspection deprecation
 		map2.put(8881L, new RouteTripSpec(8881L, //
 				0, MTrip.HEADSIGN_TYPE_STRING, BLOCK_LINE_STATION, //
 				1, MTrip.HEADSIGN_TYPE_STRING, "Lot 42" + "-" + "Oktoberfesthaus") //
@@ -674,6 +647,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"8008" // Lot 42 - Oktoberfesthaus
 						)) //
 				.compileBothTripSort());
+		//noinspection deprecation
 		map2.put(9903L, new RouteTripSpec(9903L, //
 				GrandRiverTransitCommons.NORTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, UNIVERSITY_OF_WATERLOO_SHORT, //
 				GrandRiverTransitCommons.SOUTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, ST_MARY_S) //
@@ -689,6 +663,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 								"3474" //
 						)) //
 				.compileBothTripSort());
+		//noinspection deprecation
 		map2.put(9951L, new RouteTripSpec(9951L, //
 				GrandRiverTransitCommons.NORTH_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, FOREST_GLEN, //
 				GrandRiverTransitCommons.EAST_SPLITTED_CIRCLE, MTrip.HEADSIGN_TYPE_STRING, FAIRWAY_STATION) //
@@ -706,14 +681,16 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		ALL_ROUTE_TRIPS2 = map2;
 	}
 
+	@NotNull
 	@Override
-	public String cleanStopOriginalId(String gStopId) {
+	public String cleanStopOriginalId(@NotNull String gStopId) {
 		gStopId = CleanUtils.cleanMergedID(gStopId);
 		return gStopId;
 	}
 
+	@NotNull
 	@Override
-	public Pair<Long[], Integer[]> splitTripStop(MRoute mRoute, GTrip gTrip, GTripStop gTripStop, ArrayList<MTrip> splitTrips, GSpec routeGTFS) {
+	public Pair<Long[], Integer[]> splitTripStop(@NotNull MRoute mRoute, @NotNull GTrip gTrip, @NotNull GTripStop gTripStop, @NotNull ArrayList<MTrip> splitTrips, @NotNull GSpec routeGTFS) {
 		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.getId())) {
 			return SplitUtils.splitTripStop(mRoute, gTrip, gTripStop, routeGTFS, ALL_ROUTE_TRIPS2.get(mRoute.getId()), this);
 		}
@@ -721,15 +698,16 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	@Override
-	public int compareEarly(long routeId, List<MTripStop> list1, List<MTripStop> list2, MTripStop ts1, MTripStop ts2, GStop ts1GStop, GStop ts2GStop) {
+	public int compareEarly(long routeId, @NotNull List<MTripStop> list1, @NotNull List<MTripStop> list2, @NotNull MTripStop ts1, @NotNull MTripStop ts2, @NotNull GStop ts1GStop, @NotNull GStop ts2GStop) {
 		if (ALL_ROUTE_TRIPS2.containsKey(routeId)) {
 			return ALL_ROUTE_TRIPS2.get(routeId).compare(routeId, list1, list2, ts1, ts2, ts1GStop, ts2GStop, this);
 		}
 		return super.compareEarly(routeId, list1, list2, ts1, ts2, ts1GStop, ts2GStop);
 	}
 
+	@NotNull
 	@Override
-	public ArrayList<MTrip> splitTrip(MRoute mRoute, GTrip gTrip, GSpec gtfs) {
+	public ArrayList<MTrip> splitTrip(@NotNull MRoute mRoute, @Nullable GTrip gTrip, @NotNull GSpec gtfs) {
 		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.getId())) {
 			return ALL_ROUTE_TRIPS2.get(mRoute.getId()).getAllTrips();
 		}
@@ -737,7 +715,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	@Override
-	public void setTripHeadsign(MRoute mRoute, MTrip mTrip, GTrip gTrip, GSpec gtfs) {
+	public void setTripHeadsign(@NotNull MRoute mRoute, @NotNull MTrip mTrip, @NotNull GTrip gTrip, @NotNull GSpec gtfs) {
 		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.getId())) {
 			return; // split
 		}
@@ -749,7 +727,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	@Override
-	public boolean mergeHeadsign(MTrip mTrip, MTrip mTripToMerge) {
+	public boolean mergeHeadsign(@NotNull MTrip mTrip, @NotNull MTrip mTripToMerge) {
 		List<String> headsignsValues = Arrays.asList(mTrip.getHeadsignValue(), mTripToMerge.getHeadsignValue());
 		if (mTrip.getRouteId() == 2L) {
 			if (Arrays.asList( //
@@ -1316,34 +1294,39 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final Pattern WLU = Pattern.compile("((^|\\W)(wlu)(\\W|$))", Pattern.CASE_INSENSITIVE);
 	private static final String WLU_REPLACEMENT = "$2WLU$4";
 
+	@NotNull
 	@Override
-	public String cleanTripHeadsign(String tripHeadsign) {
-		if (Utils.isUppercaseOnly(tripHeadsign, true, true)) {
-			tripHeadsign = tripHeadsign.toLowerCase(Locale.ENGLISH);
-		}
-		tripHeadsign = STARTS_WITH_RSN.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
+	public String cleanTripHeadsign(@NotNull String tripHeadsign) {
+		tripHeadsign = CleanUtils.toLowerCaseUpperCaseWords(Locale.ENGLISH, tripHeadsign, getIgnoredWords());
+		tripHeadsign = STARTS_WITH_RSN.matcher(tripHeadsign).replaceAll(EMPTY);
 		tripHeadsign = CleanUtils.keepTo(tripHeadsign);
 		tripHeadsign = CleanUtils.removeVia(tripHeadsign);
-		tripHeadsign = STARTS_WITH_IXPRESS.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
+		tripHeadsign = STARTS_WITH_IXPRESS.matcher(tripHeadsign).replaceAll(EMPTY);
 		tripHeadsign = BUS_PLUS.matcher(tripHeadsign).replaceAll(BUS_PLUS_REPLACEMENT);
 		tripHeadsign = SECONDARY_SCHOOL_.matcher(tripHeadsign).replaceAll(SECONDARY_SCHOOL_REPLACEMENT);
-		tripHeadsign = ENDS_WITH_EXPRESS.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
-		tripHeadsign = ENDS_WITH_BUSPLUS.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
-		tripHeadsign = ENDS_WITH_SPECIAL.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
+		tripHeadsign = ENDS_WITH_EXPRESS.matcher(tripHeadsign).replaceAll(EMPTY);
+		tripHeadsign = ENDS_WITH_BUSPLUS.matcher(tripHeadsign).replaceAll(EMPTY);
+		tripHeadsign = ENDS_WITH_SPECIAL.matcher(tripHeadsign).replaceAll(EMPTY);
 		tripHeadsign = INDUSTRIAL.matcher(tripHeadsign).replaceAll(INDUSTRIAL_REPLACEMENT);
 		tripHeadsign = UNIVERSITY_.matcher(tripHeadsign).replaceAll(UNIVERSITY_REPLACEMENT);
 		tripHeadsign = UNIVERSITY_OF_WATERLOO_.matcher(tripHeadsign).replaceAll(UNIVERSITY_OF_WATERLOO_SHORT_REPLACEMENT);
 		tripHeadsign = WLU.matcher(tripHeadsign).replaceAll(WLU_REPLACEMENT);
 		tripHeadsign = CleanUtils.CLEAN_AND.matcher(tripHeadsign).replaceAll(CleanUtils.CLEAN_AND_REPLACEMENT);
-		tripHeadsign = CleanUtils.removePoints(tripHeadsign);
 		tripHeadsign = CleanUtils.cleanStreetTypes(tripHeadsign);
 		tripHeadsign = CleanUtils.cleanSlashes(tripHeadsign);
 		return CleanUtils.cleanLabel(tripHeadsign);
 	}
 
+	private String[] getIgnoredWords() {
+		return new String[]{
+				"ION"
+		};
+	}
+
+	@NotNull
 	@Override
-	public String cleanStopName(String gStopName) {
-		gStopName = gStopName.toLowerCase(Locale.ENGLISH);
+	public String cleanStopName(@NotNull String gStopName) {
+		gStopName = CleanUtils.toLowerCaseUpperCaseWords(Locale.ENGLISH, gStopName, getIgnoredWords());
 		gStopName = CleanUtils.cleanNumbers(gStopName);
 		gStopName = CleanUtils.cleanStreetTypes(gStopName);
 		return CleanUtils.cleanLabel(gStopName);
@@ -1351,16 +1334,18 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@NotNull
 	@Override
-	public String getStopCode(GStop gStop) {
+	public String getStopCode(@NotNull GStop gStop) {
 		return String.valueOf(getStopId(gStop)); // using stop ID as stop code
 	}
 
 	private static final Pattern DIGITS = Pattern.compile("[\\d]+");
 
 	@Override
-	public int getStopId(GStop gStop) {
-		if (!Utils.isDigitsOnly(gStop.getStopId())) {
-			Matcher matcher = DIGITS.matcher(gStop.getStopId());
+	public int getStopId(@NotNull GStop gStop) {
+		//noinspection deprecation
+		final String stopId = gStop.getStopId();
+		if (!Utils.isDigitsOnly(stopId)) {
+			Matcher matcher = DIGITS.matcher(stopId);
 			if (matcher.find()) {
 				return Integer.parseInt(matcher.group());
 			}
