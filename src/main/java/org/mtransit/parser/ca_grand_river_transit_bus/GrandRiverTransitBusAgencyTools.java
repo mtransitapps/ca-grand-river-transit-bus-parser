@@ -342,6 +342,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	public String cleanStopName(@NotNull String gStopName) {
 		gStopName = CleanUtils.toLowerCaseUpperCaseWords(Locale.ENGLISH, gStopName, getIgnoredWords());
 		gStopName = CleanUtils.cleanNumbers(gStopName);
+		gStopName = CleanUtils.cleanBounds(gStopName);
 		gStopName = CleanUtils.cleanStreetTypes(gStopName);
 		return CleanUtils.cleanLabel(gStopName);
 	}
