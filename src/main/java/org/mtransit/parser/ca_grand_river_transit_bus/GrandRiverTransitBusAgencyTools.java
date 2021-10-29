@@ -19,12 +19,8 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// http://www.regionofwaterloo.ca/en/regionalgovernment/OpenDataHome.asp
-// http://www.regionofwaterloo.ca/en/regionalGovernment/GRT_GTFSdata.asp
-// http://www.regionofwaterloo.ca/opendatadownloads/GRT_Merged_GTFS.zip
-// http://www.regionofwaterloo.ca/opendatadownloads/GRT_GTFS_Winter2015.zip
-// http://www.regionofwaterloo.ca/opendatadownloads/GRT_GTFS.zip
-// http://www.regionofwaterloo.ca/opendatadownloads/GRT_Daily_GTFS.zip
+// https://www.grt.ca/en/about-grt/open-data.aspx
+// https://www.regionofwaterloo.ca/opendatadownloads/GRT_GTFS.zip
 public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
 	public static void main(@NotNull String[] args) {
