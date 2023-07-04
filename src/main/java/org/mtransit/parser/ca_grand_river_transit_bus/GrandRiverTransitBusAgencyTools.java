@@ -20,7 +20,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 // https://www.grt.ca/en/about-grt/open-data.aspx
-// https://www.regionofwaterloo.ca/opendatadownloads/GRT_GTFS.zip
 public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
 	public static void main(@NotNull String[] args) {
@@ -125,11 +124,12 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			case 27: return "FF9966";
 			case 28: return "C4D600";
 			case 29: return "993366";
+			case 30: return "00C513";
 			case 31: return "999966";
 			case 33: return "089018";
 			case 34: return "92278F";
-			case 36: return null; // TODO ?
-			case 50: return null; // TODO ?
+			case 36: return "D0BA00";
+			case 50: return "00C513";
 			case 51: return "CC0000";
 			case 52: return "000099";
 			case 53: return "009933";
@@ -225,8 +225,8 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@NotNull
 	@Override
-	public String cleanDirectionHeadsign(boolean fromStopName, @NotNull String directionHeadSign) {
-		directionHeadSign = super.cleanDirectionHeadsign(fromStopName, directionHeadSign);
+	public String cleanDirectionHeadsign(int directionId, boolean fromStopName, @NotNull String directionHeadSign) {
+		directionHeadSign = super.cleanDirectionHeadsign(directionId, fromStopName, directionHeadSign);
 		directionHeadSign = STARTS_WITH_LETTER.matcher(directionHeadSign).replaceAll(EMPTY);
 		return directionHeadSign;
 	}
@@ -239,7 +239,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final Pattern BUS_PLUS = Pattern.compile("( bus plus$)", Pattern.CASE_INSENSITIVE);
 	private static final String BUS_PLUS_REPLACEMENT = " BusPlus";
 
-	private static final Pattern STARTS_WITH_RSN = Pattern.compile("(^[\\d]+[\\s]*)", Pattern.CASE_INSENSITIVE);
+	private static final Pattern STARTS_WITH_RSN = Pattern.compile("(^\\d+\\s*)", Pattern.CASE_INSENSITIVE);
 
 	private static final Pattern STARTS_WITH_IXPRESS = Pattern.compile("(^IXpress )", Pattern.CASE_INSENSITIVE);
 	private static final Pattern ENDS_WITH_EXPRESS = Pattern.compile("( express$)", Pattern.CASE_INSENSITIVE);
