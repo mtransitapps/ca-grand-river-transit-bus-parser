@@ -89,11 +89,12 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		return AGENCY_COLOR;
 	}
 
+	// https://www.grt.ca/en/schedules-maps/desktop-realtime-map.aspx
 	@Nullable
 	@Override
 	public String getRouteColor(@NotNull GRoute gRoute, @NotNull MAgency agency) {
 		if (StringUtils.isEmpty(gRoute.getRouteColor())) {
-			int rsn = Integer.parseInt(gRoute.getRouteShortName());
+			final int rsn = Integer.parseInt(gRoute.getRouteShortName());
 			switch (rsn) {
 			// @formatter:off
 			case 1: return "0099CC";
@@ -128,6 +129,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			case 31: return "999966";
 			case 33: return "089018";
 			case 34: return "92278F";
+			case 35: return null; // TODO?
 			case 36: return "D0BA00";
 			case 50: return "00C513";
 			case 51: return "CC0000";
@@ -144,6 +146,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 			case 62: return "666666";
 			case 63: return "FFCC00";
 			case 64: return "990033";
+			case 65: return null; // TODO?
 			case 67: return "E09400";
 			case 72: return "996666";
 			case 73: return "0099CC";
