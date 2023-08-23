@@ -14,6 +14,7 @@ import org.mtransit.parser.gtfs.data.GRoute;
 import org.mtransit.parser.gtfs.data.GStop;
 import org.mtransit.parser.gtfs.data.GTrip;
 import org.mtransit.parser.mt.data.MAgency;
+import org.mtransit.parser.mt.data.MTrip;
 
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -237,6 +238,24 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	@Override
 	public boolean directionFinderEnabled() {
 		return true;
+	}
+
+	@Override
+	public boolean mergeHeadsign(@NotNull MTrip mTrip, @NotNull MTrip mTripToMerge) {
+		if (mTrip.getRouteId() == 56L) { // 2023-08-22: it's a mess, same last stop, missing head-sign...
+			return mTrip.mergeHeadsignValue(mTripToMerge);
+		}
+		return super.mergeHeadsign(mTrip, mTripToMerge);
+	}
+
+	@Override
+	public boolean allowNonDescriptiveHeadSigns(long routeId) {
+		if (routeId == 53L) {
+			return true; // 2023-08-22: it's a mess
+		} else if (routeId == 56L) {
+			return true; // 2023-08-22: it's a mess, same last stop, missing head-sign...
+		}
+		return super.allowNonDescriptiveHeadSigns(routeId);
 	}
 
 	private static final Pattern BUS_PLUS = Pattern.compile("( bus plus$)", Pattern.CASE_INSENSITIVE);
