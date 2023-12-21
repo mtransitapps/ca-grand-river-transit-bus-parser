@@ -59,7 +59,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public boolean useRouteShortNameForRouteId() {
-		return true;
+		return false; // used for GTFS-RT
 	}
 
 	@Override
@@ -91,113 +91,109 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	// https://www.grt.ca/en/schedules-maps/desktop-realtime-map.aspx
-	@Nullable
 	@Override
-	public String getRouteColor(@NotNull GRoute gRoute, @NotNull MAgency agency) {
-		if (StringUtils.isEmpty(gRoute.getRouteColor())) {
-			final int rsn = Integer.parseInt(gRoute.getRouteShortName());
-			switch (rsn) {
-			// @formatter:off
-			case 1: return "0099CC";
-			case 2: return "FFCC33";
-			case 3: return "9900CC";
-			case 4: return "666633";
-			case 5: return "0099FF";
-			case 6: return "000066";
-			case 7: return "CC0000";
-			case 8: return "009933";
-			case 9: return "FF9933";
-			case 10: return "0066CC";
-			case 11: return "3366FF";
-			case 12: return "CC3399";
-			case 13: return "FFCC00";
-			case 14: return "003333";
-			case 15: return "993399";
-			case 16: return "669933";
-			case 17: return "666666";
-			case 19: return "CC6600";
-			case 20: return "CC99CC";
-			case 21: return "99CC00";
-			case 22: return "666699";
-			case 23: return "FF99CC";
-			case 24: return "333333";
-			case 25: return "3399CC";
-			case 26: return "D0BA00";
-			case 27: return "FF9966";
-			case 28: return "C4D600";
-			case 29: return "993366";
-			case 30: return "00C513";
-			case 31: return "999966";
-			case 33: return "089018";
-			case 34: return "92278F";
-			case 35: return null; // TODO?
-			case 36: return "D0BA00";
-			case 50: return "00C513";
-			case 51: return "CC0000";
-			case 52: return "000099";
-			case 53: return "009933";
-			case 54: return "0099CC";
-			case 55: return "993399";
-			case 56: return "D0BA00";
-			case 57: return "FF9900";
-			case 58: return "333300";
-			case 59: return "CC0099";
-			case 60: return "333366";
-			case 61: return "009999";
-			case 62: return "666666";
-			case 63: return "FFCC00";
-			case 64: return "990033";
-			case 65: return null; // TODO?
-			case 67: return "E09400";
-			case 72: return "996666";
-			case 73: return "0099CC";
-			case 75: return "B72700";
-			case 76: return "000066";
-			case 77: return "E09400";
-			case 78: return "EA4AA3";
-			case 91: return "009CE0";
-			case 92: return "003986";
-			case 110: return "0066CC";
-			case 111: return "FF3366";
-			case 116: return "669933";
-			case 200: return "0066FF";
-			case 201: return "000000";
-			case 202: return "000000";
-			case 203: return "000000";
-			case 204: return "000000";
-			case 205: return "000000";
-			case 206: return "000000";
-			case 302: return "05AA64";
-			case 901: return null; // TODO?
-			case 902: return null; // TODO?
-			case 9801: return "009CE0";
-			case 9802: return null; // TODO?
-			case 9841: return null; // TODO?
-			case 9851: return "009CE0";
-			case 9852: return "003986";
-			case 9901: return "009CE0";
-			case 9903: return "089018";
-			case 9904: return "880091";
-			case 9905: return "B72700";
-			case 9922: return null; // TODO?
-			case 9931: return "009CE0";
-			case 9932: return "003986";
-			case 9941: return null; // TODO?
-			case 9942: return null; // TODO?
-			case 9951: return "009CE0";
-			case 9952: return "003986";
-			case 9953: return "089018";
-			case 9954: return "880091";
-			case 9961: return "009CE0";
-			case 9963: return "089018";
-			case 9964: return "880091";
-			case 9983: return "089018";
-			// @formatter:on
-			default:
-				throw new MTLog.Fatal("Unexpected route color %s!", gRoute.toStringPlus());
-			}
+	public @Nullable String provideMissingRouteColor(@NotNull GRoute gRoute) {
+		final int rsn = Integer.parseInt(gRoute.getRouteShortName());
+		switch (rsn) {
+		// @formatter:off
+		case 1: return "0099CC";
+		case 2: return "FFCC33";
+		case 3: return "9900CC";
+		case 4: return "666633";
+		case 5: return "0099FF";
+		case 6: return "000066";
+		case 7: return "CC0000";
+		case 8: return "009933";
+		case 9: return "FF9933";
+		case 10: return "0066CC";
+		case 11: return "3366FF";
+		case 12: return "CC3399";
+		case 13: return "FFCC00";
+		case 14: return "003333";
+		case 15: return "993399";
+		case 16: return "669933";
+		case 17: return "666666";
+		case 19: return "CC6600";
+		case 20: return "CC99CC";
+		case 21: return "99CC00";
+		case 22: return "666699";
+		case 23: return "FF99CC";
+		case 24: return "333333";
+		case 25: return "3399CC";
+		case 26: return "D0BA00";
+		case 27: return "FF9966";
+		case 28: return "C4D600";
+		case 29: return "993366";
+		case 30: return "00C513";
+		case 31: return "999966";
+		case 33: return "089018";
+		case 34: return "92278F";
+		case 35: return null; // TODO?
+		case 36: return "D0BA00";
+		case 50: return "00C513";
+		case 51: return "CC0000";
+		case 52: return "000099";
+		case 53: return "009933";
+		case 54: return "0099CC";
+		case 55: return "993399";
+		case 56: return "D0BA00";
+		case 57: return "FF9900";
+		case 58: return "333300";
+		case 59: return "CC0099";
+		case 60: return "333366";
+		case 61: return "009999";
+		case 62: return "666666";
+		case 63: return "FFCC00";
+		case 64: return "990033";
+		case 65: return null; // TODO?
+		case 67: return "E09400";
+		case 72: return "996666";
+		case 73: return "0099CC";
+		case 75: return "B72700";
+		case 76: return "000066";
+		case 77: return "E09400";
+		case 78: return "EA4AA3";
+		case 91: return "009CE0";
+		case 92: return "003986";
+		case 110: return "0066CC";
+		case 111: return "FF3366";
+		case 116: return "669933";
+		case 200: return "0066FF";
+		case 201: return "000000";
+		case 202: return "000000";
+		case 203: return "000000";
+		case 204: return "000000";
+		case 205: return "000000";
+		case 206: return "000000";
+		case 302: return "05AA64";
+		case 901: return null; // TODO?
+		case 902: return null; // TODO?
+		case 9801: return "009CE0";
+		case 9802: return null; // TODO?
+		case 9841: return null; // TODO?
+		case 9851: return "009CE0";
+		case 9852: return "003986";
+		case 9901: return "009CE0";
+		case 9903: return "089018";
+		case 9904: return "880091";
+		case 9905: return "B72700";
+		case 9922: return null; // TODO?
+		case 9931: return "009CE0";
+		case 9932: return "003986";
+		case 9941: return null; // TODO?
+		case 9942: return null; // TODO?
+		case 9951: return "009CE0";
+		case 9952: return "003986";
+		case 9953: return "089018";
+		case 9954: return "880091";
+		case 9961: return "009CE0";
+		case 9963: return "089018";
+		case 9964: return "880091";
+		case 9983: return "089018";
+		// @formatter:on
+		default:
+			throw new MTLog.Fatal("Unexpected route color %s!", gRoute.toStringPlus());
 		}
-		return super.getRouteColor(gRoute, agency);
 	}
 
 	@NotNull
@@ -338,7 +334,7 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		if (!CharUtils.isDigitsOnly(stopId)) {
 			final Matcher matcher = DIGITS.matcher(stopId);
 			if (matcher.find()) {
-				return Integer.parseInt(matcher.group());
+				return Integer.parseInt(matcher.group()); // used for GTFS-RT
 			}
 		}
 		return super.getStopId(gStop);
