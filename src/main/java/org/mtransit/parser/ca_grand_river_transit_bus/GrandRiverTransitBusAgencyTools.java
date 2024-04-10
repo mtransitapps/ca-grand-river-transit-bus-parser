@@ -235,14 +235,6 @@ public class GrandRiverTransitBusAgencyTools extends DefaultAgencyTools {
 		return true;
 	}
 
-	@Override
-	public boolean allowNonDescriptiveHeadSigns(long routeId) {
-		if (routeId == 51L) { // 2024-04-09: it's a mess, same last stop, missing head-sign...
-			return true;
-		}
-		return super.allowNonDescriptiveHeadSigns(routeId);
-	}
-
 	private static final Pattern BUS_PLUS = Pattern.compile("( bus plus$)", Pattern.CASE_INSENSITIVE);
 	private static final String BUS_PLUS_REPLACEMENT = " BusPlus";
 
